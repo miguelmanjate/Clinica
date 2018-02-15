@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>pesquisa paciente</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Recepção: Pesquisar Paciente</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-8">
+
+								<form action="#" th:object="${pesquisarPacienteForm}" class=""
+									th:action="@{/paciente/procurar}" method="post">
+
+									<div class="row">
+
+										<div class="col-md-6">
+
+
+
+											<div class="form-group  ">
+												<label for="tipo" class="col-md-5 col-form-label">Pesquisar
+													Por:</label>
+												<div class="col-md-7">
+													<select th:field="*{tipo}" class="form-control input-sm">
+														<option th:each="tipo : ${tipoParametro}"
+															th:value="${tipo}" th:text="${tipo}" />
+													</select>
+												</div>
+											</div>
+										</div>
+
+										<div class="col-md-6 col-sm-6">
+
+
+											<div class="input-group input-group-sm">
+												<label for="tipo"></label> <input type="text"
+													class="form-control" th:field="*{parametroDePesquisa}">
+												<span class="input-group-btn">
+													<button class="btn btn-info btn-flat" type="submit">Pesquisar</button>
+												</span>
+											</div>
+										</div>
+<div style="margin-top: 40px;">
+
+</div>
+
+									</div>
+
+
+
+								</form>
+							</div>
+
+
+						</div>
+
+
+						<div style="margin-top: 20px">
+
+							<!-- /.box-header -->
+							<!-- form start -->
+
+							<div>
+
+
+
+
+								<div class="box-body table-responsive no-padding">
+									<table class="table table-hover table-striped data-table">
+										<thead>
+											<tr>
+												<th>Nome do Paciente</th>
+												<th>Género</th>
+												<th>Estado Civil</th>
+												<th>Profissão</th>
+												<th>Telefone Principal</th>
+												<th>Editar</th>
+												<th>Ver Detalhes</th>
+												<th>Agendar Cosulta</th>
+
+
+
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="paciente :${pacientes}">
+												<td><i th:text="${paciente.nome}"></i> <i
+													th:text="${paciente.apelido}"></i></td>
+												<td th:text="${paciente.genero}"></td>
+												<td th:text="${paciente.estadoCivil}"></td>
+												<td th:text="${paciente.profissao}"></td>
+												<td th:text="${paciente.telefonePrincipal}"></td>
+
+
+
+
+												<td><a class="delete btn btn-xs btn-default"
+													th:href="@{/paciente/{id}/update(id=${paciente.id})}"><i
+														class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+												<td><a class="delete btn btn-xs btn-default"
+													th:href="@{/paciente/{id}/(id=${paciente.id})}"><i
+														class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+
+												<td><a class="btn btn-xs btn-default"
+													th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
+														Consulta</a></td>
+											</tr>
+										</tbody>
+										<tfoot>
+
+											<tr>
+												<th>Nome do Paciente</th>
+												<th>Género</th>
+												<th>Estado Civil</th>
+												<th>Profissão</th>
+												<th>Telefone Principal</th>
+												<th>Editar</th>
+												<th>Ver Detalhes</th>
+												<th>Agendar Cosulta</th>
+
+
+
+
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+							</div>
+							<!-- /.box-body -->
+
+							<div class="box-footer">
+
+
+								<div class="box-body table-responsive no-padding">
+									<table class="table table-hover">
+										<tr>
+											<th><a class="" th:href="@{/paciente/}">Registar
+													Novo</a></th>
+
+										</tr>
+
+
+									</table>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+
+
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

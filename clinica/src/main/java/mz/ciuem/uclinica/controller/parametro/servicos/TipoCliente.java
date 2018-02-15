@@ -1,0 +1,7 @@
+package mz.ciuem.uclinica.controller.parametro.servicos;
+
+public enum TipoCliente {
+	
+	FUNCIONARIO,ESTUDANTE_BOLSA_COMPLETA,ESTUDANTE_BOLSA_REDUZIDA,ESTUDANTE_NAO_BOLSEIRO,EMPRESA,PARTICULAR,AGREGADO
+
+}

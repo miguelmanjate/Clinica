@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+
+
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Pesquisa de Serviços</h3>
+						
+						
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+										<thead>
+											<tr>
+												<th>Código</th>
+												<th>Designação</th>
+												<th>Serviço - UEM</th>
+												<th>Especialidade</th>
+												<th>Sector</th>
+
+												<th>Editar</th>
+												<th>Detalhes</th>
+																								<th>Taxas</th>
+												
+
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="servico :${servicos}">
+												<td th:text="${servico.codigo}"></td>
+
+												<td th:text="${servico.designacao}"></td>
+												<td th:text="${servico.servicoDaUnidade.servicoTipo}"></td>
+												<td th:text="${servico.especialidade}"></td>
+												<td th:text="${servico.sector.designacao}"></td>
+
+												<td><a class="delete btn btn-xs btn-default"
+													th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
+														class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+												<td><a class="delete btn btn-xs btn-default"
+													th:href="@{/parametro/servico/{id}/(id=${servico.id})}"><i
+														class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+														
+														<td><a class="delete btn btn-xs btn-default"
+													th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
+														class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
+											</tr>
+										</tbody>
+
+									</table>
+						</div>
+						
+						
+					</div>
+					<!-- /.box-body -->
+	<div class="box-footer">
+							<table class="table ">
+								<tr>
+									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
+									<th><a class="" th:href="@{/parametro/servico/list}">Listar Todos</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+		
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Unidades</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Parâmetros: Registo de Unidades</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<form action="#" th:object="${unidades}" class=""
+									th:action="@{/parametro/unidade/add}" method="post">
+
+
+									<div class="alert alert-success alert-dismissable"
+										th:if="${messageVisible}">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<b>Parametrização de Unidade: </b>
+										<p>Unidade registada com sucesso!</p>
+									</div>
+
+
+									<div class="form-group ">
+										<label for="orgao">Orgao</label> <select
+											th:field="*{orgao.id}" class="form-control">
+											<option th:each="orgao : ${orgoes}" th:value="${orgao.id}"
+												th:text="${orgao.designacao}" />
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Designação da Unidade</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('designacao')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{designacao}"></span>
+										</label> <input type="text" class="form-control"
+											th:field="*{designacao}">
+									</div>
+									
+									<div class="form-group">
+										<label for="designacao">Nacionalidade:</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('nacionalidade')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{nacionalidade}"></span>
+										</label> <input type="text" class="form-control"
+											th:field="*{nacionalidade}">
+									</div>
+									
+									<div class="form-group">
+										<label for="designacao">Endereco:</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('endereco')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{endereco}"></span>
+										</label> <input type="text" class="form-control"
+											th:field="*{endereco}">
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-default"
+												th:href="@{/parametro/unidade/list}"><i
+												class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

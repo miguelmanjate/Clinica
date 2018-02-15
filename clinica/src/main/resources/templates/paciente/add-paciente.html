@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Registar Pacientes</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Paciente: Registo de Paciente</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+
+
+							<form action="#" th:object="${paciente}" class=""
+								th:action="@{/paciente/add}" method="post">
+
+								<div class="col-md-6">
+
+
+									<div class="form-group">
+										<label for="designacao">Apelido</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('apelido')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{apelido}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{apelido}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Nome</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('nome')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{nome}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{nome}">
+									</div>
+
+									<div class="form-group">
+
+										<label for="id_data">Data de Nascimento </label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('dataDeNascimento')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{dataDeNascimento}"></span>
+										</label> <input type="text" id="id_data" placeholder="DD/MM/AAAA"
+											class="form-control input-sm" th:field="*{dataDeNascimento}">
+									</div>
+
+									<div class="form-group ">
+										<label for="tipoDocumento">Tipo de Documento</label> <select
+											th:field="*{tipoDocumento}" class="form-control input-sm">
+											<option th:each="tipoDocumento : ${tipoDocumento}"
+												th:value="${tipoDocumento}" th:text="${tipoDocumento}" />
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="designacao">Número do Documento</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('numeroDocumento')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{numeroDocumento}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{numeroDocumento}">
+									</div>
+
+									<div class="form-group ">
+										<label for="raca">Raça</label> <select th:field="*{raca}"
+											class="form-control input-sm">
+											<option th:each="raca : ${raca}" th:value="${raca}"
+												th:text="${raca}" />
+										</select>
+									</div>
+
+									<div class="form-group ">
+										<label for="tipoServico">Género</label> <select
+											th:field="*{genero}" class="form-control input-sm">
+											<option th:each="genero : ${genero}" th:value="${genero}"
+												th:text="${genero}" />
+										</select>
+									</div>
+
+									<div class="form-group ">
+										<label for="estadoCivil">Estado Civil</label> <select
+											th:field="*{estadoCivil}" class="form-control input-sm">
+											<option th:each="estadoCivil : ${estadoCivil}"
+												th:value="${estadoCivil}" th:text="${estadoCivil}" />
+										</select>
+									</div>
+
+
+									<div class="form-group">
+										<label for="designacao">Residência</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('endereco')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{endereco}"></span>
+										</label> <input type="text" class="form-control"
+											th:field="*{endereco}">
+									</div>
+
+
+								</div>
+
+								<!-- Segundo bloco do formulario -->
+								<div class="col-md-6">
+
+
+									<div class="form-group">
+										<label for="designacao">Email</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('email')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{email}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{email}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Nome do Pai</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('nomeDoPai')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{nomeDoPai}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{nomeDoPai}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Nome da Mãe</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('nomeDaMae')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{nomeDaMae}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{nomeDaMae}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Telefone Principal</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('telefonePrincipal')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{telefonePrincipal}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{TelefonePrincipal}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Telefone Alternativo</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('telefoneAlternativo')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{telefoneAlternativo}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{TelefoneAlternativo}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Sector</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('sector')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{sector}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{sector}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Profissão</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('profissao')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{profissao}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{profissao}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Local de Trabalho</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('localDeTrabalho')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{localDeTrabalho}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{localDeTrabalho}">
+									</div>
+
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-default" th:href="@{/paciente/list}"><i
+												class="fa fa-eye" style="margin: 2px"></i>Listar</a> <a
+												class="btn btn-default" th:href="@{/main_recepcao/utente}">
+												Voltar </a>
+										</div>
+
+
+
+									</div>
+								</div>
+							</form>
+
+
+
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

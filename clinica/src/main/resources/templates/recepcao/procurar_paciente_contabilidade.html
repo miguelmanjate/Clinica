@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Detalhes do Servico</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+
+
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+
+				<!-- general form elements -->
+				<div class="box box-success">
+
+					<div class="box-header">
+
+						<div class="box-header">
+							<h3 class="box-title">Recepção- Contabilidade: Pesquisar
+								Paciente</h3>
+
+						</div>
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="row">
+						<div class="col-md-8">
+							<form action="#" th:object="${pesquisarPacienteForm}" class=""
+								th:action="@{/paciente/procurar/contabilidade}" method="post">
+
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group  ">
+
+											<label for="tipo" class="col-md-5 col-form-label">Pesquisar
+												Por:</label>
+											<div class="col-md-7">
+
+												<select th:field="*{tipo}" class="form-control input-sm">
+													<option th:each="tipo : ${tipoParametro}"
+														th:value="${tipo}" th:text="${tipo}"></option>
+
+												</select>
+
+											</div>
+
+										</div>
+
+									</div>
+									<div class="col-md-6 col-sm-6">
+
+										<div class="input-group input-group-sm">
+
+											<label for="tipo"></label> <input type="text"
+												class="form-control" th:field="*{parametroDePesquisa}">
+											<span class="input-group-btn">
+												<button class="btn btn-info btn-flat" type="submit"><i class="fa fa-search"></i></button>
+											</span>
+										</div>
+
+									</div>
+
+								</div>
+
+							</form>
+
+						</div>
+
+
+					</div>
+
+					<div class="box-body "></div>
+
+					<!-- /.box-body -->
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

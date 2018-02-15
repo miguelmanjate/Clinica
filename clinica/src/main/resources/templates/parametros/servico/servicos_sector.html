@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servico</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Parâmetros: Mapear Servicos do sector</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-12">
+
+								<form action="#" th:object="${servico_sector}" class=""
+									th:action="@{/parametro/servico_sector}" method="post">
+									<div class="alert alert-success alert-dismissable"
+										th:if="${messageVisible}">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<b>Parametrização de Serviços do Sector: </b>
+										<p>Serviços do Sector registado com sucesso!</p>
+									</div>
+									
+									<div class="row">
+										<div class="col-md-6">
+									
+									<div class="form-group ">
+										<label for="tipoServico">Sector</label> <select
+											 class="form-control">
+											<option/>
+										</select>
+									</div>
+									
+									<div class="form-group ">
+										<label for="tipoServico">Tipo de Serviço</label> <select
+											 class="form-control">
+											<option/>
+										</select>
+									</div>
+									</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="form-group">
+												<label for="designacao">Escolha os Serviços</label> 
+												 <select
+													 class="form-control" multiple="multiple">
+													<option/>
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-1">
+											<div class="form-group">
+												<label>
+		                                            <input type="checkbox" class="minimal"/>Especial?
+		                                        </label>
+		                                        <input type="text" class="form-control" placeholder="Preço"/>
+		                                        <select
+													 class="form-control">
+													<option>Activo<option/>
+													<option>Inativo<option/>
+												</select>
+												<button type="button" class="btn btn-primary  btn-lg btn-block">
+													<i class="fa fa-angle-right" aria-hidden="true" style = "margin: 2px"></i>
+												</button>
+												<button type="button" class="btn btn-primary  btn-lg btn-block">
+													<i class="fa fa-angle-left" aria-hidden="true" style = "margin: 2px"></i>
+												</button>
+												
+											</div>
+										</div>
+										<div class="col-sm-8">
+											<div class="form-group">
+												<label for="designacao">Serviços Escolhidos</label> 
+												<table class="table table-hover">
+													<tr>
+														<th></th>
+														<th>Serviços</th>
+														<th>Especial?</th>
+														<th>Preço</th>
+													</tr>
+													<tr>
+														<td><input type="checkbox" class="minimal"/></td>
+														<td></td>
+					
+														<td></td>
+														<td></td>
+													</tr>
+					
+												</table>
+												
+											</div>
+										</div>
+
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-default"
+												><i
+												class="fa fa-eye" style = "margin: 2px"></i>Listar</a>
+
+
+
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

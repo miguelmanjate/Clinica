@@ -1,0 +1,180 @@
+!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Detalhes do Servico</title>
+</head>
+<body>
+	<div layout:fragment="conteudo">
+
+
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+
+				<!-- general form elements -->
+				<div class="box box-success">
+
+					<div class="box-header">
+
+						<div class="box-header">
+							<h3 class="box-title">
+								<i class="fa fa-eye"></i>Detalhes do Servicos <small
+									class="pull-right"> </small>
+							</h3>
+
+						</div>
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row ">
+							<div class="col-md-8">
+								<div class="alert alert-success alert-dismissable"
+									th:if="${messageVisible}">
+									<i class="fa fa-check"></i>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">&times;</button>
+									<b>Registo do Servico: </b>
+									<p>Servico registado com sucesso!</p>
+								</div>
+							</div>
+						</div>
+						<!-- info row -->
+						<div class="row invoice-info" style="margin-bottom: 10px">
+
+							<div class="col-sm-12 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="40%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tbody>
+									
+										<tr>
+										<td><b>Codigo do Serviço : </b></td>
+										<td><i th:text="${servico.codigo}"></i></td>
+									</tr>
+									
+									<tr>
+										<td><b>Designação de Serviço :</b></td>
+										<td><i th:text="${servico.designacao}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+									
+										<tr>
+										<td><b>Designação de Serviço - UEM : </b></td>
+										<td><i th:text="${servico.servicoDaUnidade.servicoTipo}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+										<tr>
+										<td><b>Sector</b></td>
+										<td><i th:text="${servico.sector.designacao}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+									
+									<tr>
+										<td><b>Especialidade</b></td>
+										<td><i th:text="${servico.sector.designacao}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+									
+									<tr>
+														<div class="col-lg-12 col-md-12"
+												th:each="taxa :${servico.taxas}">
+												<div class="col-lg-3">
+													<span th:text="${taxa.tipoCliente}"></span>
+												</div>
+												<div class="col-lg-9">
+													<table  style="width: 100%">
+													<tr>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th> 
+												
+													</th>
+													</tr>
+													
+												
+													<tr>
+													<td  > Urgente :<span class="label label-danger" style="margin-right: 8px" th:text="${taxa.taxaUrgente}"></span></td>
+													<td  > Normal : <span class="label label-success" style="margin-right: 8px" th:text="${taxa.taxaNormal}"></span></td>
+													<td  > Retorno: <span class="label label-primary" style="margin-right: 8px" th:text="${taxa.taxaRetorno}"></span></td>
+												<td > Seg. Via : <span class="label label-warning" style="margin-right: 8px" th:text="${taxa.taxaSegundaVia}"></span></td>
+													
+													
+													</tr>
+													
+													</table>
+													
+														
+
+
+
+												</div>
+
+
+
+											</div>
+									
+									</tr>
+								
+</tbody>
+								</table>
+
+							</div>
+
+						</div>
+
+						<div class="box-footer">
+							<div class="box-body table-responsive no-padding">
+
+								<a th:href="@{/parametro/servico}" class="btn btn-primary">
+								<i class="fa fa-save inverse" style="margin-right: 2px"></i>Registar
+									Servico</a> 
+									
+									<a class="btn btn-default"
+									th:href="@{/parametro/servico/{id}/update(id=${servico.id})}">
+									<i class="fa fa-retweet" style="margin-right: 2px"></i>Editar</a>
+									
+									<a class="btn btn-default" th:href="@{/parametro/servico/list}">
+									<i class="fa fa-eye" style="margin-right: 2px"></i>Listar
+									Servicos</a> 
+
+							</div>
+						</div>
+
+
+
+					</div>
+
+					<!-- /.box-body -->
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+	</div>
+
+</body>
+</html>

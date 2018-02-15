@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Configuracção de Taxas: Taxas de Serviços</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-12 col-lg-12">
+
+								<form action="#" th:object="${taxa}" class=""
+									th:action="@{/parametro/servico/taxa/update}" method="post">
+									<div class = "row">
+									<div class = "col-lg-12">
+									
+									<h2 align="center">Serviço : <i th:text= "${servico.designacao}"></i></h2>
+									</div>
+									</div>
+<div class = "col-lg-6 col-md-6">
+									<div class="alert alert-success alert-dismissable"
+										th:if="${messageVisible}">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<b>Configuração de Taxas: </b>
+										<p>Serviço registado com sucesso!</p>
+									</div>
+
+									<div class="form-group ">
+										<label for="tipoServico">Tipo de Cliente</label> <select
+											th:field="*{tipoCliente}" class="form-control">
+											<option th:each="tipoCliente : ${tipoCliente}"
+												th:value="${tipoCliente}"
+												th:text="${tipoCliente}" />
+										</select>
+									</div>
+									<div class="form-group">
+										<label for="designacao">Taxa Normal</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('taxaNormal')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{taxaNormal}"></span>
+										</label> <input type="number" step="any" class="form-control" 
+											th:field="*{taxaNormal}">
+									</div>
+
+									<div class="form-group">
+										<label for="codigo">Taxa Urgente</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('taxaUrgente')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{taxaUrgente}"></span>
+										</label> <input type="number" step="any" class="form-control" th:field="*{taxaUrgente}">
+									</div></div>
+									<div class = "col-lg-6 col-md-6">
+									
+											<div class="form-group">
+										<label for="codigo">Taxa Retorno</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('taxaRetorno')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{taxaRetorno}"></span>
+										</label> <input type="number" step="any" class="form-control" th:field="*{taxaRetorno}">
+									</div>
+									
+										<div class="form-group">
+										<label for="codigo">Taxa Segunda Vias</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('taxaSegundaVia')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{taxaSegundaVia}"></span>
+										</label> <input type="number" step="any" class="form-control" th:field="*{taxaSegundaVia}">
+									</div>
+									</div>
+								
+<div class = "row">
+<div class = "col-lg-12 col-md-12">
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+										
+
+
+										</div>
+
+									</div></div></div>
+								</form>
+							</div>
+							
+							
+	<div class="col-lg-12 col-md-12">
+							<table class="table ">
+								<tr>
+									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
+									<th><a class="" th:href="@{/parametro/servico/list}">Listar Todos</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+							<div class="col-lg-12" style="margin-top: 10px">
+
+
+
+
+								<div class=" table-responsive no-padding">
+									<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Codigo</th>
+
+										<th>Designação do Servico</th>
+										<th>Tipo de Cliente e Taxas</th>
+										<th>Editar</th>
+										<th>Taxas</th>
+
+
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="servico :${servicos}">
+
+										<td th:text="${servico.codigo}"></td>
+										<td th:text="${servico.designacao}"></td>
+										<td >
+
+											<div class="col-lg-12 col-md-12"
+												th:each="taxa :${servico.taxas}">
+												<div class="col-lg-3">
+													<span th:text="${taxa.tipoCliente}"></span>
+												</div>
+												<div class="col-lg-9">
+													<table  style="width: 100%">
+													<tr>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th> 
+												
+													</th>
+													</tr>
+													
+												
+													<tr>
+													<td  > Urgente :<span class="label label-danger" style="margin-right: 8px" th:text="${taxa.taxaUrgente}"></span></td>
+													<td  > Normal : <span class="label label-success" style="margin-right: 8px" th:text="${taxa.taxaNormal}"></span></td>
+													<td  > Retorno: <span class="label label-primary" style="margin-right: 8px" th:text="${taxa.taxaRetorno}"></span></td>
+												<td > Seg. Via : <span class="label label-warning" style="margin-right: 8px" th:text="${taxa.taxaSegundaVia}"></span></td>
+													
+													
+													</tr>
+													
+													</table>
+													
+														
+
+
+
+												</div>
+
+
+
+											</div>
+										</td>
+
+
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
+												class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
+									</tr>
+								</tbody>
+
+							</table>
+								</div>
+
+
+							</div>
+
+
+						</div>
+
+
+
+
+
+					</div>
+					<!-- /.box-body -->
+	<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<tr>
+									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
+									<th><a class="" th:href="@{/parametro/servico/list}">Listar Todos</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

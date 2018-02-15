@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Registo de Utilizadores</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Registo de Utilizadores</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<form th:action="@{/autenticacao/utilizador}" th:object = "${user}"  class=""
+									 method="post">
+									 
+									<div class="alert alert-success alert-dismissable"
+										th:if="${messageVisible}">
+										<i class="fa fa-check"></i>
+										<button type="button" class="close" data-dismiss="alert"
+											aria-hidden="true">&times;</button>
+										<b>Parametrização de Serviço: </b>
+										<p>Serviço registado com sucesso!</p>
+									</div>
+
+									<div class="form-group ">
+										<label for="username">Username</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('username')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{username}"></span>
+										</label> <input type="email" class="form-control"
+											th:field="*{username}">
+									</div>
+									<div class="form-group">
+										<label for="password">Senha</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('password')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{password}"></span>
+										</label> <input type="password" class="form-control"
+											th:field="*{password}">
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-default"
+												th:href="@{/autenticacao/utilizador/listt}"><i
+												class="fa fa-eye" style = "margin: 2px"></i>Listar</a>
+
+
+
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

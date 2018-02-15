@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Lista de Consultas</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Consultas: lista de Consultas</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+						<div class="box-body table-responsive ">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Especialidade</th>
+										<th>Preco</th>
+
+
+
+
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="consulta :${consultas}">
+
+										<td><i th:text="${consulta.dataDaConsulta}"></i></td>
+
+										<td><i th:text="${consulta.horaDaConsulta}"></i></td>
+										<td th:text="${consulta.paciente?.nome}"></td>
+										<td th:text="${consulta.tipoConsulta}"></td>
+										<td th:text="${consulta.causaAdmissao}"></td>
+										<td th:text="${consulta.medico.nome}"></td>
+										<td th:text="${consulta.especialidade}"></td>
+										<td th:text="${consulta.preco}"></td>
+
+
+										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i -->
+										<!-- 											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td> -->
+										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/{id}/(id=${paciente.id})}"><i -->
+										<!-- 											class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td> -->
+
+										<!-- 									<td><a class="btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar -->
+										<!-- 											Consulta</a></td> -->
+									</tr>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Especialidade</th>
+										<th>Preco</th>
+
+
+
+
+
+
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<tr>
+									<th><a class="" th:href="@{/paciente/procurar/}">Agendar
+											Nova</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

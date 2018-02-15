@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Taxas de Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+
+
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Taxas</h3>
+
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Codigo</th>
+
+										<th>Designação do Servico</th>
+										<th>Tipo de Cliente e Taxas</th>
+										<th>Editar</th>
+										<th>Taxas</th>
+
+
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="servico :${servicos}">
+
+										<td th:text="${servico.codigo}"></td>
+										<td th:text="${servico.designacao}"></td>
+										<td >
+
+											<div class="col-lg-12 col-md-12"
+												th:each="taxa :${servico.taxas}">
+												<div class="col-lg-4">
+													<span th:text="${taxa.tipoCliente}"></span>
+												</div>
+												<div class="col-lg-8">
+													<table  style="width: 100%">
+													<tr>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th width="25%"> 
+												
+													</th>
+													<th> 
+												
+													</th>
+													</tr>
+													
+												
+													<tr>
+													<td  > Urgente :<span class="label label-danger" style="margin-right: 8px" th:text="${taxa.taxaUrgente}"></span></td>
+													<td  > Normal : <span class="label label-success" style="margin-right: 8px" th:text="${taxa.taxaNormal}"></span></td>
+													<td  > Retorno: <span class="label label-primary" style="margin-right: 8px" th:text="${taxa.taxaRetorno}"></span></td>
+												<td > Seg. Via : <span class="label label-warning" style="margin-right: 8px" th:text="${taxa.taxaSegundaVia}"></span></td>
+													
+													
+													</tr>
+													
+													</table>
+													
+														
+
+
+
+												</div>
+
+
+
+											</div>
+										</td>
+
+
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
+												class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
+									</tr>
+								</tbody>
+
+							</table>
+						</div>
+
+
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<table class="table ">
+							<tr>
+								<th><a class="" th:href="@{/parametro/servico/add}">Registar
+										Novo</a></th>
+								<th><a class="" th:href="@{/parametro/servico/list}">Listar
+										Todos</a></th>
+
+							</tr>
+
+
+						</table>
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

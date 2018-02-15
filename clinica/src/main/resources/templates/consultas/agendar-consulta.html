@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+
+<head>
+<title>Agendar Consulta</title>
+
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+
+
+		<div class="row">
+			<!-- left column -->
+
+
+
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h4 class="box-title">Agendar Consulta</h4>
+
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+
+
+						<div class="row ">
+							<div class="col-md-8">
+								<div class="alert alert-success alert-dismissable"
+									th:if="${messageVisible}">
+									<i class="fa fa-check"></i>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">&times;</button>
+									<b>Registo de Paciente: </b>
+									<p>Paciente registado com sucesso!</p>
+								</div>
+							</div>
+						</div>
+						<!-- info row -->
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Nome completo:</b></td>
+										<td><i th:text="${paciente.nome}"
+											style="margin-right: 5px"></i><i
+											th:text="${paciente.apelido}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Naturalidade:</b></td>
+										<td><i th:text="${paciente.naturalidade}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Genero:</b></td>
+										<td><i th:text="${paciente.genero}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Estado Civil:</b></td>
+										<td><i th:text="${paciente.estadoCivil}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Profissao:</b></td>
+										<td><i th:text="${paciente.profissao}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Local de Trabalho:</b></td>
+										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Filho de:</b></td>
+										<td><i th:text="${paciente.nomeDoPai}"
+											style="margin-right: 5px"></i><i>e </i></td>
+									</tr>
+									<tr>
+										<td><b></b></td>
+										<td><i th:text="${paciente.nomeDaMae}"></i></td>
+									</tr>
+									<tr>
+									<tr>
+										<td><b>Local de Trabalho:</b></td>
+										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Raca:</b></td>
+										<td><i th:text="${paciente.raca}"></i></td>
+									</tr>
+
+
+								</table>
+
+							</div>
+
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Endereco:</b></td>
+										<td><i th:text="${paciente.endereco}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+									<tr>
+										<td><b>Email</b></td>
+										<td><i th:text="${paciente.email}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Telefone Princial:</b></td>
+										<td><i th:text="${paciente.telefonePrincipal}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Telefone Alternativo:</b></td>
+										<td><i th:text="${paciente.telefoneAlternativo}"></i></td>
+									</tr>
+									<tr>
+										<td><b><i th:text="${paciente.tipoDocumento}"></i>:</b></td>
+										<td><i th:text="${paciente.numeroDocumento}"></i></td>
+									</tr>
+
+
+
+
+
+								</table>
+
+							</div>
+						</div>
+
+
+
+
+
+
+
+						<div class="box-body ">
+
+							<div class="row">
+
+
+								<form action="#" th:object="${consultaForm}" class=""
+									th:action="@{/consulta/agendar}" method="post">
+									<div class="row">
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+
+
+											<div class="form-group ">
+												<label for="tipoDocumento">Tipo de Consulta</label> <select 
+													th:field="*{consulta.tipoConsulta}"
+													class="form-control input-sm multiple-select">
+													<option th:each="tipoConsulta : ${tipoConsulta}"
+														th:value="${tipoConsulta}" th:text="${tipoConsulta}" />
+												</select>
+											</div>
+
+
+
+											<div class="form-group ">
+												<label for="especialidade">Especialidade</label> <select
+													th:field="*{consulta.especialidade}"
+													class="form-control input-sm multiple-select">
+													<option th:each="especialidade : ${especialidade}"
+														th:value="${especialidade}" th:text="${especialidade}" />
+												</select>
+											</div>
+
+										</div>
+
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+
+											<div class="form-group ">
+												<label for="causaAdmissao">Admissão Por</label> <select
+													th:field="*{consulta.causaAdmissao}"
+													class="form-control input-sm multiple-select">
+													<option th:each="causaAdmissao : ${causaAdmissao}"
+														th:value="${causaAdmissao}" th:text="${causaAdmissao}" />
+												</select>
+											</div>
+
+											<div class="form-group ">
+												<label for="medico">Medico</label> <select
+													th:field="*{consulta.medico.id}"
+													class="form-control input-sm multiple-select">
+													<option th:each="medico : ${medicos}"
+														th:value="${medico.id}" th:text="${medico.nome}" />
+												</select>
+											</div>
+
+
+										</div>
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+
+
+
+
+											<div class="row">
+
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="dataDaConsulta">Data </label> <label
+															class="text-danger"
+															th:if="${#fields.hasErrors('consulta.dataDaConsulta')}">
+															<i class="fa fa-times-circle-o"></i> <span
+															th:errors="*{consulta.dataDaConsulta}"></span>
+														</label>
+
+														<div class="input-group">
+
+															<div class="input-group-addon">
+																<i class="fa fa-calendar"></i>
+															</div>
+															<input th:field="*{consulta.dataDaConsulta}" type = "datetime"
+																id="data-consulta" class="form-control input-sm" />
+
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6 ">
+
+													<div class="form-group">
+														<label for="horaDaConsulta">Hora </label> <label
+															class="text-danger"
+															th:if="${#fields.hasErrors('consulta.horaDaConsulta')}">
+															<i class="fa fa-times-circle-o"></i> <span
+															th:errors="*{consulta.horaDaconsulta}"></span>
+														</label>
+														<div class="input-group">
+															<input th:field="*{consulta.horaDaConsulta}"
+																class="form-control input-sm timepicker" />
+
+														</div>
+														<!-- /.input group -->
+													</div>
+												</div>
+
+												<div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+
+
+<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
+													<div class="form-group ">
+														<label for="servico">Servicos</label> <select
+															multiple="multiple" th:field="*{servicos}"
+															class="form-control input-sm multiple-select">
+															<option th:each="servico : ${servicos}" 
+																th:value="${servico.id}" th:text="${servico.designacao}"></option>
+
+														</select>
+													</div>
+
+
+
+
+
+												</div>
+											</div>
+
+
+										</div>
+
+
+									</div>
+
+
+
+									<div class="">
+
+										<button type="submit" class="btn btn-sm btn-primary  "
+											id="btn-agendar">
+											<i class="fa fa-save inverse" style="margin: 2px"></i>Agendar
+										</button>
+									</div>
+								</form>
+
+
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<div class="box-body table-responsive no-padding">
+						<table class="table table-hover">
+							<tr>
+								<th><a class="" th:href="@{/paciente/}">Registar Novo</a></th>
+								<th><a class=""
+									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar</a></th>
+								<th><a class="" th:href="@{/paciente/list}">Listar
+										Pacientes</a></th>
+								<th><a
+									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
+										Consultas</a></th>
+
+								<th><a class=""
+									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
+										Exame</a></th>
+
+							</tr>
+
+
+						</table>
+					</div>
+					
+					
+					
+					<div class="box-body table-responsive ">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Especialidade</th>
+										<th>Preco</th>
+
+
+
+
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="consulta :${consultas}">
+
+										<td><i th:text="${consulta.dataDaConsulta}"></i></td>
+
+										<td><i th:text="${consulta.horaDaConsulta}"></i></td>
+										<td th:text="${consulta.paciente?.nome}"></td>
+										<td th:text="${consulta.tipoConsulta}"></td>
+										<td th:text="${consulta.causaAdmissao}"></td>
+										<td th:text="${consulta.medico.nome}"></td>
+										<td th:text="${consulta.especialidade}"></td>
+										<td th:text="${consulta.preco}"></td>
+
+
+										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i -->
+										<!-- 											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td> -->
+										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/{id}/(id=${paciente.id})}"><i -->
+										<!-- 											class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td> -->
+
+										<!-- 									<td><a class="btn btn-xs btn-default" -->
+										<!-- 										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar -->
+										<!-- 											Consulta</a></td> -->
+									</tr>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Especialidade</th>
+										<th>Preco</th>
+
+
+
+
+
+
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+				</div>
+				<!-- /.box-body -->
+
+
+
+			</div>
+		</div>
+
+
+	</div>
+
+
+</body>
+</html>
