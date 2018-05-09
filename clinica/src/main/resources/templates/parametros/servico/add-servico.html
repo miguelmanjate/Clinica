@@ -18,32 +18,31 @@
 				<!-- general form elements -->
 				<div class="box box-success">
 					<div class="box-header">
-						<h3 class="box-title">Parâmetros: Registo de Serviços da Unidade</h3>
+						<h3 class="box-title">Parâmetros: Registo de Serviços da
+							Unidade</h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
 
 					<div class="box-body ">
 
-				
-							
+						<form action="#" th:object="${servico}" class=""
+							th:action="@{/parametro/servico/add}" method="post">
+							<div class="row">
+								<div class="alert alert-success alert-dismissable"
+									th:if="${messageVisible}">
+									<i class="fa fa-check"></i>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">&times;</button>
+									<b>Parametrização de Serviço: </b>
+									<p>Serviço registado com sucesso!</p>
+								</div>
+							</div>
+							<div class="row">
 
-								<form action="#" th:object="${servico}" class=""
-									th:action="@{/parametro/servico/add}" method="post">
-									<div class = "row">
-									<div class="alert alert-success alert-dismissable"
-										th:if="${messageVisible}">
-										<i class="fa fa-check"></i>
-										<button type="button" class="close" data-dismiss="alert"
-											aria-hidden="true">&times;</button>
-										<b>Parametrização de Serviço: </b>
-										<p>Serviço registado com sucesso!</p>
-									</div></div>
-									<div class = "row">
-									
-									
-<div class = "col-lg-6 col-md-6">
-									
+
+								<div class="col-lg-6 col-md-6">
+
 
 									<div class="form-group ">
 										<label for="servicoDaUnidade">Serviço da UEM</label> <select
@@ -77,41 +76,42 @@
 												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
 											</button>
 
-										
+
 
 
 										</div>
 
 									</div>
-									</div>
-									
-									<div class = "col-lg-6 col-md-6">
+								</div>
+
+								<div class="col-lg-6 col-md-6">
 									<div class="form-group">
-									<label for="especialidade">Especialidade</label> <select
+										<label for="especialidade">Especialidade</label> <select
 											th:field="*{especialidade}" class="form-control">
 											<option th:each="especialidade : ${especialidades}"
-												th:value="${especialidade}"
-												th:text="${especialidade}" />
+												th:value="${especialidade}" th:text="${especialidade}" />
 										</select>
-										</div>
-										<div class="form-group">
-											<label for="sector">Sector</label> <select
+									</div>
+									<div class="form-group">
+										<label for="sector">Sector</label> <select
 											th:field="*{sector.id}" class="form-control">
 											<option th:each="sector : ${sectores}"
-												th:value="${sector.id}"
-												th:text="${sector.designacao}" />
+												th:value="${sector.id}" th:text="${sector.designacao}" />
 										</select>
-										</div>
-									</div></div>
-								</form>
-						
-							
-							
-	<div class="col-lg-12 col-md-12">
+									</div>
+								</div>
+							</div>
+						</form>
+
+
+
+						<div class="col-lg-12 col-md-12">
 							<table class="table ">
 								<tr>
-									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
-									<th><a class="" th:href="@{/parametro/servico/list}">Listar Todos</a></th>
+									<th><a class="" th:href="@{/parametro/servico/add}">Registar
+											Novo</a></th>
+									<th><a class="" th:href="@{/parametro/servico/list}">Listar
+											Todos</a></th>
 
 								</tr>
 
@@ -119,73 +119,65 @@
 							</table>
 						</div>
 
-							<div class="col-lg-12" style="margin-top: 10px">
+						<div class="col-lg-12" style="margin-top: 10px">
+						
+							<div class=" table-responsive no-padding">
+								<table class="table table-hover table-striped data-table">
+									<thead>
+										<tr>
+											<th>Código</th>
+											<th>Designação</th>
+											<th>Serviço - UEM</th>
+											<th>Especialidade</th>
+											<th>Sector</th>
+
+											<th>Editar</th>
+											<th>Detalhes</th>
+											<th>Taxas</th>
 
 
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="servico :${servicos}">
+											<td th:text="${servico.codigo}"></td>
 
+											<td th:text="${servico.designacao}"></td>
+											<td th:text="${servico.servicoDaUnidade.servicoTipo}"></td>
+											<td th:text="${servico.especialidade}"></td>
+											<td th:text="${servico.sector.designacao}"></td>
 
-								<div class=" table-responsive no-padding">
-									<table class="table table-hover table-striped data-table">
-										<thead>
-											<tr>
-												<th>Código</th>
-												<th>Designação</th>
-												<th>Serviço - UEM</th>
-												<th>Especialidade</th>
-												<th>Sector</th>
+											<td><a class="delete btn btn-xs btn-default"
+												th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
+													class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+											<td><a class="delete btn btn-xs btn-default"
+												th:href="@{/parametro/servico/{id}/(id=${servico.id})}"><i
+													class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
 
-												<th>Editar</th>
-												<th>Detalhes</th>
-																								<th>Taxas</th>
-												
+											<td><a class="delete btn btn-xs btn-default"
+												th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
+													class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
+										</tr>
+									</tbody>
 
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="servico :${servicos}">
-												<td th:text="${servico.codigo}"></td>
-
-												<td th:text="${servico.designacao}"></td>
-												<td th:text="${servico.servicoDaUnidade.servicoTipo}"></td>
-												<td th:text="${servico.especialidade}"></td>
-												<td th:text="${servico.sector.designacao}"></td>
-
-												<td><a class="delete btn btn-xs btn-default"
-													th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
-														class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
-												<td><a class="delete btn btn-xs btn-default"
-													th:href="@{/parametro/servico/{id}/(id=${servico.id})}"><i
-														class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
-														
-														<td><a class="delete btn btn-xs btn-default"
-													th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
-														class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
-											</tr>
-										</tbody>
-
-									</table>
-								</div>
-
-
+								</table>
 							</div>
 
 
-						
-
-
-
-
+						</div>
 
 					</div>
 					<!-- /.box-body -->
-	<div class="box-footer">
+					<div class="box-footer">
 
 
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
-									<th><a class="" th:href="@{/parametro/servico/list}">Listar Todos</a></th>
+									<th><a class="" th:href="@{/parametro/servico/add}">Registar
+											Novo</a></th>
+									<th><a class="" th:href="@{/parametro/servico/list}">Listar
+											Todos</a></th>
 
 								</tr>
 
@@ -198,11 +190,6 @@
 				</div>
 				<!-- /.box -->
 			</div>
-
-
-
-
-
 		</div>
 	</div>
 </body>

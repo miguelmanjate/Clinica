@@ -32,7 +32,7 @@ public class GenericEntity implements Serializable {
 
 	public GenericEntity() {
 		super();
-		
+
 		created = updated = new Date();
 	}
 
@@ -70,9 +70,6 @@ public class GenericEntity implements Serializable {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	
-
-	
 
 	@Override
 	public int hashCode() {

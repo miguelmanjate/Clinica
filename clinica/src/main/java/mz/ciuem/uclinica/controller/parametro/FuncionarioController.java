@@ -15,31 +15,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.ciuem.uclinica.entity.funcionario.Funcionario;
+import mz.ciuem.uclinica.entity.funcionario.NivelAcademico;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
-import mz.ciuem.uclinica.entity.parametro.Funcionario;
-import mz.ciuem.uclinica.entity.parametro.Servico;
-import mz.ciuem.uclinica.entity.parametro.ServicoDaUnidade;
 import mz.ciuem.uclinica.service.parametro.FuncionarioService;
-import mz.ciuem.uclinica.service.parametro.SectorService;
+import mz.ciuem.uclinica.service.parametro.UnidadesService;
 
 @Controller
-@RequestMapping("/parametro/funcionario/uem")
+@RequestMapping("/funcionario/uem")
 public class FuncionarioController {
 
 	@Autowired
 	private FuncionarioService funcionarioService;
 	
 	@Autowired
-	private SectorService sectorService;
+	private UnidadesService unidadesService;
 
 	@GetMapping(value = { "", "/", "add" })
 	private ModelAndView funcionario(Funcionario funcionario) {
 
-		ModelAndView model = new ModelAndView("/parametros/add-funcionario");
-		model.addObject("estado_civil", EstadoCivil.values());
+		ModelAndView model = new ModelAndView("/funcionario/add-funcionario");
+		model.addObject("estadoCivil", EstadoCivil.values());
 		model.addObject("genero", Genero.values());
-		model.addObject("sectores", sectorService.getAll());
+		model.addObject("nivelAcademico", NivelAcademico.values());
+		model.addObject("unidades", unidadesService.getAll());
 
 		return model;
 
@@ -50,19 +50,20 @@ public class FuncionarioController {
 			RedirectAttributes redirectAttributes) {
 
 		if (bindingResult.hasErrors()) {
-
+			
 			return funcionario(funcionario);
 
 		}
 
 		funcionarioService.saveOrUpdate(funcionario);
 		
-		String redirect = "redirect:/parametro/funcionario/uem/"+funcionario.getId();
+		String redirect = "redirect:/funcionario/uem/"+funcionario.getId();
 		
 		ModelAndView modelandview = new ModelAndView(redirect);
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 
 		return modelandview;
+		
 	}
 
 
@@ -71,7 +72,7 @@ public class FuncionarioController {
 
 		Funcionario funcionario = funcionarioService.find(id);
 
-		ModelAndView model = new ModelAndView("/parametros/detalhes-funcionario", "funcionario", funcionario);
+		ModelAndView model = new ModelAndView("/funcionario/detalhes-funcionario", "funcionario", funcionario);
 
 		return model;
 	}
@@ -81,7 +82,7 @@ public class FuncionarioController {
 
 		List<Funcionario> funcionarios = funcionarioService.getAll();
 
-		ModelAndView modelAndView = new ModelAndView("/parametros/funcionarios");
+		ModelAndView modelAndView = new ModelAndView("/funcionario/list-funcionario");
 		modelAndView.addObject("funcionarios", funcionarios);
 		return modelAndView;
 	}
@@ -91,10 +92,11 @@ public class FuncionarioController {
 
 		Funcionario funcionario = funcionarioService.find(id);
 		
-		ModelAndView model = new ModelAndView("/parametros/update-funcionario", "funcionario", funcionario);
-		model.addObject("estado_civil", EstadoCivil.values());
+		ModelAndView model = new ModelAndView("/funcionario/update-funcionario", "funcionario", funcionario);
+		model.addObject("estadoCivil", EstadoCivil.values());
 		model.addObject("genero", Genero.values());
-		model.addObject("sectores", sectorService.getAll());
+		model.addObject("nivelAcademico", NivelAcademico.values());
+		model.addObject("unidades", unidadesService.getAll());
 
 		return model;
 	}
@@ -111,7 +113,7 @@ public class FuncionarioController {
 		funcionarioService.saveOrUpdate(funcionario);
 		Funcionario f = funcionarioService.find(funcionario.getId());
 		
-		String redirect = "redirect:/parametro/funcionario/uem/"+f.getId();
+		String redirect = "redirect:/funcionario/uem/"+f.getId();
 		
 		ModelAndView model = new ModelAndView(redirect);
 		

@@ -15,7 +15,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,11 +30,15 @@ import mz.ciuem.uclinica.entity.GenericEntity;
 @Access(AccessType.FIELD)
 public class User extends GenericEntity implements UserDetails {
 
+	
+	@NotNull(message = "Mandatorio informar o nome do utilizador")
+	@NotBlank(message = "Mandatorio informar o nome do utilizador")
 	@Column(name = "username", length = 50, unique = true)
-	@NotEmpty(message = "O nome do utilizador nao deve conter espacos apenas")
 	private String username;
 
-	@NotEmpty
+	
+	@NotNull(message = "Mandatorio informar a senha")
+	@NotBlank(message = "Mandatorio informar a senha")
 	@Column(name = "password")
 	private String password;
 

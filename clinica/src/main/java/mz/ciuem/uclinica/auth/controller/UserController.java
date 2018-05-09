@@ -20,30 +20,38 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@RequestMapping(method = RequestMethod.GET, value = {"/",""})
+	public ModelAndView addUtilizador(User user){
+		
+		ModelAndView modelAndView = new ModelAndView("/autenticacao/user");
+		modelAndView.addObject("users", userService.getAll());
+		
+		return modelAndView;
+		
+	}
+	
 	
 	@RequestMapping(method = RequestMethod.POST, value = {"/",""})
 	public ModelAndView registarUtilizador(@Valid User user, BindingResult bindresult, RedirectAttributes redirectAttributes){
 		
 		if(bindresult.hasErrors()){
-			System.out.println(bindresult.toString());
+			return addUtilizador(user);
 			
 		}else{
-			userService.saveOrUpdate(user);
-			redirectAttributes.addFlashAttribute("messageVisible", "true");
+			try {
+				userService.saveOrUpdate(user);
+				redirectAttributes.addFlashAttribute("messageVisible", "true");
+			} catch (Exception e) {
+				
+			}
+		
 		}
 		
 		ModelAndView modelAndView = new ModelAndView("redirect:/autenticacao/utilizador");
-		
 		return modelAndView;
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = {"/",""})
-	public ModelAndView addUtilizador(User user){
-		
-		ModelAndView modelAndView = new ModelAndView("/autenticacao/user");
-		return modelAndView;
-		
-	}
+
 
 }

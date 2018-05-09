@@ -1,5 +1,7 @@
 package mz.ciuem.uclinica.entity.parametro;
 
+import java.util.List;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
@@ -7,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +31,18 @@ public class Unidades extends GenericEntity{
 	@JoinColumn(name  = "orgao_unidade")
 	private Orgao orgao;
 	
+//	@OneToMany(mappedBy= "unidade", fetch = FetchType.EAGER)
+//	private List<Funcionario> funcionarios;
+//	
+//	
+//	public List<Funcionario> getFuncionarios() {
+//		return funcionarios;
+//	}
+//
+//	public void setFuncionarios(List<Funcionario> funcionarios) {
+//		this.funcionarios = funcionarios;
+//	}
+
 	@Column(name="nacionalidade")
 	private String nacionalidade;
 	

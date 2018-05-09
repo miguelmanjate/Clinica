@@ -103,9 +103,21 @@
 												th:value="${estadoCivil}" th:text="${estadoCivil}" />
 										</select>
 									</div>
-
-
 									<div class="form-group">
+										<label for="naturalidade">Naturalidade</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('naturalidade')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{naturalidade}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{naturalidade}">
+									</div>
+
+								</div>
+
+								<!-- Segundo bloco do formulario -->
+								<div class="col-md-6">
+								
+								  <div class="form-group">
 										<label for="designacao">Residência</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('endereco')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -113,13 +125,6 @@
 										</label> <input type="text" class="form-control"
 											th:field="*{endereco}">
 									</div>
-
-
-								</div>
-
-								<!-- Segundo bloco do formulario -->
-								<div class="col-md-6">
-
 
 									<div class="form-group">
 										<label for="designacao">Email</label> <label
@@ -169,15 +174,6 @@
 									</div>
 
 									<div class="form-group">
-										<label for="designacao">Sector</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('sector')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{sector}"></span>
-										</label> <input type="text" class="form-control  input-sm"
-											th:field="*{sector}">
-									</div>
-
-									<div class="form-group">
 										<label for="designacao">Profissão</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('profissao')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -205,8 +201,8 @@
 
 											<a class="btn btn-default" th:href="@{/paciente/list}"><i
 												class="fa fa-eye" style="margin: 2px"></i>Listar</a> <a
-												class="btn btn-default" th:href="@{/main_recepcao/utente}">
-												Voltar </a>
+												class="btn btn-warning" th:href="@{/paciente}">
+												Cancelar </a>
 										</div>
 
 

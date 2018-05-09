@@ -15,26 +15,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.ciuem.uclinica.entity.estudante.Ano;
+import mz.ciuem.uclinica.entity.estudante.Estudante;
+import mz.ciuem.uclinica.entity.estudante.Semestre;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
-import mz.ciuem.uclinica.entity.parametro.Estudante;
-import mz.ciuem.uclinica.entity.parametro.Funcionario;
-import mz.ciuem.uclinica.entity.parametro.Servico;
+import mz.ciuem.uclinica.service.parametro.CursoService;
 import mz.ciuem.uclinica.service.parametro.EstudanteService;
 
 @Controller
-@RequestMapping("/parametro/estudante")
+@RequestMapping("/estudante/uem")
 public class EstudanteController {
 	
 	@Autowired
 	private EstudanteService estudanteService;
 	
+	@Autowired
+	private CursoService cursoService;
+	
 	@GetMapping(value ={"", "/", "add"})
 	private ModelAndView estudante(Estudante estudante){
 		
-		ModelAndView model = new ModelAndView("parametros/add-estudante");
-		model.addObject("estado_civil", EstadoCivil.values());
+		ModelAndView model = new ModelAndView("estudante/add-estudante");
+		model.addObject("estadoCivil", EstadoCivil.values());
 		model.addObject("genero", Genero.values());
+		model.addObject("anos", Ano.values());
+		model.addObject("semestres", Semestre.values());
+		model.addObject("cursos", cursoService.getAll());
 		
 		return model;
 	}
@@ -51,7 +58,7 @@ public class EstudanteController {
 		
 		estudanteService.saveOrUpdate(estudante);
 		
-		String redirect = "redirect:/parametro/estudante/"+estudante.getId();
+		String redirect = "redirect:/estudante/uem/"+estudante.getId();
 		
 		ModelAndView model = new ModelAndView(redirect);
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
@@ -65,7 +72,7 @@ public class EstudanteController {
 		
 		Estudante estudante = estudanteService.find(id);
 		
-		ModelAndView model = new ModelAndView("parametros/detalhes-estudante", "estudante", estudante);
+		ModelAndView model = new ModelAndView("/estudante/detalhes-estudante", "estudante", estudante);
 		
 		return model;
 	}
@@ -75,7 +82,7 @@ public class EstudanteController {
 
 		List<Estudante> estudantes = estudanteService.getAll();
 
-		ModelAndView modelAndView = new ModelAndView("parametros/estudantes");
+		ModelAndView modelAndView = new ModelAndView("/estudante/list-estudante");
 		modelAndView.addObject("estudantes", estudantes);
 		
 		return modelAndView;
@@ -86,9 +93,12 @@ public class EstudanteController {
 
 		Estudante estudante = estudanteService.find(id);
 		
-		ModelAndView model = new ModelAndView("/parametros/update-estudante", "estudante", estudante);
-		model.addObject("estado_civil", EstadoCivil.values());
+		ModelAndView model = new ModelAndView("/estudante/update-estudante", "estudante", estudante);
+		model.addObject("estadoCivil", EstadoCivil.values());
 		model.addObject("genero", Genero.values());
+		model.addObject("anos", Ano.values());
+		model.addObject("semestres", Semestre.values());
+		model.addObject("cursos", cursoService.getAll());
 
 		return model;
 	}
@@ -105,7 +115,7 @@ public class EstudanteController {
 		estudanteService.saveOrUpdate(estudante);
 		Estudante e = estudanteService.find(estudante.getId());
 		
-		String redirect = "redirect:/parametro/estudante/"+e.getId();
+		String redirect = "redirect:/estudante/uem/"+e.getId();
 		
 		ModelAndView model = new ModelAndView(redirect);
 		
