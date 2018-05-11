@@ -61,8 +61,8 @@ public class Consulta extends GenericEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "medico_id")
 	private Medico medico;
-
-	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+     //cascade = CascadeType.ALL
+	@ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
 	@JoinTable(name = "servico_consulta", joinColumns = { @JoinColumn(name = "consulta_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "servico_id") })
 	private List<Servico> servicos;

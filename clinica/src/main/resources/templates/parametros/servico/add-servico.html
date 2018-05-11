@@ -18,8 +18,7 @@
 				<!-- general form elements -->
 				<div class="box box-success">
 					<div class="box-header">
-						<h3 class="box-title">Parâmetros: Registo de Serviços da
-							Unidade</h3>
+						<h3 class="box-title">Parâmetros: Registo de Tipos de Serviços </h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
@@ -43,17 +42,8 @@
 
 								<div class="col-lg-6 col-md-6">
 
-
-									<div class="form-group ">
-										<label for="servicoDaUnidade">Serviço da UEM</label> <select
-											th:field="*{servicoDaUnidade.id}" class="form-control">
-											<option th:each="servicoDaUnidade : ${tipos}"
-												th:value="${servicoDaUnidade.id}"
-												th:text="${servicoDaUnidade.servicoTipo}" />
-										</select>
-									</div>
 									<div class="form-group">
-										<label for="designacao">Designação do Serviço</label> <label
+										<label for="designacao">Designação do Tipo de Serviço</label> <label
 											class="text-danger"
 											th:if="${#fields.hasErrors('designacao')}"> <i
 											class="fa fa-times-circle-o"></i> <span
@@ -63,7 +53,7 @@
 									</div>
 
 									<div class="form-group">
-										<label for="codigo">Código do Serviço</label> <label
+										<label for="codigo">Código do Tipo de Serviço</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('codigo')}">
 											<i class="fa fa-times-circle-o"></i> <span
 											th:errors="*{codigo}"></span>
@@ -75,9 +65,6 @@
 											<button type="submit" class="btn btn-primary  ">
 												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
 											</button>
-
-
-
 
 										</div>
 
@@ -92,13 +79,7 @@
 												th:value="${especialidade}" th:text="${especialidade}" />
 										</select>
 									</div>
-									<div class="form-group">
-										<label for="sector">Sector</label> <select
-											th:field="*{sector.id}" class="form-control">
-											<option th:each="sector : ${sectores}"
-												th:value="${sector.id}" th:text="${sector.designacao}" />
-										</select>
-									</div>
+
 								</div>
 							</div>
 						</form>
@@ -127,10 +108,7 @@
 										<tr>
 											<th>Código</th>
 											<th>Designação</th>
-											<th>Serviço - UEM</th>
 											<th>Especialidade</th>
-											<th>Sector</th>
-
 											<th>Editar</th>
 											<th>Detalhes</th>
 											<th>Taxas</th>
@@ -143,10 +121,8 @@
 											<td th:text="${servico.codigo}"></td>
 
 											<td th:text="${servico.designacao}"></td>
-											<td th:text="${servico.servicoDaUnidade.servicoTipo}"></td>
 											<td th:text="${servico.especialidade}"></td>
-											<td th:text="${servico.sector.designacao}"></td>
-
+							
 											<td><a class="delete btn btn-xs btn-default"
 												th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
 													class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>

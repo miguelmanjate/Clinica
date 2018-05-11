@@ -323,14 +323,14 @@
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
-								<th><a class="" th:href="@{/paciente/}">Registar Novo</a></th>
+								<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente</a></th>
 								<th><a class=""
-									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar</a></th>
+									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar Paciente</a></th>
 								<th><a class="" th:href="@{/paciente/list}">Listar
 										Pacientes</a></th>
-								<th><a
+<!-- 								<th><a
 									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
-										Consultas</a></th>
+										Consultas</a></th> -->
 
 								<th><a class=""
 									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
@@ -356,7 +356,7 @@
 										<th>Medico</th>
 										<th>Especialidade</th>
 										<th>Preco</th>
-
+                                        <th>Estado</th>
 
 
 
@@ -376,7 +376,7 @@
 										<td th:text="${consulta.medico.nome}"></td>
 										<td th:text="${consulta.especialidade}"></td>
 										<td th:text="${consulta.preco}"></td>
-
+                                        <td th:text="${consulta.estado}"></td>
 
 										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
 										<!-- 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i -->
@@ -401,7 +401,7 @@
 										<th>Medico</th>
 										<th>Especialidade</th>
 										<th>Preco</th>
-
+                                        <th>Estado</th>
 
 
 

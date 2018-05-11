@@ -38,7 +38,7 @@ public class Servico extends GenericEntity {
 	private String codigo;
 
 	@ManyToOne
-	@JoinColumn(name = "tiposervico")
+	@JoinColumn(name = "servicoDaUnidade")
 	private ServicoDaUnidade servicoDaUnidade;
 
 	@OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)

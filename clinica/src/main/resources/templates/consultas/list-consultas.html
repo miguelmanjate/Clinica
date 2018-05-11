@@ -40,9 +40,7 @@
 										<th>Medico</th>
 										<th>Especialidade</th>
 										<th>Preco</th>
-
-
-
+										<th>Detalhes</th>
 
 
 
@@ -57,9 +55,13 @@
 										<td th:text="${consulta.paciente?.nome}"></td>
 										<td th:text="${consulta.tipoConsulta}"></td>
 										<td th:text="${consulta.causaAdmissao}"></td>
-										<td th:text="${consulta.medico.nome}"></td>
+										<td th:text="${consulta.medico?.nome}"></td>
 										<td th:text="${consulta.especialidade}"></td>
 										<td th:text="${consulta.preco}"></td>
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/consulta/{id}/list/(id=${consulta.paciente?.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
 
 
 										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
@@ -85,7 +87,7 @@
 										<th>Medico</th>
 										<th>Especialidade</th>
 										<th>Preco</th>
-
+										<th>Detalhes</th>
 
 
 

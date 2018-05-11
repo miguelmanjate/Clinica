@@ -20,6 +20,7 @@ import mz.ciuem.uclinica.entity.consulta.CausaAdmissao;
 import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.consulta.ConsultaForm;
 import mz.ciuem.uclinica.entity.consulta.Especialidade;
+import mz.ciuem.uclinica.entity.consulta.EstadoDaConsulta;
 import mz.ciuem.uclinica.entity.consulta.Medico;
 import mz.ciuem.uclinica.entity.consulta.TipoConsulta;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
@@ -64,6 +65,7 @@ public class ConsultaController {
 		model.addObject("tipoConsulta", TipoConsulta.values());
 		model.addObject("especialidade", Especialidade.values());
 		model.addObject("causaAdmissao", CausaAdmissao.values());
+		model.addObject("estados", EstadoDaConsulta.values());
 		List<Medico> medicos = medicoService.getAll();
 		model.addObject("medicos", medicos);
 	}
@@ -88,6 +90,7 @@ public class ConsultaController {
 		}
 
 		consulta.setServicos(servicosSelecionados);
+		consulta.setEstado(EstadoDaConsulta.AGENDADA);
 		consultaService.create(consulta);
 
 		ModelAndView model = new ModelAndView("redirect:/consulta/" + paciente.getId() + "/list");
@@ -114,9 +117,12 @@ public class ConsultaController {
 	public ModelAndView editar(Consulta consulta, @PathVariable Long id) {
 
 		consulta = consultaService.find(id);
-
+		
 		ModelAndView model = new ModelAndView("/consultas/update-consulta", "consulta", consulta);
 		model.addObject("paciente", consulta.getPaciente());
+		
+		model.addObject("servicos", servicoService.getAll());
+		paciente = consulta.getPaciente();
 		preencherFormulario(model);
 		return model;
 
@@ -126,7 +132,7 @@ public class ConsultaController {
 
 	public ModelAndView aditar(@Valid Consulta consulta, BindingResult bindingResult,
 			RedirectAttributes redirectAtributes) {
-
+		
 		consulta.setPaciente(paciente);
 		if (bindingResult.hasErrors()) {
 		}
@@ -146,6 +152,22 @@ public class ConsultaController {
 
 		return model;
 
+	}
+	@GetMapping("{id}/cancelar")
+	public ModelAndView cancelarConsulta(Consulta consulta, @PathVariable Long id){
+		
+		consulta = consultaService.find(id);
+		consulta.setEstado(EstadoDaConsulta.CANCELA);
+		
+		Paciente paciente = pacienteService.find(consulta.getPaciente().getId());
+		//consultaService.saveOrUpdate(consulta);
+		
+		List<Consulta> consultas = consultaService.getConsultasDoPaciente(paciente);
+
+		ModelAndView model = new ModelAndView("/consultas/paciente-consultas", "consultas", consultas);
+		model.addObject("paciente", paciente);
+		
+		return model;
 	}
 
 }

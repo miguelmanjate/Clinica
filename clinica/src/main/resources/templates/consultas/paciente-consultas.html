@@ -174,7 +174,7 @@
 
 									<td th:text="${consulta.dataDaConsulta}"></td>
 									<td th:text="${consulta.horaDaConsulta}"></td>
-									<td th:text="${consulta.medico}"></td>
+									<td th:text="${consulta.medico?.nome}"></td>
 									<td th:text="${consulta.preco}"></td>
 									<td th:text="${consulta.estado}"></td>
 
@@ -185,7 +185,8 @@
 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i
 											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
 									<td><a class="delete btn btn-xs btn-default"
-										th:href="@{/paciente/{id}/(id=${paciente.id})}"><i
+									     th:href="@{/consulta/{id}/cancelar(id=${consulta.id})}"
+										><i
 											class=" fa fa-eye" style="margin: 2px"></i>Cancelar</a></td>
 
 								</tr>
@@ -201,11 +202,14 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th><a class="" th:href="@{/paciente/}">Registar Novo
+								    <th><a class="" th:href="@{/consulta/agendar/{id}(id=${paciente.id})}"
+								    >Agentar Nova Consulta
+									</a></th>
+								    <th><a class="" th:href="@{/paciente/procurar}">Registar Nova Consulta
+									</a></th>
+									<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente
 									</a></th>
 									
-									
-
 								</tr>
 
 

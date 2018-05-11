@@ -46,8 +46,8 @@
 									<i class="fa fa-check"></i>
 									<button type="button" class="close" data-dismiss="alert"
 										aria-hidden="true">&times;</button>
-									<b>Registo de Paciente: </b>
-									<p>Paciente registado com sucesso!</p>
+									<b>Registo de Consulta: </b>
+									<p>Consulta registada com sucesso!</p>
 								</div>
 							</div>
 						</div>
@@ -182,7 +182,7 @@
 									th:action="@{/consulta/update}" method="post">
 									<div class="row">
 
-										<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="col-md-3 ">
 
 
 
@@ -207,7 +207,7 @@
 										</div>
 
 
-										<div class="col-md-4 col-sm-6 col-xs-12">
+										<div class="col-md-3 ">
 
 
 											<div class="form-group ">
@@ -230,10 +230,6 @@
 										</div>
 
 										<div class="col-md-4 col-sm-6 col-xs-12">
-
-
-
-
 
 											<div class="row">
 
@@ -275,10 +271,34 @@
 													</div>
 												</div>
 											</div>
+                                               <div class="col-md-6 ">
 
+													<div class="form-group ">
+														<label for="servico">Servicos</label> <select
+															multiple="multiple" th:field="*{servicos}"
+															class="form-control input-sm multiple-select">
+															<option th:each="servico : ${servicos}" 
+																th:value="${servico.id}" th:text="${servico.designacao}"></option>
 
+														</select>
+													</div>
+
+												</div>
+												<div class="col-md-6 ">
+
+													<div class="form-group ">
+														<label for="estado">Estado</label> <select
+															 th:field="*{estado}"
+															class="form-control input-sm multiple-select">
+															<option th:each="estado : ${estados}" 
+																th:value="${estado}" th:text="${estado}"></option>
+
+														</select>
+													</div>
+
+												</div>
+												
 										</div>
-
 
 									</div>
 
@@ -290,6 +310,7 @@
 											<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
 										</button>
 									</div>
+									<input type="hidden" th:field="*{id}" />
 								</form>
 
 
@@ -303,9 +324,9 @@
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
-								<th><a class="" th:href="@{/paciente/}">Registar Novo</a></th>
+								<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente</a></th>
 								<th><a class=""
-									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar</a></th>
+									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar Paciente</a></th>
 								<th><a class="" th:href="@{/paciente/list}">Listar
 										Pacientes</a></th>
 								<th><a 

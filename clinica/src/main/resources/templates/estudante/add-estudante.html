@@ -133,7 +133,7 @@
 								
                                    <div class="form-group ">
 										<label for="curso">Curso</label> <select
-											th:field="*{curso.id}" class="form-control input-sm ">
+											th:field="*{curso.id}" class="form-control input-sm multiple-select ">
 											<option  id ="btn-select" data-id = "${curso.id}" th:each="curso : ${cursos}"
 												th:value="${curso.id}" th:text="${curso.descricao}" />
 										</select>
@@ -141,7 +141,7 @@
 																		
 									<div class="form-group ">
 										<label for="ano">Ano</label> <select
-											th:field="*{ano}" class="form-control input-sm">
+											th:field="*{ano}" class="form-control input-sm multiple-select">
 											<option th:each="ano : ${anos}" th:value="${ano}"
 												th:text="${ano}" />
 										</select>
@@ -149,7 +149,7 @@
 									
 									<div class="form-group ">
 										<label for="semestre">Semestre</label> <select
-											th:field="*{semestre}" class="form-control input-sm">
+											th:field="*{semestre}" class="form-control input-sm multiple-select">
 											<option th:each="semestre : ${semestres}" th:value="${semestre}"
 												th:text="${semestre}" />
 										</select>
