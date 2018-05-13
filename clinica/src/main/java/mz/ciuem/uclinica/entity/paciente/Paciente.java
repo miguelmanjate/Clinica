@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +27,7 @@ import mz.ciuem.uclinica.entity.consulta.Consulta;
 @Entity
 @Table(name = "paciente_paciente")
 @Access(AccessType.FIELD)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Paciente  extends GenericEntity{
 	
 	@NotNull(message = "Mandatorio informar o nome")
@@ -74,8 +77,8 @@ public class Paciente  extends GenericEntity{
 	@Column(name = "nome_mae")
 	private String nomeDaMae;
 	
-	@Column(name = "curso")
-	private String curso;
+//	@Column(name = "curso")
+//	private String curso;
 	
 	@Column(name = "tipo_bolsa")
 	private TipoBolsa tipoBolsa;
@@ -93,6 +96,10 @@ public class Paciente  extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private Raca raca;
 	
+	@Column(name = "tipo_paciente")
+	@Enumerated(EnumType.STRING)
+	private TipoDePaciente tipoDePaciente;
+	
 	@OneToMany(mappedBy = "paciente")
 	private List<Consulta> consultas;
 	
@@ -105,6 +112,14 @@ public class Paciente  extends GenericEntity{
 	@Column(name = "data_de_nascimento")
 	private Date dataDeNascimento;
 	
+	public TipoDePaciente getTipoDePaciente() {
+		return tipoDePaciente;
+	}
+
+	public void setTipoDePaciente(TipoDePaciente tipoDePaciente) {
+		this.tipoDePaciente = tipoDePaciente;
+	}
+
 	public Date getDataDeNascimento() {
 		return dataDeNascimento;
 	}
@@ -209,13 +224,13 @@ public class Paciente  extends GenericEntity{
 		this.nomeDaMae = nomeDaMae;
 	}
 
-	public String getCurso() {
-		return curso;
-	}
-
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
+//	public String getCurso() {
+//		return curso;
+//	}
+//
+//	public void setCurso(String curso) {
+//		this.curso = curso;
+//	}
 
 	public TipoBolsa getTipoBolsa() {
 		return tipoBolsa;

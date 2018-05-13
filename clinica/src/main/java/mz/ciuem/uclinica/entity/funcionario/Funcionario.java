@@ -22,50 +22,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
+import mz.ciuem.uclinica.entity.paciente.Paciente;
 import mz.ciuem.uclinica.entity.parametro.Unidades;
 
 @Entity
 @Table(name = "funcionario_uem")
 @Access(AccessType.FIELD)
-public class Funcionario  extends GenericEntity{
-	
-	@NotNull(message = "Mandatorio informar o nome")
-	@NotBlank(message = "Mandatorio informar o nome")
-	@Column(name = "apelido")
-	private String apelido;
-	
-	@NotNull(message = "Mandatorio informar o nome")
-	@NotBlank(message = "Mandatorio informar o nome")
-	@Column(name = "nome")
-	private String nome;
-	
-	
-	@Temporal(TemporalType.DATE )
-	@DateTimeFormat (pattern="dd/MM/yyyy")
-	@Column(name = "data_de_nascimento")
-	private Date dataDeNascimento;
-	
-	@Column(name = "genero")
-	@Enumerated(EnumType.STRING)
-	private Genero genero;
-	
-	@Column(name  = "nome_pai")
-	private String nomeDoPai;
-	
-	
-	@Column(name = "nome_mae")
-	private String nomeDaMae;
+public class Funcionario  extends Paciente{
+		
 	
 	@Column(name = "nivel_academico")
 	@Enumerated(EnumType.STRING)
 	private NivelAcademico nivelAcademico;
-	
-	@Column(name = "estado_civil")
-	@Enumerated(EnumType.STRING)
-	private EstadoCivil estadoCivil;
-	
-	private String endereco;
-	
+			
 	private String funcao;
 		
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -76,14 +45,6 @@ public class Funcionario  extends GenericEntity{
 	
 	private String telefone;
 	
-	public String getNumeroBi() {
-		return numeroBi;
-	}
-
-	public void setNumeroBi(String numeroBi) {
-		this.numeroBi = numeroBi;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -92,52 +53,12 @@ public class Funcionario  extends GenericEntity{
 		this.telefone = telefone;
 	}
 
-	public String getApelido() {
-		return apelido;
+	public String getNumeroBi() {
+		return numeroBi;
 	}
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Date getDataDeNascimento() {
-		return dataDeNascimento;
-	}
-
-	public void setDataDeNascimento(Date dataDeNascimento) {
-		this.dataDeNascimento = dataDeNascimento;
-	}
-
-	public Genero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(Genero genero) {
-		this.genero = genero;
-	}
-
-	public String getNomeDoPai() {
-		return nomeDoPai;
-	}
-
-	public void setNomeDoPai(String nomeDoPai) {
-		this.nomeDoPai = nomeDoPai;
-	}
-
-	public String getNomeDaMae() {
-		return nomeDaMae;
-	}
-
-	public void setNomeDaMae(String nomeDaMae) {
-		this.nomeDaMae = nomeDaMae;
+	public void setNumeroBi(String numeroBi) {
+		this.numeroBi = numeroBi;
 	}
 
 	public NivelAcademico getNivelAcademico() {
@@ -146,22 +67,6 @@ public class Funcionario  extends GenericEntity{
 
 	public void setNivelAcademico(NivelAcademico nivelAcademico) {
 		this.nivelAcademico = nivelAcademico;
-	}
-
-	public EstadoCivil getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(EstadoCivil estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
 	}
 
 	public String getFuncao() {
