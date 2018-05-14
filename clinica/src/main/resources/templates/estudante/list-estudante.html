@@ -29,14 +29,15 @@
 							<table class="table table-hover table-striped data-table">
 								<thead>
 									<tr>
-										<th>Nome do Estudante</th>
+										<th>Nome </th>
 										<th>Data de Nascimento</th>
 										<th>Curso</th>
 										<th>Ano</th>
 										<th>Semestre</th>
-										<th>Telefone</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
+										<th>Paciente</th>
+										<th>Config. Paciente</th>
+										<th>Editar</th>
+										<th> Detalhes</th>
 
 									</tr>
 								</thead>
@@ -49,31 +50,37 @@
 										<td th:text="${estudante.curso.descricao}"></td>
 										<td th:text="${estudante.ano}"></td>
 										<td th:text="${estudante.semestre}"></td>
-										<td th:text="${estudante.telefone}"></td>
+										<td th:text="${estudante.tipoDePaciente}"></td>
 										
+										<td><a class="delete btn btn-xs btn-warning"
+											th:href="@{/estudante/uem/{id}/configurar(id=${estudante.id})}"><i
+												class="fa fa-gears" style="margin: 2px"></i>
+										   </a>
+										</td>
 
-										<td><a class="delete btn btn-xs btn-default"
+										<td><a class="delete btn btn-xs btn-primary"
 											th:href="@{/estudante/uem/{id}/update(id=${estudante.id})}"><i
-												class="fa fa-edit" style="margin: 2px"></i>Editar
+												class="fa fa-edit" style="margin: 2px"></i>
 										   </a>
 										</td>
 												
 										<td><a class="delete btn btn-xs btn-default"
 											th:href="@{/estudante/uem/{id}/(id=${estudante.id})}"><i
-												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+												class=" fa fa-eye" style="margin: 2px"></i></a></td>
 
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-						                <th>Nome do Estudante</th>
+						             	<th>Nome </th>
 										<th>Data de Nascimento</th>
 										<th>Curso</th>
 										<th>Ano</th>
 										<th>Semestre</th>
-										<th>Telefone</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
+										<th>Paciente</th>
+										<th>Config. Paciente</th>
+										<th>Editar</th>
+										<th> Detalhes</th>
 										
 									</tr>
 

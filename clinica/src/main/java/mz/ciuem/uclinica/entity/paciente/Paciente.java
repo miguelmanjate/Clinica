@@ -55,8 +55,8 @@ public class Paciente  extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private EstadoCivil estadoCivil;
 	
-	@Column(name = "telefone_principal")
-	private String telefonePrincipal;
+	@Column(name = "telefone")
+	private String telefone;
 	
 	@Column(name = "telefone_alternativo")
 	private String telefoneAlternativo;
@@ -176,12 +176,12 @@ public class Paciente  extends GenericEntity{
 		this.estadoCivil = estadoCivil;
 	}
 
-	public String getTelefonePrincipal() {
-		return telefonePrincipal;
+	public String getTelefone() {
+		return telefone;
 	}
 
-	public void setTelefonePrincipal(String telefonePrincipal) {
-		this.telefonePrincipal = telefonePrincipal;
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getTelefoneAlternativo() {

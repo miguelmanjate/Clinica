@@ -63,22 +63,13 @@
 									</div>
 
 									<div class="form-group ">
-										<label for="tipoDocumento">Tipo de Documento</label> <select
-											th:field="*{tipoDocumento}" class="form-control input-sm">
-											<option th:each="tipoDocumento : ${tipoDocumento}"
-												th:value="${tipoDocumento}" th:text="${tipoDocumento}" />
+										<label for="tipoDocumento">Tipo de Peciente</label> <select
+											th:field="*{tipoDePaciente}" class="form-control input-sm">
+											<option th:each="tipoDePaciente : ${tipoDePaciente}"
+												th:value="${tipoDePaciente}" th:text="${tipoDePaciente}" />
 										</select>
 									</div>
-									<div class="form-group">
-										<label for="designacao">Número do Documento</label> <label
-											class="text-danger"
-											th:if="${#fields.hasErrors('numeroDocumento')}"> <i
-											class="fa fa-times-circle-o"></i> <span
-											th:errors="*{numeroDocumento}"></span>
-										</label> <input type="text" class="form-control input-sm"
-											th:field="*{numeroDocumento}">
-									</div>
-
+					
 									<div class="form-group ">
 										<label for="raca">Raça</label> <select th:field="*{raca}"
 											class="form-control input-sm">
@@ -157,11 +148,11 @@
 									<div class="form-group">
 										<label for="designacao">Telefone Principal</label> <label
 											class="text-danger"
-											th:if="${#fields.hasErrors('telefonePrincipal')}"> <i
+											th:if="${#fields.hasErrors('telefone')}"> <i
 											class="fa fa-times-circle-o"></i> <span
-											th:errors="*{telefonePrincipal}"></span>
+											th:errors="*{telefone}"></span>
 										</label> <input type="text" class="form-control  input-sm"
-											th:field="*{TelefonePrincipal}">
+											th:field="*{telefone}">
 									</div>
 
 									<div class="form-group">
@@ -172,15 +163,6 @@
 											th:errors="*{telefoneAlternativo}"></span>
 										</label> <input type="text" class="form-control  input-sm"
 											th:field="*{TelefoneAlternativo}">
-									</div>
-
-									<div class="form-group">
-										<label for="designacao">Profissão</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('profissao')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{profissao}"></span>
-										</label> <input type="text" class="form-control  input-sm"
-											th:field="*{profissao}">
 									</div>
 
 									<div class="form-group">
@@ -201,9 +183,14 @@
 
 											<a class="btn btn-default" th:href="@{/paciente/list}"><i
 												class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+												
+											<a class="btn btn-warning" th:href="@{/paciente/list}"><i
+												class="fa fa-eye" style="margin: 2px"></i>Cancelar</a>
 
 										</div>
 										<input type="hidden" th:field="*{id}" />
+                                       <input type="hidden" th:field="*{tipoDePaciente}" />
+                                  
 									</div>
 								</div>
 							</form>

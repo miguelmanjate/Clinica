@@ -34,9 +34,10 @@
 										<th>Unidade</th>
 										<th>Função</th>
 										<th>Nivel Academico</th>
-										<th>Genero</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
+										<th>Paciente</th>
+										<th>Config. Paciente</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
 
 									</tr>
 								</thead>
@@ -49,32 +50,38 @@
 										<td th:text="${funcionario.unidade.designacao}"></td>
 										<td th:text="${funcionario.funcao}"></td>
 										<td th:text="${funcionario.nivelAcademico}"></td>
-										<td th:text="${funcionario.genero}"></td>
+										<td th:text="${funcionario.tipoDePaciente}"></td>
 										
-
-										<td><a class="delete btn btn-xs btn-default"
+										<td><a class="delete btn btn-xs btn-warning"
+											th:href="@{/funcionario/uem/{id}/configurar(id=${funcionario.id})}"><i
+												class="fa fa-gears" style="margin: 2px"></i>
+										   </a>
+										</td>
+										
+										<td><a class="delete btn btn-xs btn-primary"
 											th:href="@{/funcionario/uem/{id}/update(id=${funcionario.id})}"><i
-												class="fa fa-edit" style="margin: 2px"></i>Editar
+												class="fa fa-edit" style="margin: 2px"></i>
 										   </a>
 										</td>
 												
 										<td><a class="delete btn btn-xs btn-default"
 											th:href="@{/funcionario/uem/{id}/(id=${funcionario.id})}"><i
-												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+												class=" fa fa-eye" style="margin: 2px"></i></a></td>
 
 									</tr>
 								</tbody>
 								<tfoot>
-									<tr>
-						                <th>Nome do Funcionario</th>
-										<th>Data de Nascimento</th>
+								 	<tr>
+										<th>Nome do Funcionario</th>
+										<th>Telefone</th>
 										<th>Unidade</th>
 										<th>Função</th>
 										<th>Nivel Academico</th>
-										<th>Genero</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
-										
+										<th>Paciente</th>
+										<th>Config. Paciente</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
+
 									</tr>
 
 								</tfoot>
@@ -90,7 +97,7 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th><a class="" th:href="@{/funcionario/uem/}">Registar Novo</a></th>
+									<th><a class="" th:href="@{/funcionario/uem/}">Registar Novo Funcionario</a></th>
 
 								</tr>
 

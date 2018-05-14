@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +28,7 @@ public class Unidades extends GenericEntity{
     @Column(name="designacao")
 	private String designacao;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch=FetchType.EAGER )
 	@JoinColumn(name  = "orgao_unidade")
 	private Orgao orgao;
 	

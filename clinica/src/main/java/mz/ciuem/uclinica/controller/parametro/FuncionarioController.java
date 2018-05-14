@@ -19,6 +19,8 @@ import mz.ciuem.uclinica.entity.funcionario.Funcionario;
 import mz.ciuem.uclinica.entity.funcionario.NivelAcademico;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
+import mz.ciuem.uclinica.entity.paciente.Raca;
+import mz.ciuem.uclinica.entity.paciente.TipoDePaciente;
 import mz.ciuem.uclinica.service.parametro.FuncionarioService;
 import mz.ciuem.uclinica.service.parametro.UnidadesService;
 
@@ -121,7 +123,36 @@ public class FuncionarioController {
 		
 		return model;
 	}
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}/configurar")
+	public ModelAndView configurarFuncionario(@PathVariable Long id) {
+
+		Funcionario funcionario = funcionarioService.find(id);
+		
+		ModelAndView model = new ModelAndView("/funcionario/funcionario-paciente", "funcionario", funcionario);
+		model.addObject("raca", Raca.values());
+		
+		return model;
+	}
 	
-	
+	@PostMapping(value = { "add_funcionario_paciente" })
+	public ModelAndView configurarFuncionario(@Valid Funcionario funcionario, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+		funcionario.setTipoDePaciente(TipoDePaciente.PACIENTE_FUNCIONARIO);	
+		if (bindingResult.hasErrors()) {
+
+			return configurarFuncionario(funcionario.getId());
+
+		}
+		
+		funcionarioService.saveOrUpdate(funcionario);
+		
+		String redirect = "redirect:/funcionario/uem/list";
+		
+		ModelAndView modelandview = new ModelAndView(redirect);
+		redirectAttributes.addFlashAttribute("messageVisible", "true");
+
+		return modelandview;
+		
+	}
 	
 }

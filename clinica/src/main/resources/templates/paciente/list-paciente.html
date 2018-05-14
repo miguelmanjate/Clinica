@@ -38,12 +38,9 @@
 										<th>Profissão</th>
 										<th>Telefone Principal</th>
 										<th>Data de Nascimento</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
+										<th>Tipo</th>
+										<th>Detalhes</th>
 										<th>Agendar Cosulta</th>
-
-
-
 
 									</tr>
 								</thead>
@@ -55,35 +52,30 @@
 										<td th:text="${paciente.genero}"></td>
 										<td th:text="${paciente.estadoCivil}"></td>
 										<td th:text="${paciente.profissao}"></td>
-										<td th:text="${paciente.telefonePrincipal}"></td>
+										<td th:text="${paciente.telefone}"></td>
 										<td th:text="${paciente.dataDeNascimento}"></td>
-
-										<td><a class="delete btn btn-xs btn-default"
-											th:href="@{/paciente/{id}/update(id=${paciente.id})}"><i
-												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
-										<td><a class="delete btn btn-xs btn-default"
+                                        <td th:text="${paciente.tipoDePaciente}"></td>
+									
+										<td><a class="delete btn btn-xs btn-success"
 											th:href="@{/paciente/{id}/(id=${paciente.id})}"><i
-												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+												class=" fa fa-eye" style="margin: 2px"></i></a></td>
 
-										<td><a class="btn btn-xs btn-default"
-											th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
-												Consulta</a></td>
+										<td><a class="btn btn-xs btn-danger"
+											th:href="@{/consulta/agendar/{id}(id=${paciente.id})}"><i
+												class=" fa fa-edit" style="margin: 2px"></i></a></a></td>
 									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>Nome do Paciente</th>
+									  	<th>Nome do Paciente</th>
 										<th>Género</th>
 										<th>Estado Civil</th>
 										<th>Profissão</th>
 										<th>Telefone Principal</th>
 										<th>Data de Nascimento</th>
-										<th>Ver Editar</th>
-										<th>Ver Detalhes</th>
+										<th>Tipo</th>
+										<th>Detalhes</th>
 										<th>Agendar Cosulta</th>
-
-
-
 
 									</tr>
 

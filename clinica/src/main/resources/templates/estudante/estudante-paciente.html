@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Detalhes do Funcionário</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">
+							<i class=""></i>Registar Estudante como Paciente <small
+								class="pull-right"></small>
+						</h3>
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row ">
+
+
+							<div class="col-md-8">
+								<div class="alert alert-success alert-dismissable"
+									th:if="${messageVisible}">
+									<i class="fa fa-check"></i>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">&times;</button>
+									<b>Registo de Funcionário: </b>
+									<p>Funcionário registado com sucesso!</p>
+								</div>
+							</div>
+						</div>
+						<!-- info row -->
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tr>
+										<td><b>Nome completo:</b></td>
+										<td><i th:text="${estudante.nome}"
+											style="margin-right: 5px"></i><i
+											th:text="${estudante.apelido}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Data de Nascimento:</b></td>
+										<td><i th:text="${estudante.dataDeNascimento}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Filho de:</b></td>
+										<td><i th:text="${estudante.nomeDoPai}"
+											style="margin-right: 5px"></i><i>e </i></td>
+									</tr>
+									<tr>
+										<td><b></b></td>
+										<td><i th:text="${estudante.nomeDaMae}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Nº de BI</b></td>
+										<td><i th:text="${estudante.numeroBi}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+
+									<tr>
+										<td><b>Genero:</b></td>
+										<td><i th:text="${estudante.genero}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Estado Civil:</b></td>
+										<td><i th:text="${estudante.estadoCivil}"></i></td>
+									</tr>
+									<td><b>Telefone</b></td>
+									<td><i th:text="${estudante.telefone}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Endereco:</b></td>
+										<td><i th:text="${estudante.endereco}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+
+									<tr>
+										<td><b>Curso </b></td>
+										<td><i th:text="${estudante.curso.descricao}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Ano</b></td>
+										<td><i th:text="${estudante.ano}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Semestre</b></td>
+										<td><i th:text="${estudante.semestre}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+						<div class="row invoice-info" style="margin-bottom: 10px">
+
+							<form action="#" th:object="${estudante}" class=""
+								th:action="@{/estudante/uem/add_estudante_paciente}"
+								method="post">
+
+								<!-- primeiro bloco do formulario -->
+								<div class="col-md-6">
+
+									<div class="form-group ">
+										<label for="raca">Raça</label> <select th:field="*{raca}"
+											class="form-control input-sm">
+											<option th:each="raca : ${raca}" th:value="${raca}"
+												th:text="${raca}" />
+										</select>
+									</div>
+
+									<div class="form-group">
+										<label for="naturalidade">Naturalidade</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('naturalidade')}"> <i
+											class="fa fa-times-circle-o"></i> <span
+											th:errors="*{naturalidade}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{naturalidade}">
+									</div>
+
+								</div>
+
+								<!-- Segundo bloco do formulario -->
+								<div class="col-md-6">
+
+									<div class="form-group">
+										<label for="designacao">Email</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('email')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{email}"></span>
+										</label> <input type="text" class="form-control input-sm"
+											th:field="*{email}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Telefone Alternativo</label> <label
+											class="text-danger"
+											th:if="${#fields.hasErrors('telefoneAlternativo')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{telefoneAlternativo}"></span>
+										</label> <input type="text" class="form-control  input-sm"
+											th:field="*{TelefoneAlternativo}">
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-warning" th:href="@{/estudante/uem/list}">
+												Cancelar </a>
+										</div>
+
+
+                                        <input type="hidden" th:field="*{id}" />
+                                        <input type="hidden" th:field="*{nome}" />
+                                        <input type="hidden" th:field="*{apelido}" />
+                                        <input type="hidden" th:field="*{dataDeNascimento}" />
+                                        <input type="hidden" th:field="*{nomeDoPai}" />
+                                        <input type="hidden" th:field="*{nomeDaMae}" />
+                                        <input type="hidden" th:field="*{numeroBi}" />
+                                        <input type="hidden" th:field="*{genero}" />
+                                        <input type="hidden" th:field="*{estadoCivil}" />
+                                        <input type="hidden" th:field="*{telefone}" />
+                                        <input type="hidden" th:field="*{endereco}" />
+                                        <input type="hidden" th:field="*{curso.id}" />
+                                        <input type="hidden" th:field="*{ano}" />
+                                        <input type="hidden" th:field="*{semestre}" />
+									</div>
+								</div>
+							</form>
+
+						</div>
+
+						<div class="box-header"></div>
+
+						<div class="box-body table-responsive no-padding"></div>
+
+					</div>
+					<!-- /.box-body -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

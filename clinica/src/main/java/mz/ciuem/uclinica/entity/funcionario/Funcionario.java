@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -37,22 +38,12 @@ public class Funcionario  extends Paciente{
 			
 	private String funcao;
 		
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne( cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)
 	@JoinColumn(name = "unidade_funcionario")
 	private Unidades unidade;
 	
 	private String numeroBi;
 	
-	private String telefone;
-	
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
 	public String getNumeroBi() {
 		return numeroBi;
 	}

@@ -18,8 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import mz.ciuem.uclinica.entity.estudante.Ano;
 import mz.ciuem.uclinica.entity.estudante.Estudante;
 import mz.ciuem.uclinica.entity.estudante.Semestre;
+import mz.ciuem.uclinica.entity.funcionario.Funcionario;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
+import mz.ciuem.uclinica.entity.paciente.Raca;
+import mz.ciuem.uclinica.entity.paciente.TipoDePaciente;
 import mz.ciuem.uclinica.service.parametro.CursoService;
 import mz.ciuem.uclinica.service.parametro.EstudanteService;
 
@@ -124,5 +127,37 @@ public class EstudanteController {
 		return model;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}/configurar")
+	public ModelAndView configurarEstudante(@PathVariable Long id) {
+
+		Estudante estudante = estudanteService.find(id);
+		
+		ModelAndView model = new ModelAndView("/estudante/estudante-paciente", "estudante", estudante);
+		model.addObject("raca", Raca.values());
+		
+		return model;
+	}
+	
+	@PostMapping(value = { "add_estudante_paciente" })
+	public ModelAndView configurarEstudante(@Valid Estudante estudante, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+
+		estudante.setTipoDePaciente(TipoDePaciente.PACIENTE_ESTUDANTE);
+		if (bindingResult.hasErrors()) {
+			
+			return configurarEstudante(estudante.getId());
+
+		}
+		
+		estudanteService.saveOrUpdate(estudante);
+		
+		String redirect = "redirect:/estudante/uem/list";
+		
+		ModelAndView modelandview = new ModelAndView(redirect);
+		redirectAttributes.addFlashAttribute("messageVisible", "true");
+
+		return modelandview;
+		
+	}
 
 }

@@ -29,7 +29,6 @@ import mz.ciuem.uclinica.entity.paciente.Paciente;
 @Access(AccessType.FIELD)
 public class Estudante extends Paciente {
 			    	
-	private String telefone;
 	private String numeroBi;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -48,14 +47,6 @@ public class Estudante extends Paciente {
 
 	public void setNumeroBi(String numeroBi) {
 		this.numeroBi = numeroBi;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	public Curso getCurso() {
