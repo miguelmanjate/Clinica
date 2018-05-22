@@ -29,7 +29,7 @@
 
 
 							<form action="#" th:object="${funcionario}" class=""
-									th:action="@{/funcionario/uem/update}" method="post"> 
+								th:action="@{/funcionario/uem/update}" method="post">
 
 								<div class="col-md-6">
 
@@ -44,10 +44,9 @@
 									</div>
 
 									<div class="form-group">
-										<label for="nome">Nome</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('nome')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{nome}"></span>
+										<label for="nome">Nome</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('nome')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{nome}"></span>
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nome}">
 									</div>
@@ -63,7 +62,7 @@
 											class="form-control input-sm" th:field="*{dataDeNascimento}">
 									</div>
 
-                                   <div class="form-group">
+									<div class="form-group">
 										<label for="nomeDoPai">Nome do Pai</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDoPai')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -71,9 +70,9 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDoPai}">
 									</div>
-                                    
-									
-                                    <div class="form-group">
+
+
+									<div class="form-group">
 										<label for="nomeDaMae">Nome da mae</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDaMae')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -81,7 +80,7 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDaMae}">
 									</div>
-									
+
 									<div class="form-group">
 										<label for="numeroBi">Nº de BI</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('numeroBi')}">
@@ -90,7 +89,7 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{numeroBi}">
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="genero">Género</label> <select
 											th:field="*{genero}" class="form-control input-sm">
@@ -103,7 +102,7 @@
 
 								<!-- Segundo bloco do formulario -->
 								<div class="col-md-6">
-									
+
 									<div class="form-group ">
 										<label for="estadoCivil">Estado Civil</label> <select
 											th:field="*{estadoCivil}" class="form-control input-sm">
@@ -112,7 +111,7 @@
 										</select>
 									</div>
 
-                                    <div class="form-group">
+									<div class="form-group">
 										<label for="telefone">Telefone</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('telefone')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -120,7 +119,7 @@
 										</label> <input type="text" class="form-control"
 											th:field="*{telefone}">
 									</div>
-                                    
+
 									<div class="form-group">
 										<label for="endereco">Endereço</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('endereco')}">
@@ -129,67 +128,71 @@
 										</label> <input type="text" class="form-control"
 											th:field="*{endereco}">
 									</div>
-								
-                                   <div class="form-group ">
+
+									<div class="form-group ">
 										<label for="unidade">Unidade</label> <select
 											th:field="*{unidade.id}" class="form-control input-sm">
 											<option th:each="unidade : ${unidades}"
 												th:value="${unidade.id}" th:text="${unidade.designacao}" />
 										</select>
 									</div>
-									
+
 									<div class="form-group">
-										<label for="funcao">Função</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('funcao')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{funcao}"></span>
+										<label for="funcao">Função</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('funcao')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{funcao}"></span>
 										</label> <input type="text" class="form-control  input-sm"
 											th:field="*{funcao}">
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="nivelAcademico">Nivel Academico</label> <select
 											th:field="*{nivelAcademico}" class="form-control input-sm">
-											<option th:each="nivelAcademico : ${nivelAcademico}" th:value="${nivelAcademico}"
-												th:text="${nivelAcademico}" />
+											<option th:each="nivelAcademico : ${nivelAcademico}"
+												th:value="${nivelAcademico}" th:text="${nivelAcademico}" />
 										</select>
 									</div>
-                                    
-                                    <div class="box-footer">
+
+									<div class="box-footer">
 										<div>
 											<button type="submit" class="btn btn-primary  ">
 												<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
 											</button>
 
 											<a class="btn btn-default" th:href="@{/funcionario/uem/list}"><i
-												class="fa fa-eye" style="margin: 2px"></i>Listar</a> 
+												class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+												 
+												<a class="btn btn-danger" th:href="@{/funcionario/uem/list}">
+												<i class="fa fa-times" style="margin: 2px"></i> Cancelar
+											</a>
 										</div>
-										
-                                       <input type="hidden" th:field="*{id}" />
-                                       <input type="hidden" th:field="*{raca}" />
-                                       <input type="hidden" th:field="*{naturalidade}" />
-                                       <input type="hidden" th:field="*{email}" />
-                                       <input type="hidden" th:field="*{telefoneAlternativo}" />
-                                       <input type="hidden" th:field="*{tipoDePaciente}" />
-                                       
-									</div>
-									</div>
-                                 
 
-								 </form>
+										<input type="hidden" th:field="*{id}" /> <input type="hidden"
+											th:field="*{raca}" /> <input type="hidden"
+											th:field="*{naturalidade}" /> <input type="hidden"
+											th:field="*{email}" /> <input type="hidden"
+											th:field="*{telefoneAlternativo}" /> <input type="hidden"
+											th:field="*{tipoDePaciente}" />
+											<input type="hidden" th:field="*{nid}" />
+
+									</div>
 								</div>
-						
 
+
+							</form>
 						</div>
 
-					</div>
-					<!-- /.box-body -->
 
+					</div>
 
 				</div>
-				<!-- /.box -->
-			</div>
+				<!-- /.box-body -->
 
+
+			</div>
+			<!-- /.box -->
 		</div>
+
+	</div>
 </body>
 </html>

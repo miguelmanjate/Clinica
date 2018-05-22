@@ -32,10 +32,10 @@
 							<table class="table table-hover table-striped data-table">
 								<thead>
 									<tr>
+									    <th>NID</th>
 										<th>Nome do Paciente</th>
 										<th>Género</th>
 										<th>Estado Civil</th>
-										<th>Profissão</th>
 										<th>Telefone Principal</th>
 										<th>Data de Nascimento</th>
 										<th>Tipo</th>
@@ -47,11 +47,11 @@
 
 								<tbody>
 									<tr th:each="paciente :${pacientes}">
+									    <td th:text="${paciente.nid}"></td>
 										<td><i th:text="${paciente.nome}"></i> <i
 											th:text="${paciente.apelido}"></i></td>
 										<td th:text="${paciente.genero}"></td>
 										<td th:text="${paciente.estadoCivil}"></td>
-										<td th:text="${paciente.profissao}"></td>
 										<td th:text="${paciente.telefone}"></td>
 										<td th:text="${paciente.dataDeNascimento}"></td>
                                         <td th:text="${paciente.tipoDePaciente}"></td>
@@ -67,10 +67,10 @@
 								</tbody>
 								<tfoot>
 									<tr>
-									  	<th>Nome do Paciente</th>
+                                       	<th>NID</th>
+										<th>Nome do Paciente</th>
 										<th>Género</th>
 										<th>Estado Civil</th>
-										<th>Profissão</th>
 										<th>Telefone Principal</th>
 										<th>Data de Nascimento</th>
 										<th>Tipo</th>

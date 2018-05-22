@@ -24,9 +24,6 @@ public class PacienteServiceImpl extends GenericServiceImpl<Paciente> implements
 		case NOME:
 			return pacienteDao.procurarPacientePorNome(parametro);
 
-		case CODIGO:
-			return pacienteDao.procurarPacientePorCodigo(parametro);
-
 		case NID:
 			return pacienteDao.procurarPacientePorNID(parametro);
 

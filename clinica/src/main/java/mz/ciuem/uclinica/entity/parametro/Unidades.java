@@ -28,7 +28,7 @@ public class Unidades extends GenericEntity{
     @Column(name="designacao")
 	private String designacao;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch=FetchType.EAGER )
+	@ManyToOne(cascade = CascadeType.REFRESH )
 	@JoinColumn(name  = "orgao_unidade")
 	private Orgao orgao;
 	

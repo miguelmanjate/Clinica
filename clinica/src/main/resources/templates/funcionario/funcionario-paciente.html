@@ -126,7 +126,7 @@
 
 									<tr>
 										<td><b>Unidade </b></td>
-										<td><i th:text="${funcionario.unidade.designacao}"></i></td>
+										<td><i th:text="${funcionario.unidade?.designacao}"></i></td>
 									</tr>
 									<tr>
 										<td><b>Função</b></td>
@@ -201,7 +201,8 @@
 												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
 											</button>
 
-											<a class="btn btn-warning" th:href="@{/funcionario/uem/list}">
+											<a class="btn btn-danger" th:href="@{/funcionario/uem/list}">
+											<i class="fa fa-times" style="margin: 2px"></i>
 												Cancelar </a>
 										</div>
 

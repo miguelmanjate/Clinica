@@ -47,14 +47,14 @@
 										
 										<td th:text="${estudante.nome}"></td>
 										<td th:text="${estudante.dataDeNascimento}"></td>
-										<td th:text="${estudante.curso.descricao}"></td>
+										<td th:text="${estudante.curso?.descricao}"></td>
 										<td th:text="${estudante.ano}"></td>
 										<td th:text="${estudante.semestre}"></td>
 										<td th:text="${estudante.tipoDePaciente}"></td>
 										
 										<td><a class="delete btn btn-xs btn-warning"
 											th:href="@{/estudante/uem/{id}/configurar(id=${estudante.id})}"><i
-												class="fa fa-gears" style="margin: 2px"></i>
+												class="fa fa-gears" style="margin: 5px"></i>
 										   </a>
 										</td>
 

@@ -62,13 +62,13 @@
 											class="form-control input-sm" th:field="*{dataDeNascimento}">
 									</div>
 
-									<div class="form-group ">
+<!-- 									<div class="form-group ">
 										<label for="tipoDocumento">Tipo de Peciente</label> <select
 											th:field="*{tipoDePaciente}" class="form-control input-sm">
 											<option th:each="tipoDePaciente : ${tipoDePaciente}"
 												th:value="${tipoDePaciente}" th:text="${tipoDePaciente}" />
 										</select>
-									</div>
+									</div> -->
 					
 									<div class="form-group ">
 										<label for="raca">Raça</label> <select th:field="*{raca}"
@@ -184,13 +184,14 @@
 											<a class="btn btn-default" th:href="@{/paciente/list}"><i
 												class="fa fa-eye" style="margin: 2px"></i>Listar</a>
 												
-											<a class="btn btn-warning" th:href="@{/paciente/list}"><i
-												class="fa fa-eye" style="margin: 2px"></i>Cancelar</a>
+											<a class="btn btn-danger" th:href="@{/paciente/list}"><i
+												class="fa fa-times" style="margin: 2px"></i>Cancelar</a>
 
 										</div>
 										<input type="hidden" th:field="*{id}" />
+										<input type="hidden" th:field="*{nid}" />
                                        <input type="hidden" th:field="*{tipoDePaciente}" />
-                                  
+                                       
 									</div>
 								</div>
 							</form>

@@ -138,6 +138,7 @@ public class FuncionarioController {
 	public ModelAndView configurarFuncionario(@Valid Funcionario funcionario, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 		funcionario.setTipoDePaciente(TipoDePaciente.PACIENTE_FUNCIONARIO);	
+		funcionario.setNid(funcionario.getId());
 		if (bindingResult.hasErrors()) {
 
 			return configurarFuncionario(funcionario.getId());

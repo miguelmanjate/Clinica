@@ -60,7 +60,7 @@
 									class="fa fa-plus"></i>Agendar Nova</a></li>
 
 							<li><a th:href="@{/consulta/list}"><i
-									class="fa fa-angle-double-right"></i>Listar Consultas</a></li>
+									class="fa fa-list"></i>Listar Consultas</a></li>
 						</ul></li>
 
 					<li class="treeview"><a href=""> <i
@@ -68,12 +68,14 @@
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/paciente}"><i
-									class="fa fa-plus"></i>Paciente Geral</a></li>
+							<li><a th:href="@{/paciente}"><i class="fa fa-plus"></i>Paciente
+									Geral</a></li>
 							<li><a th:href="@{/funcionario/uem/list}"><i
 									class="fa fa-plus"></i>Paciente Funcionario</a></li>
 							<li><a th:href="@{/estudante/uem/list}"><i
 									class="fa fa-plus"></i>Paciente Estudante</a></li>
+
+							<li><a th:href="@{/paciente/list}"><i class="fa fa-list"></i>Listar</a></li>
 
 							<li><a th:href="@{/paciente/procurar}"><i
 									class="fa fa-search"></i>Pesquisar</a></li>
@@ -85,51 +87,59 @@
 					</a>
 						<ul class="treeview-menu">
 							<li><a th:href="@{/parametro/servico/add}"><i
-									class="fa fa-plus"></i>Serviços de consulta</a></li>
+									class="fa fa-plus"></i>Novo Serviço</a></li>
 
-							<li><a th:href="@{/parametro/servico/list}"><i
-									class="fa fa-angle-double-right"></i>Listar Serviços
-									Espeçificos</a></li>
-
-							<li><a th:href="@{/parametro/servico/taxas}"><i
-									class="fa fa-angle-double-right"></i>Configurar Taxas -
-									Serviços</a></li>
-
-							<li><a th:href="@{/parametro/servico-uem/servicos}"><i
-									class="fa fa-angle-double-right"></i>Serviços da Unidade </a></li>
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i
-							class="fa fa-key"></i> <span>Gestão de Utilizador</span> <i
+					<li class="treeview"><a href=""> <i class="fa fa-key"></i>
+							<span>Gestão de Utilizador</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a th:href="@{/autenticacao/utilizador}"><i
 									class="fa fa-users"></i>Registar Novo</a></li>
 
-							<li><a ><i
-									class="fa fa-eye"></i>Pesquisar</a></li>
+							<li><a><i class="fa fa-eye"></i>Pesquisar</a></li>
 						</ul></li>
-					
-					<li class="treeview"><a href=""> <i
-							class="fa fa-users"></i> <span>Registo de Medicos</span> <i
+
+					<li class="treeview"><a href=""> <i class="fa fa-dollar"></i>
+							<span>Finanças</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a th:href="@{/consulta/listAgendadas}"><i class="fa fa-list"></i>Listar Consultas</a></li>
+
+						</ul></li>
+
+					<li class="treeview"><a href=""> <i class="fa fa-users"></i>
+							<span>Gestão de Médicos</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a th:href="@{/parametro/medico}"><i
-									class="fa fa-plus"></i> Novo</a></li>
+									class="fa fa-plus"></i>Novo Médico</a></li>
+									
+							<li><a ><i
+									class="fa fa-eye"></i>Ver Consultas</a></li>
+
+						</ul></li>
+						
+					<li class="treeview"><a href=""> <i class="fa fa-flask"></i>
+							<span>Laboratorios</span> <i class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li><a><i class="fa fa-list"></i>Listar Exames</a></li>
 
 						</ul></li>
 
-                    <li class="treeview"><a href=""> <i
-							class="fa fa-sun-o"></i> <span>Configuração da UEM</span> <i
+					<li class="treeview"><a href=""> <i class="fa fa-sun-o"></i>
+							<span>Configuração da UEM</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a th:href="@{/funcionario/uem}"><i
 									class="fa fa-bar-chart-o"></i>Gestão de Funcionários</a></li>
 
-							<li><a th:href="@{/estudante/uem}" ><i
+							<li><a th:href="@{/estudante/uem}"><i
 									class="fa fa-bar-chart-o"></i>Gestão de Estudantes</a></li>
 						</ul></li>
 
@@ -169,7 +179,7 @@
 
 	<script th:src="@{/js/plugins/datatables/dataTables.bootstrap.js}"></script>
 	<script th:src="@{/js/plugins/datatables/jquery.dataTables.js}"></script>
-    <script th:src="@{/js/select.js}"></script>
+	<script th:src="@{/js/select.js}"></script>
 
 
 	<script th:src="@{/js/wickedpicker.js}"></script>

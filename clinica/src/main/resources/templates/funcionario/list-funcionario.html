@@ -47,14 +47,14 @@
 										
 										<td th:text="${funcionario.nome}"></td>
 										<td th:text="${funcionario.telefone}"></td>
-										<td th:text="${funcionario.unidade.designacao}"></td>
+										<td th:text="${funcionario.unidade?.designacao}"></td>
 										<td th:text="${funcionario.funcao}"></td>
 										<td th:text="${funcionario.nivelAcademico}"></td>
 										<td th:text="${funcionario.tipoDePaciente}"></td>
 										
 										<td><a class="delete btn btn-xs btn-warning"
 											th:href="@{/funcionario/uem/{id}/configurar(id=${funcionario.id})}"><i
-												class="fa fa-gears" style="margin: 2px"></i>
+												class="fa fa-gears" style="margin: 5px"></i>
 										   </a>
 										</td>
 										

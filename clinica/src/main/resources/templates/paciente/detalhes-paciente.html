@@ -40,7 +40,7 @@
 									<i class="fa fa-check"></i>
 									<button type="button" class="close" data-dismiss="alert"
 										aria-hidden="true">&times;</button>
-									<b>Registo de Paciente: </b>
+									<b>Registo de Paciente </b>
 									<p>Paciente registado com sucesso!</p>
 								</div>
 							</div>
@@ -56,32 +56,29 @@
 										</tr>
 
 									</thead>
+									 <tr>
+										<td><b>NID </b></td>
+										<td><i th:text="${paciente.nid}"></i></td>
+									</tr>
 									<tr>
-										<td><b>Nome completo:</b></td>
+										<td><b>Nome completo </b></td>
 										<td><i th:text="${paciente.nome}"
 											style="margin-right: 5px"></i><i
 											th:text="${paciente.apelido}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Naturalidade:</b></td>
+										<td><b>Tipo de Paciente </b></td>
+										<td><i th:text="${paciente.tipoDePaciente}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Naturalidade </b></td>
 										<td><i th:text="${paciente.naturalidade}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Genero:</b></td>
+										<td><b>Genero </b></td>
 										<td><i th:text="${paciente.genero}"></i></td>
 									</tr>
-									<tr>
-										<td><b>Estado Civil:</b></td>
-										<td><i th:text="${paciente.estadoCivil}"></i></td>
-									</tr>
-									<tr>
-										<td><b>Profissao:</b></td>
-										<td><i th:text="${paciente.profissao}"></i></td>
-									</tr>
 
-									<tr>
-										<td><b>Local de Trabalho:</b></td>
-										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
 								</table>
 
 							</div>
@@ -96,7 +93,12 @@
 
 									</thead>
 									<tr>
-										<td><b>Filho de:</b></td>
+										<td><b>Estado Civil </b></td>
+										<td><i th:text="${paciente.estadoCivil}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Filho de </b></td>
 										<td><i th:text="${paciente.nomeDoPai}"
 											style="margin-right: 5px"></i><i>e </i></td>
 									</tr>
@@ -105,17 +107,13 @@
 										<td><i th:text="${paciente.nomeDaMae}"></i></td>
 									</tr>
 									<tr>
+									
 									<tr>
-										<td><b>Local de Trabalho:</b></td>
-										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
-									</tr>
-
-									<tr>
-										<td><b>Raca:</b></td>
+										<td><b>Raca </b></td>
 										<td><i th:text="${paciente.raca}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Data:</b></td>
+										<td><b>Data de Nascimento</b></td>
 										<td><i th:text="${paciente.dataDeNascimento}"></i></td>
 									</tr>
 
@@ -134,7 +132,7 @@
 
 									</thead>
 									<tr>
-										<td><b>Endereco:</b></td>
+										<td><b>Endereco </b></td>
 										<td><i th:text="${paciente.endereco}"
 											style="margin-right: 5px"></i></td>
 									</tr>
@@ -143,21 +141,14 @@
 										<td><i th:text="${paciente.email}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Telefone Princial:</b></td>
+										<td><b>Telefone Princial </b></td>
 										<td><i th:text="${paciente.telefone}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Telefone Alternativo:</b></td>
+										<td><b>Telefone Alternativo </b></td>
 										<td><i th:text="${paciente.telefoneAlternativo}"></i></td>
 									</tr>
-									<tr>
-										<td><b><i th:text="${paciente.tipoDocumento}"></i>:</b></td>
-										<td><i th:text="${paciente.numeroDocumento}"></i></td>
-									</tr>
 
-
-
-									</tr>
 
 								</table>
 
@@ -172,9 +163,9 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th><a class="" th:href="@{/paciente/}">Registar Novo</a></th>
+									<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente</a></th>
 									<th><a class=""
-										th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar</a></th>
+										th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar Paciente</a></th>
 									<th><a class="" th:href="@{/paciente/list}">Listar
 											Pacientes</a></th>
 									<th><a class=""

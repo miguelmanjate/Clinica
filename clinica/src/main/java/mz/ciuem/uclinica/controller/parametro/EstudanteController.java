@@ -143,6 +143,7 @@ public class EstudanteController {
 			RedirectAttributes redirectAttributes) {
 
 		estudante.setTipoDePaciente(TipoDePaciente.PACIENTE_ESTUDANTE);
+		estudante.setNid(estudante.getId());
 		if (bindingResult.hasErrors()) {
 			
 			return configurarEstudante(estudante.getId());

@@ -2,6 +2,6 @@ package mz.ciuem.uclinica.entity.parametro;
 
 public enum ServicoTipo {
 	
-	EXAME_MEDICO, CONSULTA_MEDICA
+	CONSULTA_MEDICA, EXAME_MEDICO
 
 }

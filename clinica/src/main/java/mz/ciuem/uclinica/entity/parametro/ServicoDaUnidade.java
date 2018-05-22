@@ -30,8 +30,8 @@ public class ServicoDaUnidade extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private RubricaDaUnidade rubricaDaUnidade;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "servicoDaUnidade")
-	private List<Servico> servicos;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "servicoDaUnidade")
+//	private List<Servico> servicos;
 
 
 
@@ -41,14 +41,6 @@ public class ServicoDaUnidade extends GenericEntity{
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
-	}
-
-	public List<Servico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
 	}
 
 	@Override

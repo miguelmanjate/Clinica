@@ -25,9 +25,6 @@
 
 					<div class="box-body ">
 
-
-
-
 						<div class="box-body table-responsive ">
 							<table class="table table-hover table-striped data-table">
 								<thead>
@@ -41,8 +38,6 @@
 										<th>Especialidade</th>
 										<th>Preco</th>
 										<th>Detalhes</th>
-
-
 
 									</tr>
 								</thead>
@@ -60,7 +55,7 @@
 										<td th:text="${consulta.preco}"></td>
 
 										<td><a class="delete btn btn-xs btn-primary"
-											th:href="@{/consulta/{id}/list/(id=${consulta.paciente?.id})}"><i
+											th:href="@{/consulta/{id}/select/(id=${consulta.id})}"><i
 												class=" fa fa-eye" style="margin: 2px"></i></a></td>
 
 

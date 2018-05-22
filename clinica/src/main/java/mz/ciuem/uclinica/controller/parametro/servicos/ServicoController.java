@@ -19,6 +19,7 @@ import mz.ciuem.uclinica.entity.consulta.Especialidade;
 import mz.ciuem.uclinica.entity.consulta.Taxa;
 import mz.ciuem.uclinica.entity.parametro.Servico;
 import mz.ciuem.uclinica.entity.parametro.ServicoDaUnidade;
+import mz.ciuem.uclinica.entity.parametro.ServicoTipo;
 import mz.ciuem.uclinica.service.parametro.SectorService;
 import mz.ciuem.uclinica.service.parametro.ServicoService;
 import mz.ciuem.uclinica.service.parametro.TaxasServie;
@@ -44,8 +45,7 @@ public class ServicoController {
 	public ModelAndView servicos(Servico servico) {
 
 		ModelAndView model = new ModelAndView("parametros/servico/add-servico");
-		List<ServicoDaUnidade> tipoServicos = tipoServicoService.getAll();
-		model.addObject("tipos", tipoServicos);
+		
 		inicializarForm(model);
 
 		return model;
@@ -53,8 +53,7 @@ public class ServicoController {
 
 	private void inicializarForm(ModelAndView model) {
 		model.addObject("servicos", servicoService.getAll());
-		model.addObject("sectores",sectorService.getAll());
-		model.addObject("especialidades",Especialidade.values());
+		model.addObject("servicoTipos",ServicoTipo.values());
 	}
 
 	@PostMapping( value ={ "/add"})
@@ -122,50 +121,50 @@ public class ServicoController {
 		return model;
 	}
 	
-	@GetMapping(value = {"/{id}/taxas"})
-	public ModelAndView configurarTaxas(@PathVariable Long id, Taxa taxa) {
-		
-		servico = servicoService.find(id);
-		ModelAndView model = new ModelAndView("/parametros/servico/configuracao-taxas");
-		model.addObject(servico);
-		model.addObject("tipoCliente", TipoCliente.values());
-		listarServicos(model);
-		
-		
-		return model;
-	}
-	
-	@PostMapping(value = {"/taxa/update"})
-	public ModelAndView configurarTaxas(@Valid Taxa taxa,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		
-		
-		if (bindingResult.hasErrors()) {
-			
-		}
-		ModelAndView model = new ModelAndView("redirect:/parametro/servico/taxas");
-		taxa.setServico(servico);
-		taxasService.saveOrUpdate(taxa);
-		redirectAttributes.addFlashAttribute("messageVisible", "true");
-
-		
-		return model;
-	}
-	
-	
-	@GetMapping(value = {"/taxas"})
-	public ModelAndView configurarTaxas() {
-		
-	
-	
-		ModelAndView model = new ModelAndView("/parametros/servico/taxas");
-		listarServicos(model);
-		return model;
-	}
-
-	private void listarServicos(ModelAndView model) {
-		List<Servico> servicos = servicoService.getServicosComSuasTaxas();
-		model.addObject("servicos",servicos);
-	}
+//	@GetMapping(value = {"/{id}/taxas"})
+//	public ModelAndView configurarTaxas(@PathVariable Long id, Taxa taxa) {
+//		
+//		servico = servicoService.find(id);
+//		ModelAndView model = new ModelAndView("/parametros/servico/configuracao-taxas");
+//		model.addObject(servico);
+//		model.addObject("tipoCliente", TipoCliente.values());
+//		listarServicos(model);
+//		
+//		
+//		return model;
+//	}
+//	
+//	@PostMapping(value = {"/taxa/update"})
+//	public ModelAndView configurarTaxas(@Valid Taxa taxa,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+//		
+//		
+//		if (bindingResult.hasErrors()) {
+//			
+//		}
+//		ModelAndView model = new ModelAndView("redirect:/parametro/servico/taxas");
+//		taxa.setServico(servico);
+//		taxasService.saveOrUpdate(taxa);
+//		redirectAttributes.addFlashAttribute("messageVisible", "true");
+//
+//		
+//		return model;
+//	}
+//	
+//	
+//	@GetMapping(value = {"/taxas"})
+//	public ModelAndView configurarTaxas() {
+//		
+//	
+//	
+//		ModelAndView model = new ModelAndView("/parametros/servico/taxas");
+//		listarServicos(model);
+//		return model;
+//	}
+//
+//	private void listarServicos(ModelAndView model) {
+//		List<Servico> servicos = servicoService.getServicosComSuasTaxas();
+//		model.addObject("servicos",servicos);
+//	}
 	
 	
 

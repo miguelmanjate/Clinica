@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Contabilidade: Lista de Consultas Agendadas</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Contabilidade: Lista de Consultas Agendadas</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="box-body table-responsive ">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Estado</th>
+										<th>Preco</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="consulta :${consultas}">
+
+										<td><i th:text="${consulta.dataDaConsulta}"></i></td>
+
+										<td><i th:text="${consulta.horaDaConsulta}"></i></td>
+										<td th:text="${consulta.paciente?.nome}"></td>
+										<td th:text="${consulta.tipoConsulta}"></td>
+										<td th:text="${consulta.causaAdmissao}"></td>
+										<td th:text="${consulta.medico?.nome}"></td>
+										<td th:text="${consulta.estado}"></td>
+										<td th:text="${consulta.preco}"></td>
+
+										<td><a class="delete btn btn-xs btn-success"
+											th:href="@{/consulta/{id}/select/(id=${consulta.id})}"><i
+												class=" fa fa-money" style="margin: 4px"></i></a></td>
+
+									</tr>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Data da Consulta</th>
+										<th>Hora da Consulta</th>
+										<th>Nome do Paciente</th>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Medico</th>
+										<th>Estado</th>
+										<th>Preco</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<tr>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

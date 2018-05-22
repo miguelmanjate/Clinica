@@ -63,14 +63,18 @@ public class PacienteCtrl {
 
 		}
 		paciente.setTipoDePaciente(TipoDePaciente.PACIENTE_GERAL);
+		
 		pacienteService.saveOrUpdate(paciente);
-	
+		paciente.setNid(paciente.getId());
+		pacienteService.update(paciente);
+		
 		String redirect = "redirect:" + paciente.getId();
 
 		ModelAndView modelAndView = new ModelAndView(redirect);
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 		return modelAndView;
 	}
+
 
 	@RequestMapping(method = RequestMethod.GET, value = { "/{id}", "/{id}/" })
 	public ModelAndView detalhes(@PathVariable Long id) {
@@ -110,16 +114,18 @@ public class PacienteCtrl {
 	public ModelAndView editar(@PathVariable Long id) throws ParseException {
 
 		Paciente paciente = pacienteService.find(id);
+     
 
-		
-		ModelAndView model = new ModelAndView("/paciente/update-paciente", "paciente", paciente);
-		model.addObject("genero", Genero.values());
-		model.addObject("tipoDocumento", TipoDocumento.values());
-		model.addObject("raca", Raca.values());
-		model.addObject("estadoCivil", EstadoCivil.values());
-		model.addObject("tipoDePaciente", TipoDePaciente.values());
-		
-		return model;
+			ModelAndView model = new ModelAndView("/paciente/update-paciente", "paciente", paciente);
+			model.addObject("genero", Genero.values());
+			model.addObject("tipoDocumento", TipoDocumento.values());
+			model.addObject("raca", Raca.values());
+			model.addObject("estadoCivil", EstadoCivil.values());
+			model.addObject("tipoDePaciente", TipoDePaciente.values());
+			
+			return model;
+			
+	    	
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
@@ -127,10 +133,10 @@ public class PacienteCtrl {
 		
 		if (bindingResult.hasErrors()) {
 
-			System.out.println("Ocorreu um erro durante o registo de pacientes!");
+			System.err.println("Ocorreu um erro durante o registo de pacientes!");
 
 		}
-	
+		//paciente.setNid(paciente.getId());
 		pacienteService.saveOrUpdate(paciente);
 		ModelAndView model = new ModelAndView("redirect:/paciente/"+paciente.getId());
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
@@ -149,12 +155,16 @@ public class PacienteCtrl {
 
 	@PostMapping("/procurar")
 	public ModelAndView procurarPaciente(PesquisarPacienteForm pesquisarPacienteForm) {
-
+		
 		pacientes = pacienteService.procurarPacientePor(pesquisarPacienteForm.getTipo(),
 				pesquisarPacienteForm.getParametroDePesquisa());
-
-		ModelAndView model = new ModelAndView("redirect:/paciente/procurar");
-		return model;
+        			
+			ModelAndView model = new ModelAndView("/paciente/procurar-paciente");
+			model.addObject("pacientes", pacientes);
+			model.addObject("tipoParametro", ParametrosDePesquisaPaciente.values());
+			return model;
+					
+		
 	}
 
 

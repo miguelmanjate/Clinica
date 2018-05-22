@@ -36,17 +36,23 @@ public class Servico extends GenericEntity {
 	// @NotNull(message = "Mandatorio informar o codigo do servico")
 	// @NotBlank(message = "Mandatorio informar o codigo do servico")
 	private String codigo;
+	
+	private double preco;
+	
+	@Column( name = "servico_tipo")
+	@Enumerated(EnumType.STRING)
+	private ServicoTipo servicoTipo;
 
-	@ManyToOne
-	@JoinColumn(name = "servicoDaUnidade")
-	private ServicoDaUnidade servicoDaUnidade;
+//	@ManyToOne
+//	@JoinColumn(name = "servicoDaUnidade")
+//	private ServicoDaUnidade servicoDaUnidade;
 
-	@OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
-	private List<Taxa> taxas;
+//	@OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
+//	private List<Taxa> taxas;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "sector_id")
-	private Sector sector;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "sector_id")
+//	private Sector sector;
 
 	@Column(name = "servico_especialidade")
 	@Enumerated(EnumType.STRING)
@@ -54,6 +60,22 @@ public class Servico extends GenericEntity {
 	
 	@ManyToMany
 	private List<Consulta> consultas;
+	
+	public double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public ServicoTipo getServicoTipo() {
+		return servicoTipo;
+	}
+
+	public void setServicoTipo(ServicoTipo servicoTipo) {
+		this.servicoTipo = servicoTipo;
+	}
 
 	public Especialidade getEspecialidade() {
 		return especialidade;
@@ -61,30 +83,6 @@ public class Servico extends GenericEntity {
 
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
-	}
-
-	public Sector getSector() {
-		return sector;
-	}
-
-	public void setSector(Sector sector) {
-		this.sector = sector;
-	}
-
-	public List<Taxa> getTaxas() {
-		return taxas;
-	}
-
-	public void setTaxas(List<Taxa> taxas) {
-		this.taxas = taxas;
-	}
-
-	public ServicoDaUnidade getServicoDaUnidade() {
-		return servicoDaUnidade;
-	}
-
-	public void setServicoDaUnidade(ServicoDaUnidade servicoDaUnidade) {
-		this.servicoDaUnidade = servicoDaUnidade;
 	}
 
 	public String getDesignacao() {

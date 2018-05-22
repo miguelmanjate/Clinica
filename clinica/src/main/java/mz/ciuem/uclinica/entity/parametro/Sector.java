@@ -21,19 +21,11 @@ public class Sector extends GenericEntity{
 	@ManyToOne
 	private Unidades Unidades;
 	
-	@OneToMany(mappedBy = "sector")
-	private List<Servico> servicos;
+//	@OneToMany(mappedBy = "sector")
+//	private List<Servico> servicos;
 
 	public String getDesignacao() {
 		return designacao;
-	}
-
-	public List<Servico> getServicos() {
-		return servicos;
-	}
-
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
 	}
 
 	public void setDesignacao(String designacao) {

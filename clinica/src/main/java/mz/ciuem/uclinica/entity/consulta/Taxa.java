@@ -44,20 +44,10 @@ public class Taxa extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private TipoCliente tipoCliente;
 	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinColumn(name  = "servico_taxa_id")
-	private Servico servico;
+//	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//	@JoinColumn(name  = "servico_taxa_id")
+//	private Servico servico;
 	
-	
-
-	public Servico getServico() {
-		return servico;
-	}
-
-	public void setServico(Servico servico) {
-		this.servico = servico;
-	}
-
 	public Double getTaxaNormal() {
 		return taxaNormal;
 	}

@@ -40,31 +40,32 @@
 
 									</thead>
 									<tr>
-										<td><b>Nome completo:</b></td>
+										<td><b>NID </b></td>
+										<td><h3>
+												<span class="label label-success"> <i
+													th:text="${paciente.nid}"></i>
+												</span>
+											</h3></td>
+									</tr>
+									<tr>
+										<td><b>Nome completo </b></td>
 										<td><i th:text="${paciente.nome}"
 											style="margin-right: 5px"></i><i
 											th:text="${paciente.apelido}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Naturalidade:</b></td>
+										<td><b>Tipo de Paciente </b></td>
+										<td><i th:text="${paciente.tipoDePaciente}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Naturalidade </b></td>
 										<td><i th:text="${paciente.naturalidade}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Genero:</b></td>
+										<td><b>Genero </b></td>
 										<td><i th:text="${paciente.genero}"></i></td>
 									</tr>
-									<tr>
-										<td><b>Estado Civil:</b></td>
-										<td><i th:text="${paciente.estadoCivil}"></i></td>
-									</tr>
-									<tr>
-										<td><b>Profissao:</b></td>
-										<td><i th:text="${paciente.profissao}"></i></td>
-									</tr>
 
-									<tr>
-										<td><b>Local de Trabalho:</b></td>
-										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
 								</table>
 
 							</div>
@@ -79,7 +80,11 @@
 
 									</thead>
 									<tr>
-										<td><b>Filho de:</b></td>
+										<td><b>Estado Civil </b></td>
+										<td><i th:text="${paciente.estadoCivil}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Filho de </b></td>
 										<td><i th:text="${paciente.nomeDoPai}"
 											style="margin-right: 5px"></i><i>e </i></td>
 									</tr>
@@ -89,12 +94,12 @@
 									</tr>
 									<tr>
 									<tr>
-										<td><b>Local de Trabalho:</b></td>
-										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
+										<td><b>Data de Nascimento </b></td>
+										<td><i th:text="${paciente.dataDeNascimento}"></i></td>
 									</tr>
 
 									<tr>
-										<td><b>Raca:</b></td>
+										<td><b>Raca </b></td>
 										<td><i th:text="${paciente.raca}"></i></td>
 									</tr>
 
@@ -114,7 +119,7 @@
 
 									</thead>
 									<tr>
-										<td><b>Endereco:</b></td>
+										<td><b>Endereco </b></td>
 										<td><i th:text="${paciente.endereco}"
 											style="margin-right: 5px"></i></td>
 									</tr>
@@ -123,74 +128,64 @@
 										<td><i th:text="${paciente.email}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Telefone Princial:</b></td>
+										<td><b>Telefone Princial </b></td>
 										<td><i th:text="${paciente.telefone}"></i></td>
 									</tr>
 									<tr>
-										<td><b>Telefone Alternativo:</b></td>
+										<td><b>Telefone Alternativo </b></td>
 										<td><i th:text="${paciente.telefoneAlternativo}"></i></td>
 									</tr>
-									<tr>
-										<td><b><i th:text="${paciente.tipoDocumento}"></i>:</b></td>
-										<td><i th:text="${paciente.numeroDocumento}"></i></td>
-									</tr>
-
-
-
-
 
 								</table>
 
 							</div>
 						</div>
 
-
-
-
-
 						<div class="box-body table-responsive no-padding">
-							<table class="table table-hover table-striped data-table" style="margin-top: 20px" >
-							<thead>
-								<tr>
-									<th>Tipo de Consulta</th>
-									<th>Causa de Admissao</th>
-									<th>Data</th>
-									<th>Hora</th>
-									<th>Medico</th>
-									<th>Preco</th>
-									<th>Estado</th>
-									<th>Editar</th>
-
-									<th>Cancelar</th>
-
-
-
-								</tr>
+							<table class="table table-hover table-striped data-table"
+								style="margin-top: 20px">
+								<thead>
+									<tr>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Data</th>
+										<th>Hora</th>
+										<th>Medico</th>
+										<th>Preco</th>
+										<th>Estado</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
+										<th>Cancelar</th>
+									</tr>
 								</thead>
 								<tbody>
-								<tr th:each="consulta :${consultas}">
-									<td th:text="${consulta.tipoConsulta}"></td>
-									<td th:text="${consulta.causaAdmissao}"></td>
+									<tr th:each="consulta :${consultas}">
+										<td th:text="${consulta.tipoConsulta}"></td>
+										<td th:text="${consulta.causaAdmissao}"></td>
 
-									<td th:text="${consulta.dataDaConsulta}"></td>
-									<td th:text="${consulta.horaDaConsulta}"></td>
-									<td th:text="${consulta.medico?.nome}"></td>
-									<td th:text="${consulta.preco}"></td>
-									<td th:text="${consulta.estado}"></td>
-
-
+										<td th:text="${consulta.dataDaConsulta}"></td>
+										<td th:text="${consulta.horaDaConsulta}"></td>
+										<td th:text="${consulta.medico?.nome}"></td>
+										<td th:text="${consulta.preco}"></td>
+										<td th:text="${consulta.estado}"></td>
 
 
-									<td><a class="delete btn btn-xs btn-default"
-										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i
-											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
-									<td><a class="delete btn btn-xs btn-default"
-									     th:href="@{/consulta/{id}/cancelar(id=${consulta.id})}"
-										><i
-											class=" fa fa-eye" style="margin: 2px"></i>Cancelar</a></td>
 
-								</tr>
-</tbody>
+
+										<td><a class="delete btn btn-xs btn-primary"
+											th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i></a></td>
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/consulta/{id}/detalhes(id=${consulta.id})}"><i
+												class="fa fa-eye" style="margin: 2px"></i></a></td>
+
+										<td><a class="delete btn btn-xs btn-danger"
+											th:href="@{/consulta/{id}/cancelar(id=${consulta.id})}"><i
+												class=" fa fa-times" style="margin: 2px"></i></a></td>
+
+									</tr>
+								</tbody>
 							</table>
 						</div>
 					</div>
@@ -202,14 +197,16 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-								    <th><a class="" th:href="@{/consulta/agendar/{id}(id=${paciente.id})}"
-								    >Agentar Nova Consulta
+									<th><a class=""
+										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agentar
+											Nova Consulta </a></th>
+									<th><a class="" th:href="@{/paciente/procurar}">Registar
+											Nova Consulta </a></th>
+									<th><a class="" th:href="@{/paciente/}">Registar Novo
+											Paciente </a></th>
+									<th><a class="" th:href="@{/paciente/procurar}">Voltar
 									</a></th>
-								    <th><a class="" th:href="@{/paciente/procurar}">Registar Nova Consulta
-									</a></th>
-									<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente
-									</a></th>
-									
+
 								</tr>
 
 

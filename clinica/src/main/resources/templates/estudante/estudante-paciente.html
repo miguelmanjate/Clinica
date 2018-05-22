@@ -126,7 +126,7 @@
 
 									<tr>
 										<td><b>Curso </b></td>
-										<td><i th:text="${estudante.curso.descricao}"></i></td>
+										<td><i th:text="${estudante.curso?.descricao}"></i></td>
 									</tr>
 									<tr>
 										<td><b>Ano</b></td>
@@ -199,7 +199,8 @@
 												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
 											</button>
 
-											<a class="btn btn-warning" th:href="@{/estudante/uem/list}">
+											<a class="btn btn-danger" th:href="@{/estudante/uem/list}">
+											<i class="fa fa-times" style="margin: 2px"></i>
 												Cancelar </a>
 										</div>
 

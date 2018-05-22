@@ -165,6 +165,9 @@
 
 											<a class="btn btn-default" th:href="@{/estudante/uem/list}"><i
 												class="fa fa-eye" style="margin: 2px"></i>Listar</a> 
+											<a class="btn btn-danger" th:href="@{/estudante/uem/list}">
+											<i class="fa fa-times" style="margin: 2px"></i>
+												Cancelar </a>
 										</div>
                                       <input type="hidden" th:field="*{id}" />
                                        <input type="hidden" th:field="*{raca}" />
@@ -172,6 +175,7 @@
                                        <input type="hidden" th:field="*{email}" />
                                        <input type="hidden" th:field="*{telefoneAlternativo}" />
                                        <input type="hidden" th:field="*{tipoDePaciente}" />
+                                       <input type="hidden" th:field="*{nid}" />
 									</div>
 									</form>
 								</div>

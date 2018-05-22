@@ -105,8 +105,9 @@
 									</div>
 									<div class="form-group">
 										<label for="naturalidade">Naturalidade</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('naturalidade')}">
-											<i class="fa fa-times-circle-o"></i> <span
+											class="text-danger"
+											th:if="${#fields.hasErrors('naturalidade')}"> <i
+											class="fa fa-times-circle-o"></i> <span
 											th:errors="*{naturalidade}"></span>
 										</label> <input type="text" class="form-control  input-sm"
 											th:field="*{naturalidade}">
@@ -116,8 +117,8 @@
 
 								<!-- Segundo bloco do formulario -->
 								<div class="col-md-6">
-								
-								  <div class="form-group">
+
+									<div class="form-group">
 										<label for="designacao">Residência</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('endereco')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -155,9 +156,8 @@
 
 									<div class="form-group">
 										<label for="designacao">Telefone Principal</label> <label
-											class="text-danger"
-											th:if="${#fields.hasErrors('telefone')}"> <i
-											class="fa fa-times-circle-o"></i> <span
+											class="text-danger" th:if="${#fields.hasErrors('telefone')}">
+											<i class="fa fa-times-circle-o"></i> <span
 											th:errors="*{telefone}"></span>
 										</label> <input type="text" class="form-control  input-sm"
 											th:field="*{Telefone}">
@@ -201,8 +201,9 @@
 
 											<a class="btn btn-default" th:href="@{/paciente/list}"><i
 												class="fa fa-eye" style="margin: 2px"></i>Listar</a> <a
-												class="btn btn-warning" th:href="@{/paciente}">
-												Cancelar </a>
+												class="btn btn-danger" th:href="@{/paciente}"><i
+												class="fa fa-times" style="margin: 2px"></i> Cancelar
+											</a>
 										</div>
 
 

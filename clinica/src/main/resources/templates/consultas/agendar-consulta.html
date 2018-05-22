@@ -18,9 +18,6 @@
 		<div class="row">
 			<!-- left column -->
 
-
-
-
 			<div class="col-md-12 ">
 				<!-- general form elements -->
 				<div class="box box-success">
@@ -182,7 +179,7 @@
 
 
 											<div class="form-group ">
-												<label for="tipoDocumento">Tipo de Consulta</label> <select 
+												<label for="tipoDocumento">Tipo de Consulta</label> <select
 													th:field="*{consulta.tipoConsulta}"
 													class="form-control input-sm multiple-select">
 													<option th:each="tipoConsulta : ${tipoConsulta}"
@@ -230,10 +227,6 @@
 
 										<div class="col-md-4 col-sm-6 col-xs-12">
 
-
-
-
-
 											<div class="row">
 
 												<div class="col-md-6">
@@ -250,8 +243,9 @@
 															<div class="input-group-addon">
 																<i class="fa fa-calendar"></i>
 															</div>
-															<input th:field="*{consulta.dataDaConsulta}" type = "datetime"
-																id="data-consulta" class="form-control input-sm" />
+															<input th:field="*{consulta.dataDaConsulta}"
+																type="datetime" id="data-consulta"
+																class="form-control input-sm" />
 
 														</div>
 													</div>
@@ -277,12 +271,12 @@
 												<div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
 
 
-<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
+													<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
 													<div class="form-group ">
 														<label for="servico">Servicos</label> <select
 															multiple="multiple" th:field="*{servicos}"
 															class="form-control input-sm multiple-select">
-															<option th:each="servico : ${servicos}" 
+															<option th:each="servico : ${servicos}"
 																th:value="${servico.id}" th:text="${servico.designacao}"></option>
 
 														</select>
@@ -309,6 +303,9 @@
 											id="btn-agendar">
 											<i class="fa fa-save inverse" style="margin: 2px"></i>Agendar
 										</button>
+										<a class="btn btn-danger" th:href="@{/paciente/procurar}">
+											<i class="fa fa-times" style="margin: 2px"></i> Cancelar
+										</a>
 									</div>
 								</form>
 
@@ -323,12 +320,14 @@
 					<div class="box-body table-responsive no-padding">
 						<table class="table table-hover">
 							<tr>
-								<th><a class="" th:href="@{/paciente/}">Registar Novo Paciente</a></th>
+								<th><a class="" th:href="@{/paciente/}">Registar Novo
+										Paciente</a></th>
 								<th><a class=""
-									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar Paciente</a></th>
+									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar
+										Paciente</a></th>
 								<th><a class="" th:href="@{/paciente/list}">Listar
 										Pacientes</a></th>
-<!-- 								<th><a
+								<!-- 								<th><a
 									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
 										Consultas</a></th> -->
 
@@ -341,76 +340,76 @@
 
 						</table>
 					</div>
-					
-					
-					
+
+
+
 					<div class="box-body table-responsive ">
-							<table class="table table-hover table-striped data-table">
-								<thead>
-									<tr>
-										<th>Data da Consulta</th>
-										<th>Hora da Consulta</th>
-										<th>Nome do Paciente</th>
-										<th>Tipo de Consulta</th>
-										<th>Causa de Admissao</th>
-										<th>Medico</th>
-										<th>Especialidade</th>
-										<th>Preco</th>
-                                        <th>Estado</th>
+						<table class="table table-hover table-striped data-table">
+							<thead>
+								<tr>
+									<th>Data da Consulta</th>
+									<th>Hora da Consulta</th>
+									<th>Nome do Paciente</th>
+									<th>Tipo de Consulta</th>
+									<th>Causa de Admissao</th>
+									<th>Medico</th>
+									<th>Especialidade</th>
+									<th>Preco</th>
+									<th>Estado</th>
 
 
 
 
 
-									</tr>
-								</thead>
-								<tbody>
-									<tr th:each="consulta :${consultas}">
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="consulta :${consultas}">
 
-										<td><i th:text="${consulta.dataDaConsulta}"></i></td>
+									<td><i th:text="${consulta.dataDaConsulta}"></i></td>
 
-										<td><i th:text="${consulta.horaDaConsulta}"></i></td>
-										<td th:text="${consulta.paciente?.nome}"></td>
-										<td th:text="${consulta.tipoConsulta}"></td>
-										<td th:text="${consulta.causaAdmissao}"></td>
-										<td th:text="${consulta.medico.nome}"></td>
-										<td th:text="${consulta.especialidade}"></td>
-										<td th:text="${consulta.preco}"></td>
-                                        <td th:text="${consulta.estado}"></td>
+									<td><i th:text="${consulta.horaDaConsulta}"></i></td>
+									<td th:text="${consulta.paciente?.nome}"></td>
+									<td th:text="${consulta.tipoConsulta}"></td>
+									<td th:text="${consulta.causaAdmissao}"></td>
+									<td th:text="${consulta.medico.nome}"></td>
+									<td th:text="${consulta.especialidade}"></td>
+									<td th:text="${consulta.preco}"></td>
+									<td th:text="${consulta.estado}"></td>
 
-										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
-										<!-- 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i -->
-										<!-- 											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td> -->
-										<!-- 									<td><a class="delete btn btn-xs btn-default" -->
-										<!-- 										th:href="@{/consulta/{id}/(id=${paciente.id})}"><i -->
-										<!-- 											class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td> -->
+									<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+									<!-- 										th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i -->
+									<!-- 											class="fa fa-edit" style="margin: 2px"></i>Editar</a></td> -->
+									<!-- 									<td><a class="delete btn btn-xs btn-default" -->
+									<!-- 										th:href="@{/consulta/{id}/(id=${paciente.id})}"><i -->
+									<!-- 											class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td> -->
 
-										<!-- 									<td><a class="btn btn-xs btn-default" -->
-										<!-- 										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar -->
-										<!-- 											Consulta</a></td> -->
-									</tr>
+									<!-- 									<td><a class="btn btn-xs btn-default" -->
+									<!-- 										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar -->
+									<!-- 											Consulta</a></td> -->
+								</tr>
 
-								</tbody>
-								<tfoot>
-									<tr>
-										<th>Data da Consulta</th>
-										<th>Hora da Consulta</th>
-										<th>Nome do Paciente</th>
-										<th>Tipo de Consulta</th>
-										<th>Causa de Admissao</th>
-										<th>Medico</th>
-										<th>Especialidade</th>
-										<th>Preco</th>
-                                        <th>Estado</th>
-
-
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>Data da Consulta</th>
+									<th>Hora da Consulta</th>
+									<th>Nome do Paciente</th>
+									<th>Tipo de Consulta</th>
+									<th>Causa de Admissao</th>
+									<th>Medico</th>
+									<th>Especialidade</th>
+									<th>Preco</th>
+									<th>Estado</th>
 
 
 
-									</tr>
-								</tfoot>
-							</table>
-						</div>
+
+
+								</tr>
+							</tfoot>
+						</table>
+					</div>
 				</div>
 				<!-- /.box-body -->
 

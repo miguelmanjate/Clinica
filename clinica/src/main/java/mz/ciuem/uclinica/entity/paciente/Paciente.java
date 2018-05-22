@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -39,6 +40,8 @@ public class Paciente  extends GenericEntity{
 	@NotBlank(message = "Mandatorio informar o nome")
 	@Column(name = "nome")
 	private String nome;
+	
+	private Long nid;
 	
 	@Column(name = "tipo_documento_identificacao")
 	@Enumerated(EnumType.STRING)
@@ -100,7 +103,7 @@ public class Paciente  extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private TipoDePaciente tipoDePaciente;
 	
-	@OneToMany(mappedBy = "paciente")
+	@OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
 	private List<Consulta> consultas;
 	
 	
@@ -112,6 +115,14 @@ public class Paciente  extends GenericEntity{
 	@Column(name = "data_de_nascimento")
 	private Date dataDeNascimento;
 	
+	public Long getNid() {
+		return nid;
+	}
+
+	public void setNid(Long nid) {
+		this.nid = nid;
+	}
+
 	public TipoDePaciente getTipoDePaciente() {
 		return tipoDePaciente;
 	}

@@ -56,13 +56,14 @@
 												<label for="tipo"></label> <input type="text"
 													class="form-control" th:field="*{parametroDePesquisa}">
 												<span class="input-group-btn">
-													<button class="btn btn-info btn-flat" type="submit">  <i class="fa fa-search"></i> Pesquisar</button>
+													<button type="submit" class="btn btn-sm btn-primary  "
+														id="btn-agendar">
+														<i class="fa fa-search" style="margin: 2px"></i>Pesquisar
+													</button>
 												</span>
 											</div>
 										</div>
-<div style="margin-top: 40px;">
-
-</div>
+										<div style="margin-top: 40px;"></div>
 
 									</div>
 
@@ -89,43 +90,40 @@
 									<table class="table table-hover table-striped data-table">
 										<thead>
 											<tr>
+												<th>NID</th>
 												<th>Nome do Paciente</th>
 												<th>Género</th>
-												<th>Estado Civil</th>
 												<th>Tipo</th>
 												<th>Telefone Principal</th>
 												<th>Detalhes</th>
 												<th>Agendar Cosulta</th>
 
-
-
-
 											</tr>
 										</thead>
 										<tbody>
 											<tr th:each="paciente :${pacientes}">
+												<td><i th:text="${paciente.nid}"></i></td>
 												<td><i th:text="${paciente.nome}"></i> <i
 													th:text="${paciente.apelido}"></i></td>
 												<td th:text="${paciente.genero}"></td>
-												<td th:text="${paciente.estadoCivil}"></td>
 												<td th:text="${paciente.tipoDePaciente}"></td>
 												<td th:text="${paciente.telefone}"></td>
 
 												<td><a class="delete btn btn-xs btn-success"
-													th:href="@{/paciente/{id}/(id=${paciente.id})}"><i
+													th:href="@{/consulta/{id}/list/(id=${paciente.id})}"><i
 														class=" fa fa-eye" style="margin: 2px"></i></a></td>
 
-												<td><a class="btn btn-xs btn-danger"
+												<td><a class="btn btn-xs btn-primary"
 													th:href="@{/consulta/agendar/{id}(id=${paciente.id})}"><i
-														class=" fa fa-edit" style="margin: 2px"></i></a></td>
+														class=" fa fa-check" style="margin: 5px"></i></a></td>
 											</tr>
 										</tbody>
 										<tfoot>
 
 											<tr>
-											  	<th>Nome do Paciente</th>
+												<th>NID</th>
+												<th>Nome do Paciente</th>
 												<th>Género</th>
-												<th>Estado Civil</th>
 												<th>Tipo</th>
 												<th>Telefone Principal</th>
 												<th>Detalhes</th>
@@ -146,10 +144,9 @@
 										<tr>
 											<th><a class="" th:href="@{/paciente/}">Registar
 													Novo Paciente</a></th>
-                                             <th><a class="" th:href="@{/paciente/list}">Listar todos Pacientes</a></th>
-                                             
+
 										</tr>
-                                     
+
 									</table>
 								</div>
 
