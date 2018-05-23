@@ -36,16 +36,16 @@ public class PacienteCtrl {
 	private List<Paciente> pacientes;
 
 	@GetMapping(value = { "", "/", "add" })
-	private ModelAndView addPaciente(Paciente paciente ) {
-        
+	private ModelAndView addPaciente(Paciente paciente) {
+
 		ModelAndView model = new ModelAndView("paciente/add-paciente");
 		preencherFormulario(model);
-		
+
 		return model;
 	}
-	
+
 	private void preencherFormulario(ModelAndView model) {
-		
+
 		model.addObject("genero", Genero.values());
 		model.addObject("tipoDocumento", TipoDocumento.values());
 		model.addObject("raca", Raca.values());
@@ -56,25 +56,23 @@ public class PacienteCtrl {
 	@PostMapping(value = { "add" })
 	public ModelAndView registarPaciente(@Valid Paciente paciente, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
-		
-		
+
 		if (bindingResult.hasErrors()) {
 			return addPaciente(paciente);
 
 		}
 		paciente.setTipoDePaciente(TipoDePaciente.PACIENTE_GERAL);
-		
+
 		pacienteService.saveOrUpdate(paciente);
 		paciente.setNid(paciente.getId());
 		pacienteService.update(paciente);
-		
+
 		String redirect = "redirect:" + paciente.getId();
 
 		ModelAndView modelAndView = new ModelAndView(redirect);
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 		return modelAndView;
 	}
-
 
 	@RequestMapping(method = RequestMethod.GET, value = { "/{id}", "/{id}/" })
 	public ModelAndView detalhes(@PathVariable Long id) {
@@ -88,21 +86,22 @@ public class PacienteCtrl {
 	@RequestMapping(method = RequestMethod.GET, value = { "/list", "/list/" })
 	public ModelAndView listar() {
 		pesquisarPacientes();
-		
-	    return exibirPacientes();
+
+		return exibirPacientes();
 	}
- 
-	private void pesquisarPacientes(){
-		
-		List<Paciente>  pacietesSelecionados = pacienteService.getAll();
+
+	private void pesquisarPacientes() {
+
+		List<Paciente> pacietesSelecionados = pacienteService.getAll();
 		pacientes = new ArrayList<>();
-		for(Paciente p : pacietesSelecionados){
-			if(p.getTipoDePaciente() != null){
+		for (Paciente p : pacietesSelecionados) {
+			if (p.getTipoDePaciente() != null) {
 				pacientes.add(p);
 			}
 		}
-		
+
 	}
+
 	private ModelAndView exibirPacientes() {
 
 		ModelAndView modelAndView = new ModelAndView("/paciente/list-paciente");
@@ -114,31 +113,30 @@ public class PacienteCtrl {
 	public ModelAndView editar(@PathVariable Long id) throws ParseException {
 
 		Paciente paciente = pacienteService.find(id);
-     
 
-			ModelAndView model = new ModelAndView("/paciente/update-paciente", "paciente", paciente);
-			model.addObject("genero", Genero.values());
-			model.addObject("tipoDocumento", TipoDocumento.values());
-			model.addObject("raca", Raca.values());
-			model.addObject("estadoCivil", EstadoCivil.values());
-			model.addObject("tipoDePaciente", TipoDePaciente.values());
-			
-			return model;
-			
-	    	
+		ModelAndView model = new ModelAndView("/paciente/update-paciente", "paciente", paciente);
+		model.addObject("genero", Genero.values());
+		model.addObject("tipoDocumento", TipoDocumento.values());
+		model.addObject("raca", Raca.values());
+		model.addObject("estadoCivil", EstadoCivil.values());
+		model.addObject("tipoDePaciente", TipoDePaciente.values());
+
+		return model;
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
-	public ModelAndView editar(@Valid Paciente paciente, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-		
+	public ModelAndView editar(@Valid Paciente paciente, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
+
 		if (bindingResult.hasErrors()) {
 
 			System.err.println("Ocorreu um erro durante o registo de pacientes!");
 
 		}
-		//paciente.setNid(paciente.getId());
+		// paciente.setNid(paciente.getId());
 		pacienteService.saveOrUpdate(paciente);
-		ModelAndView model = new ModelAndView("redirect:/paciente/"+paciente.getId());
+		ModelAndView model = new ModelAndView("redirect:/paciente/" + paciente.getId());
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 
 		return model;
@@ -155,17 +153,20 @@ public class PacienteCtrl {
 
 	@PostMapping("/procurar")
 	public ModelAndView procurarPaciente(PesquisarPacienteForm pesquisarPacienteForm) {
-		
-		pacientes = pacienteService.procurarPacientePor(pesquisarPacienteForm.getTipo(),
+        
+		List<Paciente> pacientes = new ArrayList<>();
+		List<Paciente> pacietesSelecionados = pacienteService.procurarPacientePor(pesquisarPacienteForm.getTipo(),
 				pesquisarPacienteForm.getParametroDePesquisa());
-        			
-			ModelAndView model = new ModelAndView("/paciente/procurar-paciente");
-			model.addObject("pacientes", pacientes);
-			model.addObject("tipoParametro", ParametrosDePesquisaPaciente.values());
-			return model;
-					
-		
-	}
+        for (Paciente p : pacietesSelecionados){
+        	if (p.getTipoDePaciente() != null) {
+				pacientes.add(p);
+			}
+        }
+		ModelAndView model = new ModelAndView("/paciente/procurar-paciente");
+		model.addObject("pacientes", pacientes);
+		model.addObject("tipoParametro", ParametrosDePesquisaPaciente.values());
+		return model;
 
+	}
 
 }

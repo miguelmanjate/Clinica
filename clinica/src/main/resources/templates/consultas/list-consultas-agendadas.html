@@ -37,7 +37,7 @@
 										<th>Medico</th>
 										<th>Estado</th>
 										<th>Preco</th>
-										<th>Detalhes</th>
+										<th>Pagamento</th>
 
 									</tr>
 								</thead>
@@ -55,7 +55,7 @@
 										<td th:text="${consulta.preco}"></td>
 
 										<td><a class="delete btn btn-xs btn-success"
-											th:href="@{/consulta/{id}/select/(id=${consulta.id})}"><i
+											th:href="@{/factura/{id}/faturar/(id=${consulta.id})}"><i
 												class=" fa fa-money" style="margin: 4px"></i></a></td>
 
 									</tr>
@@ -71,7 +71,7 @@
 										<th>Medico</th>
 										<th>Estado</th>
 										<th>Preco</th>
-										<th>Detalhes</th>
+										<th>Pagamento</th>
 
 									</tr>
 								</tfoot>

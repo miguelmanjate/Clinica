@@ -47,7 +47,6 @@ public class Paciente  extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private TipoDocumento tipoDocumento;
 	
-	@Column(name = "naturalidade")
 	private String naturalidade;
 	
 	@Column(name = "genero")
@@ -58,14 +57,11 @@ public class Paciente  extends GenericEntity{
 	@Enumerated(EnumType.STRING)
 	private EstadoCivil estadoCivil;
 	
-	@Column(name = "telefone")
 	private String telefone;
 	
 	@Column(name = "telefone_alternativo")
 	private String telefoneAlternativo;
 	
-	@NotNull(message = "Campo de endereco Obrigatorio")
-	@NotBlank(message = "Campo de endereco Obrigatorio")
 	@Column(name = "endereco")
 	private String endereco;
 	
@@ -86,7 +82,6 @@ public class Paciente  extends GenericEntity{
 	@Column(name = "tipo_bolsa")
 	private TipoBolsa tipoBolsa;
 	
-	@Column(name = "profissao")
 	private String profissao;
 	
 	@Column(name = "local_trabalho")

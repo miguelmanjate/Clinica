@@ -1,6 +1,6 @@
 package mz.ciuem.uclinica.entity.parametro;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -9,36 +9,57 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
+import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
 
 @Entity
-@Table(name="clinica_factura")
+@Table(name="factura_factura")
 @Access(AccessType.FIELD)
 public class Factura extends GenericEntity {
 	
 	@Column(name="numero_factura")
 	private Long numeroDaFactura;
 	
-	@Column(name="data_inicio")
+	@Column(name="data_inicio ")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date dataInicio;
 	
 	@Column(name="data_fim")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataFim;
 	
 	private double total;
 	
-	@ManyToOne
-	@JoinColumn(name ="unidades")
-	private Unidades unidades;
+	@Transient
+	private String dataString;
 	
 	@ManyToOne
-	@JoinColumn(name ="paciente")
-	private Paciente paciente;
+	@JoinColumn(name ="consulta")
+	private Consulta consulta;
 	
-	@ManyToOne
-	private Iva iva;
+	public String getDataString() {
+		return dataString;
+	}
+
+	public void setDataString(String dataString) {
+		this.dataString = dataString;
+	}
+
+	public Consulta getConsulta() {
+		return consulta;
+	}
+
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
+	}
 
 	public Long getNumeroDaFactura() {
 		return numeroDaFactura;
@@ -72,29 +93,5 @@ public class Factura extends GenericEntity {
 		this.total = total;
 	}
 
-	public Unidades getUnidade() {
-		return unidades;
-	}
-
-	public void setUnidade(Unidades unidade) {
-		this.unidades = unidade;
-	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
-	public Iva getIva() {
-		return iva;
-	}
-
-	public void setIva(Iva iva) {
-		this.iva = iva;
-	}
-	
 
 }
