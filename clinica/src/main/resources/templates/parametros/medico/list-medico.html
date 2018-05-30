@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Listar Medicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+		
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Médicos</h3>
+						
+							<div class = "msg1-medico-update"
+									th:if="${messageVisible}">
+									
+								</div>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Nome do Médico</th>
+										<th>Género</th>
+										<th>Estado Civil</th>
+										<th>Especialidade</th>
+										<th>Telefone Principal</th>
+										<th>Data de Nascimento</th>
+										<th>Ver Editar</th>
+										<th>Ver Detalhes</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="medico :${medicos}">
+										<td><i th:text="${medico.nome}"></i> <i
+											th:text="${medico.apelido}"></i></td>
+										<td th:text="${medico.genero}"></td>
+										<td th:text="${medico.estadoCivil}"></td>
+										<td th:text="${medico.especialidade.descricao}"></td>
+										<td th:text="${medico.telefonePrincipal}"></td>
+										<td th:text="${medico.dataDeNascimento}"></td>
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/medicos/{id}/update(id=${medico.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/medicos/{id}/(id=${medico.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+
+								
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Nome do Médico</th>
+										<th>Género</th>
+										<th>Estado Civil</th>
+										<th>Especialidade</th>
+										<th>Telefone Principal</th>
+										<th>Data de Nascimento</th>
+										<th>Ver Editar</th>
+										<th>Ver Detalhes</th>
+
+									</tr>
+
+								</tfoot>
+
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<tr>
+									<th><a class="" th:href="@{/parametro/medicos/}">Registar Novo</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -25,16 +25,14 @@ import mz.ciuem.uclinica.service.parametro.UnidadesService;
 public class SectorController {
 
 	@Autowired
-	private UnidadesService unidadesService;
-	@Autowired
 	private SectorService sectorService;
 
 	@GetMapping(value = { "", "/", "add" })
 	private ModelAndView sector(Sector sector) {
 
 		
-		ModelAndView model = new ModelAndView("/parametros/add-sector");
-		
+		ModelAndView model = new ModelAndView("/parametros/sector/add-sector");
+		model.addObject("sectores", sectorService.getAll());
 		return model;
 	}
 
@@ -47,7 +45,7 @@ public class SectorController {
 		}
 		sectorService.saveOrUpdate(sector);
 		
-		String redirect = "redirect:/parametro/sector/";
+		String redirect = "redirect: "+sector.getId();
 		ModelAndView modelAndView = new ModelAndView(redirect);
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 		return modelAndView;
@@ -58,7 +56,7 @@ public class SectorController {
 		
 		Sector sector = sectorService.find(id);
 		
-		ModelAndView model = new ModelAndView("parametros/detalhes-sector", "sector", sector);
+		ModelAndView model = new ModelAndView("/parametros/sector/detalhes-sector", "sector", sector);
 		
 		return model;
 	}
@@ -68,7 +66,7 @@ public class SectorController {
 
 		List<Sector> sectores = sectorService.getAll();
 
-		ModelAndView modelAndView = new ModelAndView("/parametros/sectores");
+		ModelAndView modelAndView = new ModelAndView("/parametros/sector/sectores");
 		modelAndView.addObject("sectores", sectores);
 		return modelAndView;
 	}
@@ -77,9 +75,9 @@ public class SectorController {
 	public ModelAndView editar(@PathVariable Long id) {
 
 		Sector sector = sectorService.find(id);
-		List<Unidades> unidades = unidadesService.getAll();
-		ModelAndView model = new ModelAndView("/parametros/update-sector", "sector", sector);
-		model.addObject("unidades", unidades);
+	
+		ModelAndView model = new ModelAndView("/parametros/sector/update-sector", "sector", sector);
+		
 
 		return model;
 	}
@@ -93,9 +91,11 @@ public class SectorController {
 		}
 
 		sectorService.saveOrUpdate(sector);
-		ModelAndView model = new ModelAndView("redirect:/parametro/sector/list");
+		String redirect = "redirect: "+sector.getId();
+		ModelAndView modelAndView = new ModelAndView(redirect);
+		
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
-		return model;
+		return modelAndView;
 	}
 	
 

@@ -20,6 +20,7 @@ import mz.ciuem.uclinica.entity.consulta.Taxa;
 import mz.ciuem.uclinica.entity.parametro.Servico;
 import mz.ciuem.uclinica.entity.parametro.ServicoDaUnidade;
 import mz.ciuem.uclinica.entity.parametro.ServicoTipo;
+import mz.ciuem.uclinica.service.parametro.EspecialidadeService;
 import mz.ciuem.uclinica.service.parametro.SectorService;
 import mz.ciuem.uclinica.service.parametro.ServicoService;
 import mz.ciuem.uclinica.service.parametro.TaxasServie;
@@ -28,7 +29,6 @@ import mz.ciuem.uclinica.service.parametro.TipoServicoService;
 @Controller
 @RequestMapping("/parametro/servico")
 public class ServicoController {
-
 	@Autowired
 	private ServicoService servicoService;
 	@Autowired
@@ -39,13 +39,18 @@ public class ServicoController {
 	
 	@Autowired
 	private SectorService sectorService;
+	
+	@Autowired
+	private EspecialidadeService especialidadeService;
+	
 	private Servico servico;
 
 	@GetMapping(value = { "", "/", "add" })
 	public ModelAndView servicos(Servico servico) {
 
 		ModelAndView model = new ModelAndView("parametros/servico/add-servico");
-		
+		List<ServicoDaUnidade> tipoServicos = tipoServicoService.getAll();
+		model.addObject("tipos", tipoServicos);
 		inicializarForm(model);
 
 		return model;
@@ -53,7 +58,7 @@ public class ServicoController {
 
 	private void inicializarForm(ModelAndView model) {
 		model.addObject("servicos", servicoService.getAll());
-		model.addObject("servicoTipos",ServicoTipo.values());
+		model.addObject("especialidades",especialidadeService.getAll());
 	}
 
 	@PostMapping( value ={ "/add"})
@@ -111,7 +116,7 @@ public class ServicoController {
 	public ModelAndView editar(@Valid Servico servico, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
 		if (bindingResult.hasErrors()) {
-         System.err.println("Tem error");
+         System.err.println(bindingResult.toString());
 			return editar(servico.getId());
 		}
 
@@ -165,6 +170,7 @@ public class ServicoController {
 //		List<Servico> servicos = servicoService.getServicosComSuasTaxas();
 //		model.addObject("servicos",servicos);
 //	}
+	
 	
 	
 

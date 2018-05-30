@@ -24,7 +24,7 @@
 							<i class="fa fa-eye"></i> Detalhes do Estudante <small
 								class="pull-right"></small>
 						</h3>
-						
+
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
@@ -59,7 +59,7 @@
 											style="margin-right: 5px"></i><i
 											th:text="${estudante.apelido}"></i></td>
 									</tr>
-								    <tr>
+									<tr>
 										<td><b>Data de Nascimento:</b></td>
 										<td><i th:text="${estudante.dataDeNascimento}"></i></td>
 									</tr>
@@ -100,19 +100,19 @@
 										<td><i th:text="${estudante.estadoCivil}"></i></td>
 									</tr>
 									<td><b>Telefone</b></td>
-										<td><i th:text="${estudante.telefone}"></i></td>
+									<td><i th:text="${estudante.telefone}"></i></td>
 									</tr>
-									
+
 									<tr>
 										<td><b>Endereco:</b></td>
 										<td><i th:text="${estudante.endereco}"
 											style="margin-right: 5px"></i></td>
 									</tr>
-									
+
 								</table>
 
 							</div>
-							
+
 							<div class="col-sm-4 invoice-col">
 								<table>
 									<thead>
@@ -122,6 +122,11 @@
 										</tr>
 
 									</thead>
+
+									<tr>
+										<td><b>Faculdade </b></td>
+										<td><i th:text="${estudante.faculdade?.descricao}"></i></td>
+									</tr>
 
 									<tr>
 										<td><b>Curso </b></td>
@@ -146,11 +151,13 @@
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover">
 								<tr>
-									<th><a class="" th:href="@{/estudante/uem}">Registar Novo</a></th>
-									<th><a class="" th:href="@{/estudante/uem/{id}/update(id=${estudante.id})}">Editar</a></th>
-									<th><a class="" th:href="@{/estudante/uem/list}" >Listar
+									<th><a class="" th:href="@{/estudante/uem}">Registar
+											Novo</a></th>
+									<th><a class=""
+										th:href="@{/estudante/uem/{id}/update(id=${estudante.id})}">Editar</a></th>
+									<th><a class="" th:href="@{/estudante/uem/list}">Listar
 											todos</a></th>
-											
+
 								</tr>
 
 							</table>

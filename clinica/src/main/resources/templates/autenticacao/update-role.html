@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Actualização de Perfis</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Actualização de Perfis</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<form th:action="@{/roles/update}" th:object="${role}"
+									class="" method="post">
+
+									
+
+
+									<div class="form-group ">
+										<label for="nome">Designação do Perfil - Role Name</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('rolename')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{rolename}"></span>
+										</label> <input type="text" class="form-control" style="text-transform: uppercase" th:field="*{rolename}">
+									</div>
+
+
+
+									
+
+									<div class="form-group ">
+										<label for="permission">Permissions</label> <select required="required"
+											multiple="multiple" id = "permissions" name = "permissions"
+											class="form-control input-sm multiple-select">
+
+											<option th:each="permission : ${permissions}" th:value="${permission.id}"
+												th:text="${permission.authorization}" 
+												th:selected = "${role.permissions.contains(permission)}"
+												/>
+										</select>
+									</div>
+
+
+<input type="hidden" th:field = "*{id}">
+
+
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-success btn-sm  ">
+												<i class="fa fa-refresh fa-inverse" style="margin: 2px"></i>Actualizar
+											</button>
+
+											<a class="btn btn-default btn-sm"
+												th:href="@{/roles/list}"><i
+												class="fa fa-eye " style="margin: 2px"></i>Listar</a>
+
+
+
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

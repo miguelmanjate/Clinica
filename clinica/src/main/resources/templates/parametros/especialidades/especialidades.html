@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Especialidades</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+
+								<thead>
+									<tr>
+										<th>Codigo</th>
+										<th>Sigla</th>
+										<th>Descricao</th>
+										<th>Tipo de Servico</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="especialidade : ${especialidades}">
+										<td th:text="${especialidade.codigo}"></td>
+										<td th:text="${especialidade.sigla}"></td>
+
+
+										<td th:text="${especialidade.descricao}"></td>
+
+										<td th:text="${especialidade.servicoTipo}"></td>
+										<td><a
+											th:href="@{/parametro/especialidades/{id}/update(id=${especialidade.id})}"
+											class="delete btn btn-xs btn-default"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/especialidades/{id}/(id=${especialidade.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+<!-- 
+					<form action="#" th:action="@{/parametro/sector}" method="get">
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-default">
+								<i class="fa fa-times inverse" style="margin: 2px"></i> Registar
+								Nova
+							</button>
+
+						</div>
+					</form> -->
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

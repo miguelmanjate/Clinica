@@ -2,22 +2,30 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mz.ciuem.uclinica</groupId>
+	
+
+	
+	
 	<artifactId>clinica</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
+
+
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.2.RELEASE</version>
 	</parent>
+	
 	<properties>
 		<java.version>1.8</java.version>
 		<start-class>mz.ciuem.uclinica.conf.SpringBootWebApplication</start-class>
-		<thymeleaf.version>3.0.3.RELEASE</thymeleaf.version>
+		<thymeleaf.version>3.0.7.RELEASE</thymeleaf.version>
 		<thymeleaf-extras-java8time.version>3.0.0.RELEASE</thymeleaf-extras-java8time.version>
-		<thymeleaf-layout-dialect.version>2.2.0</thymeleaf-layout-dialect.version>
+		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
+		<thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,10 +35,11 @@
 
 		<!-- Integracao thymeleaf e Spring Security -->
 
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+<dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+</dependency>
 
 
 		<dependency>
@@ -58,12 +67,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-<!-- 		Remocao da dependencia de TomCat -->
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-tomcat</artifactId>
-		<scope>provided</scope>
-	</dependency>
+		<!-- Remocao da dependencia de TomCat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Depencia de para habilitar o modulo seguranca do Spring -->
 
@@ -71,16 +80,40 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+		<!-- JasperReport para criacao de relatorios -->
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.4.0</version>
+		</dependency>
+
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<!-- <dependency> -->
+		<!-- <groupId>net.sf.jasperreports</groupId> -->
+		<!-- <artifactId>jasperreports-fonts</artifactId> -->
+		<!-- <version>6.0.0</version> -->
+		<!-- </dependency> -->
+
 		<!-- <dependency> -->
 		<!-- <groupId>org.springframework.boot</groupId> -->
 		<!-- <artifactId>spring-boot-starter-data-cassandra</artifactId> -->
 		<!-- </dependency> -->
 
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.scala-lang</groupId> -->
-<!-- 			<artifactId>scala-library</artifactId> -->
-<!-- 			<version>2.11.0</version> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.scala-lang</groupId> -->
+		<!-- <artifactId>scala-library</artifactId> -->
+		<!-- <version>2.11.0</version> -->
+		<!-- </dependency> -->
 	</dependencies>
 	<build>
 		<plugins>

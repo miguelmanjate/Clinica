@@ -44,10 +44,9 @@
 									</div>
 
 									<div class="form-group">
-										<label for="nome">Nome</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('nome')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{nome}"></span>
+										<label for="nome">Nome</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('nome')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{nome}"></span>
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nome}">
 									</div>
@@ -63,7 +62,7 @@
 											class="form-control input-sm" th:field="*{dataDeNascimento}">
 									</div>
 
-                                   <div class="form-group">
+									<div class="form-group">
 										<label for="nomeDoPai">Nome do Pai</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDoPai')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -71,9 +70,9 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDoPai}">
 									</div>
-                                    
-									
-                                    <div class="form-group">
+
+
+									<div class="form-group">
 										<label for="nomeDaMae">Nome da mae</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDaMae')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -81,8 +80,8 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDaMae}">
 									</div>
-									
-								   <div class="form-group">
+
+									<div class="form-group">
 										<label for="numeroBi">Nº de BI</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('numeroBi')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -90,7 +89,7 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{numeroBi}">
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="genero">Género</label> <select
 											th:field="*{genero}" class="form-control input-sm">
@@ -103,7 +102,7 @@
 
 								<!-- Segundo bloco do formulario -->
 								<div class="col-md-6">
-									
+
 									<div class="form-group ">
 										<label for="estadoCivil">Estado Civil</label> <select
 											th:field="*{estadoCivil}" class="form-control input-sm">
@@ -111,7 +110,7 @@
 												th:value="${estadoCivil}" th:text="${estadoCivil}" />
 										</select>
 									</div>
-									
+
 									<div class="form-group">
 										<label for="telefone">Telefone</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('telefone')}">
@@ -130,66 +129,75 @@
 										</label> <input type="text" class="form-control"
 											th:field="*{endereco}">
 									</div>
-								
-                                   <div class="form-group ">
-										<label for="curso">Curso</label> <select
-											th:field="*{curso.id}" class="form-control input-sm">
-											<option th:each="curso : ${cursos}"
-												th:value="${curso.id}" th:text="${curso.descricao}" />
+
+									<div class="form-group ">
+										<label for="especialidade">Faculdades</label> <select
+											th:field="*{faculdade.id}"
+											class="form-control input-sm multiple-select select">
+											<option th:each="faculdade : ${faculdades}"
+												th:value="${faculdade.id}" th:text="${faculdade.descricao}" />
 										</select>
 									</div>
-																		
+
 									<div class="form-group ">
-										<label for="ano">Ano</label> <select
-											th:field="*{ano}" class="form-control input-sm">
+										<label for="curso">Cursos</label> <select
+											th:field="*{curso.id}"
+											class="form-control input-sm multiple-select cursos">
+
+										</select>
+									</div>
+
+									<div class="form-group ">
+										<label for="ano">Ano</label> <select th:field="*{ano}"
+											class="form-control input-sm">
 											<option th:each="ano : ${anos}" th:value="${ano}"
 												th:text="${ano}" />
 										</select>
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="semestre">Semestre</label> <select
 											th:field="*{semestre}" class="form-control input-sm">
-											<option th:each="semestre : ${semestres}" th:value="${semestre}"
-												th:text="${semestre}" />
+											<option th:each="semestre : ${semestres}"
+												th:value="${semestre}" th:text="${semestre}" />
 										</select>
 									</div>
 
-									</div>
-                                 
-									<div class="box-footer">
-										<div>
-											<button type="submit" class="btn btn-primary  ">
-												<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
-											</button>
-
-											<a class="btn btn-default" th:href="@{/estudante/uem/list}"><i
-												class="fa fa-eye" style="margin: 2px"></i>Listar</a> 
-											<a class="btn btn-danger" th:href="@{/estudante/uem/list}">
-											<i class="fa fa-times" style="margin: 2px"></i>
-												Cancelar </a>
-										</div>
-                                      <input type="hidden" th:field="*{id}" />
-                                       <input type="hidden" th:field="*{raca}" />
-                                       <input type="hidden" th:field="*{naturalidade}" />
-                                       <input type="hidden" th:field="*{email}" />
-                                       <input type="hidden" th:field="*{telefoneAlternativo}" />
-                                       <input type="hidden" th:field="*{tipoDePaciente}" />
-                                       <input type="hidden" th:field="*{nid}" />
-									</div>
-									</form>
 								</div>
-		
+
+								<div class="box-footer">
+									<div>
+										<button type="submit" class="btn btn-primary  ">
+											<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
+										</button>
+
+										<a class="btn btn-default" th:href="@{/estudante/uem/list}"><i
+											class="fa fa-eye" style="margin: 2px"></i>Listar</a> <a
+											class="btn btn-danger" th:href="@{/estudante/uem/list}">
+											<i class="fa fa-times" style="margin: 2px"></i> Cancelar
+										</a>
+									</div>
+									<input type="hidden" th:field="*{id}" /> <input type="hidden"
+										th:field="*{raca}" /> <input type="hidden"
+										th:field="*{naturalidade}" /> <input type="hidden"
+										th:field="*{email}" /> <input type="hidden"
+										th:field="*{telefoneAlternativo}" /> <input type="hidden"
+										th:field="*{tipoDePaciente}" /> <input type="hidden"
+										th:field="*{nid}" />
+								</div>
+							</form>
 						</div>
 
 					</div>
-					<!-- /.box-body -->
-
 
 				</div>
-				<!-- /.box -->
-			</div>
+				<!-- /.box-body -->
 
+
+			</div>
+			<!-- /.box -->
 		</div>
+
+	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package mz.ciuem.uclinica.controller.parametro;
 
 import java.text.ParseException;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,34 +16,49 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import mz.ciuem.uclinica.entity.consulta.Especialidade;
 import mz.ciuem.uclinica.entity.consulta.Medico;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
-import mz.ciuem.uclinica.entity.paciente.Paciente;
 import mz.ciuem.uclinica.entity.paciente.Raca;
 import mz.ciuem.uclinica.entity.paciente.TipoDocumento;
 import mz.ciuem.uclinica.service.consulta.MedicoService;
+import mz.ciuem.uclinica.service.parametro.EspecialidadeService;
+import mz.ciuem.uclinica.service.parametro.SectorService;
 
 @Controller
-@RequestMapping("/parametro/medico")
+@RequestMapping("/parametro/medicos")
 public class MedicoController {
 	
 	@Autowired
 	private MedicoService medicoService;
+	
+	@Autowired
+	private EspecialidadeService especialidadeService;
+	
+	@Autowired
+	private SectorService sectorService;
+
+	private List<Medico> medicos;
 	
 	@GetMapping(value = {"","/"})
 	
 	public ModelAndView addMedico(Medico medico){
 		
 		ModelAndView modelAndView = new ModelAndView("/parametros/medico/add-medico");
-		modelAndView.addObject("especialidade", Especialidade.values());
-		modelAndView.addObject("medicos", medicoService.getAll());
+		inicialiarFormulario(modelAndView);
+
 		
 		return modelAndView;
 	}
+
+	private void inicialiarFormulario(ModelAndView modelAndView) {
+		modelAndView.addObject("especialidades", especialidadeService.getAll());
+		modelAndView.addObject("sectores", sectorService.getAll());
+		modelAndView.addObject("genero", Genero.values());
+		modelAndView.addObject("estadoCivil", EstadoCivil.values());
+	}
 	
-	@PostMapping(value = {"","/"})
+	@PostMapping(value = {"/add","/add/"})
 	public ModelAndView gravarMedico(@Valid Medico medico, BindingResult bindingResult, RedirectAttributes redirectAttributes){
 		
 		if (bindingResult.hasErrors()) {
@@ -51,11 +67,35 @@ public class MedicoController {
 			
 		}
 		medicoService.saveOrUpdate(medico);
-		ModelAndView model = new ModelAndView("redirect:/parametro/medico");
+		ModelAndView model = new ModelAndView("redirect:/parametro/medicos/"+medico.getId());
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 		return model;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = { "/list", "/list/" })
+	public ModelAndView listar() {
+
+		medicos = medicoService.getAll();
+		
+	    return exibirPacientes();
+	}
+
+	private ModelAndView exibirPacientes() {
+
+		ModelAndView modelAndView = new ModelAndView("/parametros/medico/list-medico");
+		modelAndView.addObject("medicos", medicos);
+		return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = { "/{id}", "/{id}/" })
+	public ModelAndView detalhes(@PathVariable Long id) {
+
+		Medico medico = medicoService.find(id);
+		ModelAndView model = new ModelAndView("/parametros/medico/detalhes-medico", "medico", medico);
+
+		return model;
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}/update")
 	public ModelAndView editar(@PathVariable Long id) throws ParseException {
 
@@ -63,8 +103,7 @@ public class MedicoController {
 
 		
 		ModelAndView model = new ModelAndView("/parametros/medico/update-medico", "medico", medico);
-		model.addObject("especialidade", Especialidade.values());
-		model.addObject("medicos", medicoService.getAll());
+		inicialiarFormulario(model);
 
 		return model;
 	}
@@ -74,15 +113,16 @@ public class MedicoController {
  
 		if (bindingResult.hasErrors()) {
 
-			System.out.println("Ocorreu um erro durante o registo de pacientes!");
+			addMedico(new Medico());
 
 		}
-	
-		medicoService.saveOrUpdate(medico);
-		ModelAndView model = new ModelAndView("redirect:/parametro/medico");
+		
+		medicoService.update(medico);
+		ModelAndView model = new ModelAndView("redirect:/parametro/medicos/"+medico.getId());
 		redirectAttributes.addFlashAttribute("messageVisible", "true");
 
 		return model;
 	}
-
+	
+	
 }

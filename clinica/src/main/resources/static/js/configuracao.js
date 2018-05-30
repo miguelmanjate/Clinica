@@ -27,4 +27,96 @@ $(function() {
 	
 	
 	$(".multiple-select").chosen();
+	
+	
+	dataTablePreviouAndNextSpace();
+
+	$(".select").change(function() {
+		sendAjaxRequest();
+		
+		//alert(url);
+	});
+	
+	$(".select").chosen("destroy");
+	
+	$(".select").append('<option value="Selecione" selected="selected" disabled>Select an Option</option>');
+	$(".select").chosen();
+	
+	validatePass();
 });
+
+function validatePass(){
+	
+    $('.save-btn').click(function(event){
+    	
+    	 $("#label-min-senha").css("display", "none");
+    	 $("#label-min-senha-confirm").css("display", "none");
+	    
+        data = $('#password').val();
+        var len = data.length;
+        
+        if(len < 5) {
+            $("#label-min-senha").css("display", "block");
+            $("#password").val('');
+            $("#confirmpassword").val('');
+            event.preventDefault();
+            
+            return;
+        }
+         
+        if($('#password').val() != $('#confirmpassword').val()) {
+        	 $("#label-min-senha-confirm").css("display", "block");
+        	 $("#password").val('');
+             $("#confirmpassword").val('');
+            event.preventDefault();
+            return;
+        }
+        	
+        	$(".form").submit();
+       
+         
+    });
+}
+
+function sendAjaxRequest() {
+	
+	var url = $(location).attr('href');
+
+
+	var select = $(".select");
+	var cursosSelect = $(".cursos");
+	cursosSelect.chosen("destroy");
+	
+	var selected = select.find(":selected").text();
+
+	$.get(url+"/cursos?faculdade=" + selected, function(data) {
+		cursosSelect.empty();
+
+		$.each(data, function(key, value) {
+			cursosSelect.append('<option value=' + value.id + '>' + value.descricao
+					+ '</option>');
+		});
+
+		cursosSelect.chosen();
+
+	});
+	
+}
+
+function dataTablePreviouAndNextSpace() {
+
+	$(".paginate_disabled_previous").css({
+		"margin-right" : "40px",
+		"margin-top" : "10px"
+	});
+
+	$(".paginate_disabled_next").css({
+		"margin-right" : "40px",
+		"margin-top" : "10px"
+	});
+	$(".dataTables_paginate").css({
+		"margin-top" : "20px",
+		"margin-bottom" : "20px",
+		"font-weight" : "bold"
+	});
+}

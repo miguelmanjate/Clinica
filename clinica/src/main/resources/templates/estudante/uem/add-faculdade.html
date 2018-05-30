@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Registo de Perfis</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Registo de Perfis (Roles)</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<form th:action="@{/faculdade/add}" th:object="${faculdade}"
+									class="" method="post">
+
+									<div class="form-group ">
+										<label for="nome">Descrição da Faculdade</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('descricao')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{descricao}"></span>
+										</label> <input type="text" class="form-control"  th:field="*{descricao}">
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary btn-sm  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

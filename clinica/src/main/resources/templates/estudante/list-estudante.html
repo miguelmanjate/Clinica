@@ -31,6 +31,7 @@
 									<tr>
 										<th>Nome </th>
 										<th>Data de Nascimento</th>
+										<th>Faculdade</th>
 										<th>Curso</th>
 										<th>Ano</th>
 										<th>Semestre</th>
@@ -47,6 +48,7 @@
 										
 										<td th:text="${estudante.nome}"></td>
 										<td th:text="${estudante.dataDeNascimento}"></td>
+										<td th:text="${estudante.faculdade?.descricao}"></td>
 										<td th:text="${estudante.curso?.descricao}"></td>
 										<td th:text="${estudante.ano}"></td>
 										<td th:text="${estudante.semestre}"></td>
@@ -74,6 +76,7 @@
 									<tr>
 						             	<th>Nome </th>
 										<th>Data de Nascimento</th>
+										<th>Faculdade</th>
 										<th>Curso</th>
 										<th>Ano</th>
 										<th>Semestre</th>

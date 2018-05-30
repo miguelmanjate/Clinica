@@ -23,12 +23,12 @@ import mz.ciuem.uclinica.entity.GenericEntity;
 @Access(AccessType.FIELD)
 public class Permission extends GenericEntity implements GrantedAuthority {
 
-	@Column(name = "autorizacao")
+	@Column(name = "autorizacao", updatable = false)
 	@Enumerated(EnumType.STRING)
 	private Authorization authorization;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
-	private List<Role> roles;;
+	private List<Role> roles;
 
 	@Override
 	public String getAuthority() {
@@ -41,6 +41,7 @@ public class Permission extends GenericEntity implements GrantedAuthority {
 
 	public void setAuthorization(Authorization authorization) {
 		this.authorization = authorization;
+		
 	}
 
 	public List<Role> getRoles() {

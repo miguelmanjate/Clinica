@@ -23,7 +23,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img th:src="@{/img/avatar3.png}" class="img-circle"
+						<img th:src="@{/img/avatar.png}" class="img-circle"
 							alt="User Image" />
 					</div>
 					<div class="pull-left info">
@@ -51,63 +51,111 @@
 				<ul class="sidebar-menu">
 
 
-					<li class="treeview"><a href=""> <i
-							class="fa fa-bar-chart-o"></i> <span>Gestão de Consultas</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<li class="treeview"
+						sec:authorize="hasAnyRole('ROLE_AGENDAR_CONSULTA','ROLE_LISTAR_CONSULTA')"><a
+						href=""> <i class="fa fa-bar-chart-o"></i> <span>Gestão
+								de Consultas</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/paciente/procurar}"><i
-									class="fa fa-plus"></i>Agendar Nova</a></li>
+							<li sec:authorize="hasRole('ROLE_AGENDAR_CONSULTA')"><a
+								th:href="@{/paciente/procurar}"><i class="fa fa-plus"></i>Agendar
+									Nova</a></li>
 
-							<li><a th:href="@{/consulta/list}"><i
-									class="fa fa-list"></i>Listar Consultas</a></li>
+							<li sec:authorize="hasRole('ROLE_LISTAR_CONSULTA')"><a
+								th:href="@{/consulta/list}"><i class="fa fa-list"></i>Listar
+									Consultas</a></li>
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i
-							class="fa fa-bar-chart-o"></i> <span>Gestão de Pacientes</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<li class="treeview"
+						sec:authorize="hasAnyRole('ROLE_REGISTAR_PACIENTE_COMUN','ROLE_REGISTAR_PACIENTE_FUNC',
+					'ROLE_REGISTAR_PACIENTE_EST','ROLE_PESQUISAR_PACIENTE','ROLE_LISTAR_PACIENTE')"><a
+						href=""> <i class="fa fa-bar-chart-o"></i> <span>Gestão
+								de Pacientes</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/paciente}"><i class="fa fa-plus"></i>Paciente
-									Geral</a></li>
-							<li><a th:href="@{/funcionario/uem/list}"><i
-									class="fa fa-plus"></i>Paciente Funcionario</a></li>
-							<li><a th:href="@{/estudante/uem/list}"><i
-									class="fa fa-plus"></i>Paciente Estudante</a></li>
+							<li sec:authorize="hasRole('ROLE_REGISTAR_PACIENTE_COMUN')"><a
+								th:href="@{/paciente}"><i class="fa fa-plus"></i>Paciente
+									Comun</a></li>
+							<li sec:authorize="hasRole('ROLE_REGISTAR_PACIENTE_FUNC')"><a
+								th:href="@{/funcionario/uem/list}"><i class="fa fa-plus"></i>Paciente
+									Funcionario</a></li>
+							<li sec:authorize="hasRole('ROLE_REGISTAR_PACIENTE_EST')"><a
+								th:href="@{/estudante/uem/list}"><i class="fa fa-plus"></i>Paciente
+									Estudante</a></li>
 
-							<li><a th:href="@{/paciente/list}"><i class="fa fa-list"></i>Listar</a></li>
+							<li sec:authorize="hasRole('ROLE_LISTAR_PACIENTE')"><a
+								th:href="@{/paciente/list}"><i class="fa fa-list"></i>Listar</a></li>
 
-							<li><a th:href="@{/paciente/procurar}"><i
-									class="fa fa-search"></i>Pesquisar</a></li>
+							<li sec:authorize="hasRole('ROLE_PESQUISAR_PACIENTE')"><a
+								th:href="@{/paciente/procurar}"><i class="fa fa-search"></i>Pesquisar</a></li>
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i
-							class="fa fa-bar-chart-o"></i> <span>Gestão de Serviços</span> <i
-							class="fa fa-angle-left pull-right"></i>
+					<!-- Menu de Gestão de Serviços inicia aqui -->
+					<li class="treeview"
+						sec:authorize="hasRole('ROLE_REGISTAR_SERVICO')"><a href="">
+							<i class="fa fa-bar-chart-o"></i> <span>Gestão de Serviços</span>
+							<i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
 							<li><a th:href="@{/parametro/servico/add}"><i
 									class="fa fa-plus"></i>Novo Serviço</a></li>
+							<li><a><i class="fa fa-plus"></i>Listar Serviços</a></li>
 
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i class="fa fa-key"></i>
-							<span>Gestão de Utilizador</span> <i
+					<!-- Menu de Parametrização inicia aqui -->
+
+					<li class="treeview"><a href=""> <i
+							class="fa fa-bar-chart-o"></i> <span>Parametrização</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/autenticacao/utilizador}"><i
-									class="fa fa-users"></i>Registar Novo</a></li>
+							<li><a th:href="@{/parametro/especialidades}"><i
+									class="fa fa-angle-double-right"></i>Gestão de Especialidade</a></li>
+							<li><a th:href="@{/parametro/sector}"><i
+									class="fa fa-angle-double-right"></i>Registo de Sectores</a></li>
+							<li><a><i class="fa fa-plus"></i>Parametros</a></li>
 
-							<li><a><i class="fa fa-eye"></i>Pesquisar</a></li>
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i class="fa fa-dollar"></i>
-							<span>Finanças</span> <i class="fa fa-angle-left pull-right"></i>
+					<!-- Menu de Gestão de Utilizadores inicia aqui -->
+
+					<li class="treeview"
+						sec:authorize="hasAnyRole('ROLE_REGISTAR_UTILIZADOR', 'ROLE_LISTAR_UTILIZADOR', 'ROLE_REGISTAR_PERFIL'
+					, 'ROLE_LISTAR_PERFIL')"><a
+						href=""> <i class="fa  fa-list-ul"></i> <span>Gestão de
+								Utilizadores</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/consulta/listAgendadas}"><i class="fa fa-list"></i>Listar Consultas</a></li>
-                            <li><a th:href="@{/factura/list/recibos}"><i class="fa fa-list"></i>Listar Recibos</a></li>
+							<li sec:authorize="hasRole('ROLE_REGISTAR_UTILIZADOR')"><a
+								th:href="@{/utilizadores}"><i class="fa fa-plus"></i>Registar
+									Novo</a></li>
+
+							<li sec:authorize="hasRole('ROLE_LISTAR_UTILIZADOR')"><a
+								th:href="@{/utilizadores/list}"><i
+									class="fa fa-angle-double-right"></i>Listar Utilizadores</a></li>
+
+							<li sec:authorize="hasRole('ROLE_REGISTAR_PERFIL')"><a
+								th:href="@{/roles}"><i class="fa fa-angle-double-right"></i>Registar
+									Perfil - Role</a></li>
+							<li sec:authorize="hasRole('ROLE_LISTAR_PERFIL')"><a
+								th:href="@{/roles/list}"><i class="fa fa-angle-double-right"></i>Listar
+									perfis</a></li>
+						</ul></li>
+
+
+					<li class="treeview"
+						sec:authorize="hasAnyRole('ROLE_LISTAR_CONSULTA','ROLE_LISTAR_RECIBOS')"><a
+						href=""> <i class="fa fa-dollar"></i> <span>Finanças</span> <i
+							class="fa fa-angle-left pull-right"></i>
+					</a>
+						<ul class="treeview-menu">
+							<li sec:authorize="hasRole('ROLE_LISTAR_CONSULTA')"><a
+								th:href="@{/consulta/listAgendadas}"><i class="fa fa-list"></i>Listar
+									Consultas</a></li>
+							<li sec:authorize="hasRole('ROLE_LISTAR_RECIBOS')"><a
+								th:href="@{/factura/list/recibos}"><i class="fa fa-list"></i>Listar
+									Recibos</a></li>
 						</ul></li>
 
 					<li class="treeview"><a href=""> <i class="fa fa-users"></i>
@@ -115,14 +163,13 @@
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">
-							<li><a th:href="@{/parametro/medico}"><i
+							<li><a th:href="@{/parametro/medicos}"><i
 									class="fa fa-plus"></i>Novo Médico</a></li>
-									
-							<li><a ><i
-									class="fa fa-eye"></i>Ver Consultas</a></li>
+
+							<li><a><i class="fa fa-eye"></i>Ver Consultas</a></li>
 
 						</ul></li>
-						
+
 					<li class="treeview"><a href=""> <i class="fa fa-flask"></i>
 							<span>Laboratorios</span> <i class="fa fa-angle-left pull-right"></i>
 					</a>
@@ -131,8 +178,9 @@
 
 						</ul></li>
 
-					<li class="treeview"><a href=""> <i class="fa fa-sun-o"></i>
-							<span>Configuração da UEM</span> <i
+					<li class="treeview"
+						sec:authorize="hasRole('ROLE_CONFIGURACAO_UEM')"><a href="">
+							<i class="fa fa-sun-o"></i> <span>Configuração da UEM</span> <i
 							class="fa fa-angle-left pull-right"></i>
 					</a>
 						<ul class="treeview-menu">

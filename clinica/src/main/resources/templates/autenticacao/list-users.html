@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Lista de Utilizadores</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Utilizadores</h3>
+					</div>
+
+
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="message-update-user" th:if="${message_update_user}">
+
+						</div>
+						<div class="message-save-user" th:if="${message_save_user}">
+
+						</div>
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Nome do Utilizador</th>
+										<th>Username</th>
+										<th>Telefone</th>
+										<th>Está activo?</th>
+										<th>Perfil</th>
+										<th>Data de Registo</th>
+
+										<th>Edita</th>
+
+
+
+
+
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="user :${users}">
+										<td th:text="${user.nome}"></td>
+										<th><i th:text="${user.username}"></i></th>
+										<td th:text="${user.telefone}"></td>
+										<td><input type="checkbox" checked="${user.enabled}" />
+										</td>
+										<td>
+											<ul th:each="role :${user.roles}">
+
+												<li th:text="${role?.rolename}"></li>
+
+
+											</ul>
+										</td>
+
+<td>
+<i th:text = "${user.created}"></i>
+</td>
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/utilizadores/{id}/update(id=${user.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										
+
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Nome do Utilizador</th>
+										<th>Username</th>
+										<th>Telefone</th>
+										<th>Está activo?</th>
+										<th>Perfil</th>
+										<th>Data de Registo</th>
+										<th>Edita</th>
+
+
+
+
+
+									</tr>
+
+								</tfoot>
+
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+								<tr>
+									<th><a class="" th:href="@{/utilizadores/}">Registar
+											Novo</a></th>
+
+								</tr>
+
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

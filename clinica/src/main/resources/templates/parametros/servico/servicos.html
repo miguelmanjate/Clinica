@@ -22,8 +22,8 @@
 				<div class="box box-success">
 					<div class="box-header">
 						<h3 class="box-title">Pesquisa de Serviços</h3>
-						
-						
+
+
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
@@ -35,51 +35,62 @@
 
 						<div class="box-body table-responsive no-padding">
 							<table class="table table-hover table-striped data-table">
-										<thead>
-											<tr>
-												<th>Designação</th>
-												<th>Serviço do Tipo</th>
-												<th>Preço</th>
-												<th>Editar</th>
-												<th>Detalhes</th>
-													
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="servico :${servicos}">
-												
-												<td th:text="${servico.designacao}"></td>
-												<td th:text="${servico.servicoTipo}"></td>
-												<td th:text="${servico.preco}"></td>
+								<thead>
+									<tr>
+										<th>Código</th>
+										<th>Descrição</th>
+										<th>Especialidade</th>
+										<th>Sector</th>
+										<th>Tipo</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
+										<th>Taxas</th>
 
-												<td><a class="delete btn btn-xs btn-default"
-													th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
-														class="fa fa-edit" style="margin: 2px"></i></a></td>
-														
-												<td><a class="delete btn btn-xs btn-default"
-													th:href="@{/parametro/servico/{id}/(id=${servico.id})}"><i
-														class=" fa fa-eye" style="margin: 2px"></i></a></td>
-				
-											</tr>
-										</tbody>
 
-									</table>
-						</div>
-						
-						
-					</div>
-					<!-- /.box-body -->
-	<div class="box-footer">
-							<table class="table ">
-								<tr>
-									<th><a class="" th:href="@{/parametro/servico/add}">Registar Novo</a></th>
-									
-								</tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="servico :${servicos}">
+										<td th:text="${servico.codigo}"></td>
 
+										<td th:text="${servico.descricao}"></td>
+										<td th:text="${servico?.especialidade?.descricao}"></td>
+										<td th:text="${servico?.especialidade?.sector?.descricao}"></td>
+										<td th:text="${servico?.especialidade?.servicoTipo}"></td>
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/update(id=${servico.id})}"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/(id=${servico.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/servico/{id}/taxas(id=${servico.id})}"><i
+												class=" fa fa-dollar" style="margin: 2px"></i>Configurar</a></td>
+									</tr>
+								</tbody>
 
 							</table>
 						</div>
-		
+
+
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<table class="table ">
+							<tr>
+								<th><a class="" th:href="@{/parametro/servico/add}">Registar
+										Novo</a></th>
+								<th><a class="" th:href="@{/parametro/servico/list}">Listar
+										Todos</a></th>
+
+							</tr>
+
+
+						</table>
+					</div>
+
 				</div>
 			</div>
 

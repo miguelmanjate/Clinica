@@ -12,19 +12,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.ciuem.uclinica.entity.estudante.Ano;
+import mz.ciuem.uclinica.entity.estudante.CursoJson;
 import mz.ciuem.uclinica.entity.estudante.Estudante;
 import mz.ciuem.uclinica.entity.estudante.Semestre;
-import mz.ciuem.uclinica.entity.funcionario.Funcionario;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
 import mz.ciuem.uclinica.entity.paciente.Raca;
 import mz.ciuem.uclinica.entity.paciente.TipoDePaciente;
 import mz.ciuem.uclinica.service.parametro.CursoService;
 import mz.ciuem.uclinica.service.parametro.EstudanteService;
+import mz.ciuem.uclinica.service.parametro.FaculdadeService;
 
 @Controller
 @RequestMapping("/estudante/uem")
@@ -36,19 +39,27 @@ public class EstudanteController {
 	@Autowired
 	private CursoService cursoService;
 	
+	@Autowired
+	private FaculdadeService faculdadeService;
+	
 	@GetMapping(value ={"", "/", "add"})
 	private ModelAndView estudante(Estudante estudante){
 		
 		ModelAndView model = new ModelAndView("estudante/add-estudante");
+		
+		return preencher(model);
+	}
+	
+	private ModelAndView preencher(ModelAndView model){
+		
 		model.addObject("estadoCivil", EstadoCivil.values());
 		model.addObject("genero", Genero.values());
 		model.addObject("anos", Ano.values());
 		model.addObject("semestres", Semestre.values());
-		model.addObject("cursos", cursoService.getAll());
+		model.addObject("faculdades", faculdadeService.getAll());
 		
 		return model;
 	}
-	
 	
 	@PostMapping(value ={"/add"})
 	public ModelAndView addestudantes(@Valid Estudante estudante , BindingResult bindingResult,
@@ -97,13 +108,9 @@ public class EstudanteController {
 		Estudante estudante = estudanteService.find(id);
 		
 		ModelAndView model = new ModelAndView("/estudante/update-estudante", "estudante", estudante);
-		model.addObject("estadoCivil", EstadoCivil.values());
-		model.addObject("genero", Genero.values());
-		model.addObject("anos", Ano.values());
-		model.addObject("semestres", Semestre.values());
-		model.addObject("cursos", cursoService.getAll());
 
-		return model;
+
+		return preencher(model);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
@@ -159,6 +166,14 @@ public class EstudanteController {
 
 		return modelandview;
 		
+	}
+	
+	@RequestMapping(value = {"/cursos", "/{id}/update/cursos"})
+	
+	public @ResponseBody List<CursoJson> getCursoPorFaculdade(@RequestParam String faculdade){
+		List<CursoJson> cursos = cursoService.getTodosCursosDaFaculdade(faculdade);
+		
+		return cursos;
 	}
 
 }

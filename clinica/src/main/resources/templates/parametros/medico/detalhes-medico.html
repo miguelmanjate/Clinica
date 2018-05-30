@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Detalhes do Medico</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+
+
+		<div class="row">
+			<!-- left column -->
+
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">
+							<i class="fa fa-eye"></i> Detalhes do Registo do Medico <small
+								class="pull-right"></small>
+						</h3>
+
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row ">
+							<div class="col-md-8">
+								<div class="msg1-medico" th:if="${messageVisible}"></div>
+							</div>
+						</div>
+						<!-- info row -->
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Nome completo:</b></td>
+										<td><i th:text="${medico.nome}" style="margin-right: 5px"></i><i
+											th:text="${medico.apelido}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Naturalidade:</b></td>
+										<td><i th:text="${medico.naturalidade}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Genero:</b></td>
+										<td><i th:text="${medico.genero}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Estado Civil:</b></td>
+										<td><i th:text="${medico.estadoCivil}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Email</b></td>
+										<td><i th:text="${medico.email}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Nº de BI</b></td>
+										<td><i th:text="${medico.numeroDeBi}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Endereco:</b></td>
+										<td><i th:text="${medico.endereco}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Data:</b></td>
+										<td><i th:text="${medico.dataDeNascimento}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Codigo:</b></td>
+										<td><i th:text="${medico.codigo}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+
+									<tr>
+										<td><b>Telefone Princial:</b></td>
+										<td><i th:text="${medico.telefonePrincipal}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Telefone Alternativo:</b></td>
+										<td><i th:text="${medico.telefoneAlternativo}"></i></td>
+									</tr>
+ 									<tr>
+										<td><b>Sector</b></td>
+										<td><i th:text="${medico.especialidade?.sector?.descricao}"></i></td>
+									</tr> 
+
+									<tr>
+										<td><b>Especialidade</b></td>
+										<td><i th:text="${medico.especialidade?.descricao}"></i></td>
+									</tr>
+
+
+								</table>
+
+							</div>
+						</div>
+						
+						
+						<div class="box-footer">
+							<div class="box-body table-responsive no-padding">
+
+								<a th:href="@{/parametro/medicos/}"class="btn btn-primary"> <i
+									class="fa fa-plus" style="margin-right: 2px"></i>Registar
+								</a> <a th:href="@{/parametro/medicos/{id}/update(id=${medico.id})}"
+									class="btn btn-default"> <i class="fa fa-retweet"
+									style="margin-right: 2px"></i>Editar
+								</a> <a th:href="@{/parametro/medicos/list}" class="btn btn-default">
+									<i class="fa fa-eye" style="margin-right: 2px"></i>Listar
+								</a>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

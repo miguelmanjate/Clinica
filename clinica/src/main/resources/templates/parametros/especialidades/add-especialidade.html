@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Parâmetros: Registo de Especialidades</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="">
+
+							<form action="#" th:object="${especialidade}" class=""
+								th:action="@{/parametro/especialidades/add}" method="post">
+
+								<div class="mgs" th:if="${messageVisible}"></div>
+								<div class="row">
+									<div class="col-md-5">
+
+										<div class="form-group">
+											<label for="codigo">Codigo da Especialidade</label> <label
+												class="text-danger" th:if="${#fields.hasErrors('codigo')}">
+												<i class="fa fa-times-circle-o"></i> <span
+												th:errors="*{codigo}"></span>
+											</label> <input type="text" class="form-control" required="required"
+												th:field="*{codigo}">
+										</div>
+
+										<div class="form-group">
+											<label for="designacao">Descricao </label> <label
+												class="text-danger"
+												th:if="${#fields.hasErrors('descricao')}"> <i
+												class="fa fa-times-circle-o"></i> <span
+												th:errors="*{descricao}"></span>
+											</label> <input type="text" class="form-control" required="required"
+												th:field="*{descricao}">
+										</div>
+										<div class="form-group">
+											<label for="sigla">Sigla</label> <label class="text-danger"
+												th:if="${#fields.hasErrors('sigla')}"> <i
+												class="fa fa-times-circle-o"></i> <span th:errors="*{sigla}"></span>
+											</label> <input type="text" class="form-control" th:field="*{sigla}">
+										</div>
+
+									</div>
+
+									<div class="col-md-5">
+
+
+										<div class="form-group">
+											<label for="sigla">Tipo</label> <label class="text-danger"
+												th:if="${#fields.hasErrors('servicoTipo')}"> <i
+												class="fa fa-times-circle-o"></i> <span th:errors="*{sigla}"></span>
+											</label> <select th:field="*{servicoTipo}"
+												class="form-control multiple-select">
+												<option th:each="servicoTipo : ${servicoTipos}"
+													th:value="${servicoTipo}" th:text="${servicoTipo}" />
+											</select>
+										</div>
+										<div class="form-group ">
+											<label for="sector">Sector</label> <select
+												th:field="*{sector.id}"
+												class="form-control input-sm multiple-select">
+												<option th:each="sector : ${sectores}"
+													th:value="${sector.id}" th:text="${sector.descricao}" />
+											</select>
+										</div>
+
+									</div>
+								</div>
+
+								<div class="box-footer">
+									<div>
+										<button type="submit" class="btn btn-primary  ">
+											<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+										</button>
+
+										<a class="btn btn-default" th:href="@{/parametro/sector/list}"><i
+											class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+
+
+									</div>
+
+
+								</div>
+							</form>
+
+
+
+						</div>
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+
+								<thead>
+									<tr>
+										<th>Codigo</th>
+										<th>Sigla</th>
+										<th>Descricao</th>
+										<th>Tipo</th>
+
+										<th>Editar</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="especialidade : ${especialidades}">
+										<td th:text="${especialidade.codigo}"></td>
+										<td th:text="${especialidade.sigla}"></td>
+
+
+										<td th:text="${especialidade.descricao}"></td>
+
+										<td th:text="${especialidade.servicoTipo}"></td>
+
+
+										<td><a
+											th:href="@{/parametro/especialidades/{id}/update(id=${especialidade.id})}"
+											class="delete btn btn-xs btn-default"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										<td><a class="delete btn btn-xs btn-default"
+											th:href="@{/parametro/especialidades/{id}/(id=${especialidade.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

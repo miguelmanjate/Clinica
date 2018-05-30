@@ -5,4 +5,6 @@ import mz.ciuem.uclinica.service.GenericService;
 
 public interface EspecialidadeService extends GenericService<Especialidade>{
 	
+	Especialidade getEspecialidadePorDesignacao(String descricao);
+	
 }

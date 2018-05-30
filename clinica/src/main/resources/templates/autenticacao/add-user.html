@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Registo de Utilizadores</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Registo de Utilizadores</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<form th:action="@{/utilizadores/add}" th:object="${user}"
+									class="form" method="post">
+
+									<div class="alert alert-success alert-dismissable"
+										th:if="${messageVisible}">
+								
+									</div>
+
+
+									<div class="form-group ">
+										<label for="nome">Nome</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('nome')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{nome}"></span>
+										</label> <input type="text" class="form-control" th:field="*{nome}">
+									</div>
+
+
+
+									<div class="form-group ">
+										<label for="username">email/username</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('username')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{username}"></span>
+										</label> <input type="email" class="form-control"
+											th:field="*{username}">
+									</div>
+									<div class="form-group ">
+										<label for="telefone">Telefone</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('telefone')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{telefone}"></span>
+										</label> <input type="text" class="form-control"
+											th:field="*{telefone}">
+									</div>
+									<div class="form-group">
+										<label for="password">Senha</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('password')}"> <i
+											class="fa fa-times-circle-o"></i> 
+											
+											<span
+											th:errors="*{password}"></span>
+										</label> 
+										<label  style="display: none" id  = "label-min-senha">
+										<i class = "text-danger" > A senha deve ter no mínimo 5 caracteres</i>
+										</label>
+										
+										<input type="password" class="form-control"
+											th:field="*{password}">
+									</div>
+
+									<div class="form-group">
+										<label for="confirmpassword">Confirmar Senha</label> <label id = "label-min-senha-confirm" style="display: none"
+											class="text-danger"> <i
+											> Senhas diferente! as senhas devem ser iguais</i> <span></span>
+										</label> <input type="password" class="form-control"
+											id = "confirmpassword" name = "confirmpassword" >
+									</div>
+
+									<div class="form-group ">
+										<label for="roles">Perfil</label> <select required="required"
+											multiple="multiple" th:field="*{roles}"
+											class="form-control input-sm multiple-select">
+
+											<option th:each="role : ${roles}" th:value="${role.id}"
+												th:text="${role.rolename}" />
+										</select>
+									</div>
+
+
+
+
+
+
+									<div class="box-footer">
+										<div>
+											<button  class="btn btn-primary save-btn ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+											<a class="btn btn-default"
+												th:href="@{/autenticacao/utilizadores/list}"><i
+												class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+
+
+
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+	
+
+</body>
+</html>

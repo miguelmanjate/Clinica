@@ -31,7 +31,7 @@ public class Role extends GenericEntity implements GrantedAuthority {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	private Set<User> users;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "role_permission", joinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "permission_id", nullable = false, updatable = false))
 	private List<Permission> permissions;
 
@@ -45,7 +45,7 @@ public class Role extends GenericEntity implements GrantedAuthority {
 	}
 
 	public void setRolename(String rolename) {
-		this.rolename = rolename;
+		this.rolename = rolename.toUpperCase();
 	}
 
 	public Set<User> getUsers() {

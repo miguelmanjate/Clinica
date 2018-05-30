@@ -77,7 +77,7 @@ public class ConsultaController {
 		
 		List<Servico> servicosSelecionados = new ArrayList<>();
 		for(Servico s : servicos){
-			     if(s.getServicoTipo().equals(ServicoTipo.CONSULTA_MEDICA))
+//			     if(s.getServicoTipo().equals(ServicoTipo.CONSULTA_MEDICA))
 			    	 servicosSelecionados.add(s);	 
 		}
          return servicosSelecionados;
@@ -109,7 +109,7 @@ public class ConsultaController {
 		for (Servico servico : consultaForm.getServicos()) {
 			
 			servicosSelecionados.add(servicoService.find(servico.getId()));
-			precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
+//			precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
 		
 		}
 
@@ -187,7 +187,7 @@ public class ConsultaController {
         for(Servico servico : consultaForm.getServicos()){
         	
         	servicosSelecionados.add(servicoService.find(servico.getId()));
-        	precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
+//        	precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
         }
 		
         consulta.setPreco(precoTotal);

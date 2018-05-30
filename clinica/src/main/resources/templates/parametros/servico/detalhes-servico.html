@@ -62,22 +62,76 @@
 									<tbody>
 
 										<tr>
-											<td><b>Designação de Serviço : </b></td>
-											<td><i th:text="${servico.designacao}"
+											<td><b>Codigo do Serviço  </b></td>
+											<td><i th:text="${servico.codigo}"></i></td>
+										</tr>
+
+										<tr>
+											<td><b>Descrição de Serviço </b></td>
+											<td><i th:text="${servico.descricao}"
 												style="margin-right: 5px"></i></td>
 										</tr>
 
 										<tr>
-											<td><b>Preço :</b></td>
-											<td><i th:text="${servico.preco}"
+											<td><b>Tipo </b></td>
+											<td><i th:text="${servico.especialidade?.servicoTipo}"
+												style="margin-right: 5px"></i></td>
+										</tr>
+										<tr>
+											<td><b>Sector</b></td>
+											<td><i th:text="${servico.especialidade?.sector?.descricao}"
 												style="margin-right: 5px"></i></td>
 										</tr>
 
 										<tr>
-											<td><b>Serviço do Tipo </b></td>
-											<td><i th:text="${servico.servicoTipo}"
+											<td><b>Especialidade</b></td>
+											<td><i th:text="${servico.especialidade?.descricao}"
 												style="margin-right: 5px"></i></td>
 										</tr>
+
+<!-- 										<tr>
+											<div class="col-lg-12 col-md-12"
+												th:each="taxa :${servico.taxas}">
+												<div class="col-lg-3">
+													<span th:text="${taxa.tipoCliente}"></span>
+												</div>
+												<div class="col-lg-9">
+													<table style="width: 100%">
+														<tr>
+															<th width="25%"></th>
+															<th width="25%"></th>
+															<th width="25%"></th>
+															<th></th>
+														</tr>
+
+
+														<tr>
+															<td>Urgente :<span class="label label-danger"
+																style="margin-right: 8px" th:text="${taxa.taxaUrgente}"></span></td>
+															<td>Normal : <span class="label label-success"
+																style="margin-right: 8px" th:text="${taxa.taxaNormal}"></span></td>
+															<td>Retorno: <span class="label label-primary"
+																style="margin-right: 8px" th:text="${taxa.taxaRetorno}"></span></td>
+															<td>Seg. Via : <span class="label label-warning"
+																style="margin-right: 8px"
+																th:text="${taxa.taxaSegundaVia}"></span></td>
+
+
+														</tr>
+
+													</table>
+
+
+
+
+
+												</div>
+
+
+
+											</div>
+
+										</tr> -->
 
 									</tbody>
 								</table>
@@ -89,19 +143,19 @@
 						<div class="box-footer">
 							<div class="box-body table-responsive no-padding">
 
-								<a th:href="@{/parametro/servico}" class="">
-									<i class="" style="margin-right: 2px"></i>Novo Serviço
-								</a> <a class=""
+								<a th:href="@{/parametro/servico}" class="btn btn-primary">
+									<i class="fa fa-save inverse" style="margin-right: 2px"></i>Registar
+									Servico
+								</a> <a class="btn btn-default"
 									th:href="@{/parametro/servico/{id}/update(id=${servico.id})}">
-									<i class="" style="margin-right: 52px"></i>Editar
-								</a> <a class="" th:href="@{/parametro/servico}">
-									<i class="" style="margin-right: 52px"></i>Voltar
+									<i class="fa fa-retweet" style="margin-right: 2px"></i>Editar
+								</a> <a class="btn btn-default" th:href="@{/parametro/servico/list}">
+									<i class="fa fa-eye" style="margin-right: 2px"></i>Listar
+									Servicos
 								</a>
 
 							</div>
 						</div>
-
-
 
 					</div>
 

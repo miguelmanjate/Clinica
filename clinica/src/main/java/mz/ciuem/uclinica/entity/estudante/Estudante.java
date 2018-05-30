@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,8 +33,12 @@ public class Estudante extends Paciente {
 	private String numeroBi;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "curso_estudante")
+	@JoinColumn(name = "curso_id")
 	private Curso curso;
+	
+	@ManyToOne()
+	@JoinColumn(name = "faculdade_id")
+	private Faculdade faculdade;
 	
 	@Enumerated(EnumType.STRING)
 	private Ano ano;
@@ -41,6 +46,14 @@ public class Estudante extends Paciente {
 	@Enumerated(EnumType.STRING)
 	private Semestre semestre;
 	
+	public Faculdade getFaculdade() {
+		return faculdade;
+	}
+
+	public void setFaculdade(Faculdade faculdade) {
+		this.faculdade = faculdade;
+	}
+
 	public String getNumeroBi() {
 		return numeroBi;
 	}

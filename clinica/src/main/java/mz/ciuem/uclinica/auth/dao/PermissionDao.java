@@ -8,6 +8,9 @@ import mz.ciuem.uclinica.dao.GenericDao;
 
 public interface PermissionDao extends GenericDao<Permission>{
 
-	List<Permission> bucarPelaAutorizacao(Authorization roleAdmin);
+	List<Permission> buscarPelaAutorizacao(Authorization roleAdmin);
+
+	Permission buscarPermissaoPorDesignacao(Authorization auth);
+
 
 }

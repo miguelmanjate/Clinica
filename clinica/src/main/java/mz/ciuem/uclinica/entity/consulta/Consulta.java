@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
+import mz.ciuem.uclinica.entity.parametro.Especialidade;
 import mz.ciuem.uclinica.entity.parametro.Servico;
 
 @Entity
@@ -39,9 +40,9 @@ public class Consulta extends GenericEntity {
 	@Enumerated(EnumType.STRING)
 	private CausaAdmissao causaAdmissao;
 
-	@Column(name = "consulta_especialidade")
-	@Enumerated(EnumType.STRING)
-	private Especialidade especialidade;
+	@ManyToOne
+	@JoinColumn(name = "consulta_especialidade_id")
+	private Especialidade especialidade ;
 
 	@Column(name = "data_consulta")
 	@Temporal(TemporalType.DATE)

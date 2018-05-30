@@ -6,7 +6,6 @@ import java.util.Set;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,9 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,37 +28,61 @@ import mz.ciuem.uclinica.entity.GenericEntity;
 @Access(AccessType.FIELD)
 public class User extends GenericEntity implements UserDetails {
 
-	
-	@NotNull(message = "Mandatorio informar o nome do utilizador")
-	@NotBlank(message = "Mandatorio informar o nome do utilizador")
 	@Column(name = "username", length = 50, unique = true)
+	@NotEmpty(message = "O nome do utilizador nao deve conter espacos apenas")
+	@Email(message = "O nome do utilizador devera ser um email válido!")
 	private String username;
 
-	
-	@NotNull(message = "Mandatorio informar a senha")
-	@NotBlank(message = "Mandatorio informar a senha")
+	@Column(name = "nome")
+	@NotEmpty
+	private String nome;
+
+	@Column(name = "telefone")
+	@NotEmpty
+	private String telefone;
+
+	@NotEmpty
 	@Column(name = "password")
 	private String password;
 
 	@Column(name = "enabled")
 	private boolean enabled;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade  = CascadeType.ALL)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false),
-	inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false))
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", nullable = false, updatable = false), inverseJoinColumns = @JoinColumn(name = "role_id", nullable = false, updatable = false))
 	private Set<Role> roles;
 
 	@Override
 	public Collection<GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-		authorities.addAll(getRoles());
-		
+
+		for (Role role : getRoles()) {
+			authorities.add(role);
+			authorities.addAll(role.getPermissions());
+		}
+
 		return authorities;
 	}
-	
+
 	@PrePersist
-	public void encryptPassword(){
-		
+	public void encryptPassword() {
+
 		setPasswordUsingBCrypt(password);
 	}
 
@@ -115,16 +137,13 @@ public class User extends GenericEntity implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	public String setPasswordUsingBCrypt(String password){
-		
+
+	public String setPasswordUsingBCrypt(String password) {
+
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		this.password = passwordEncoder.encode(password);
 		return this.password;
-		
+
 	}
-	
-	
-	
 
 }
