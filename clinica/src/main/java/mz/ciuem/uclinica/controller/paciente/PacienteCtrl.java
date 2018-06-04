@@ -127,11 +127,11 @@ public class PacienteCtrl {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/update")
 	public ModelAndView editar(@Valid Paciente paciente, BindingResult bindingResult,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes) throws ParseException {
 
 		if (bindingResult.hasErrors()) {
 
-			System.err.println("Ocorreu um erro durante o registo de pacientes!");
+			return editar(paciente.getId());
 
 		}
 		// paciente.setNid(paciente.getId());

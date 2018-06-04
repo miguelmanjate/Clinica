@@ -131,7 +131,7 @@
 
 									<div class="form-group ">
 										<label for="unidade">Unidade</label> <select
-											th:field="*{unidade.id}" class="form-control input-sm">
+											th:field="*{unidade.id}" class="form-control input-sm multiple-select select">
 											<option th:each="unidade : ${unidades}"
 												th:value="${unidade.id}" th:text="${unidade.designacao}" />
 										</select>
@@ -147,7 +147,7 @@
 
 									<div class="form-group ">
 										<label for="nivelAcademico">Nivel Academico</label> <select
-											th:field="*{nivelAcademico}" class="form-control input-sm">
+											th:field="*{nivelAcademico}" class="form-control input-sm multiple-select select">
 											<option th:each="nivelAcademico : ${nivelAcademico}"
 												th:value="${nivelAcademico}" th:text="${nivelAcademico}" />
 										</select>

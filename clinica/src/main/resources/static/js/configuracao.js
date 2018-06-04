@@ -1,6 +1,9 @@
 $(function() {
-	
-	$("#data-consulta").datepicker({ dateFormat: 'dd-mm-yy' });
+
+	$("#data-consulta").datepicker({
+		dateFormat : 'dd-mm-yy',
+			minDate: 0
+	}).datepicker("setDate","0");
 
 	$(".timepicker").wickedpicker({
 		twentyFour : true,
@@ -15,92 +18,118 @@ $(function() {
 		date.setMinutes(data.substring(4, 7));
 		date.setSeconds("0");
 
-		
 		$(".timepicker").val(date);
-	
 
 	});
-	
 
 	$(".data-table").DataTable();
 	$("body").removeClass("skin-black").addClass("skin-blue");
-	
-	
+
 	$(".multiple-select").chosen();
-	
-	
+
 	dataTablePreviouAndNextSpace();
 
 	$(".select").change(function() {
 		sendAjaxRequest();
-		
-		//alert(url);
+
+		// alert(url);
 	});
-	
+
 	$(".select").chosen("destroy");
-	
-	$(".select").append('<option value="Selecione" selected="selected" disabled>Select an Option</option>');
+
+	$(".select")
+			.append(
+					'<option value="Selecione" selected="selected" disabled>Select an Option</option>');
 	$(".select").chosen();
-	
+
 	validatePass();
 });
 
-function validatePass(){
-	
-    $('.save-btn').click(function(event){
-    	
-    	 $("#label-min-senha").css("display", "none");
-    	 $("#label-min-senha-confirm").css("display", "none");
-	    
-        data = $('#password').val();
-        var len = data.length;
-        
-        if(len < 5) {
-            $("#label-min-senha").css("display", "block");
-            $("#password").val('');
-            $("#confirmpassword").val('');
-            event.preventDefault();
-            
-            return;
-        }
-         
-        if($('#password').val() != $('#confirmpassword').val()) {
-        	 $("#label-min-senha-confirm").css("display", "block");
-        	 $("#password").val('');
-             $("#confirmpassword").val('');
-            event.preventDefault();
-            return;
-        }
-        	
-        	$(".form").submit();
-       
-         
-    });
+function validatePass() {
+
+	$('.save-btn').click(function(event) {
+
+		$("#label-min-senha").css("display", "none");
+		$("#label-min-senha-confirm").css("display", "none");
+
+		data = $('#password').val();
+		var len = data.length;
+
+		if (len < 5) {
+			$("#label-min-senha").css("display", "block");
+			$("#password").val('');
+			$("#confirmpassword").val('');
+			event.preventDefault();
+
+			return;
+		}
+
+		if ($('#password').val() != $('#confirmpassword').val()) {
+			$("#label-min-senha-confirm").css("display", "block");
+			$("#password").val('');
+			$("#confirmpassword").val('');
+			event.preventDefault();
+			return;
+		}
+
+		$(".form").submit();
+
+	});
 }
 
 function sendAjaxRequest() {
-	
-	var url = $(location).attr('href');
 
+	var url = $(location).attr('href');
 
 	var select = $(".select");
 	var cursosSelect = $(".cursos");
 	cursosSelect.chosen("destroy");
-	
+
+	var medicosSelect = $(".medicos");
+	medicosSelect.chosen("destroy");
+
+	var servicosSelect = $(".servicos");
+	servicosSelect.chosen("destroy");
+
 	var selected = select.find(":selected").text();
 
-	$.get(url+"/cursos?faculdade=" + selected, function(data) {
+	$.get(url + "/cursos?faculdade=" + selected, function(data) {
 		cursosSelect.empty();
 
 		$.each(data, function(key, value) {
-			cursosSelect.append('<option value=' + value.id + '>' + value.descricao
-					+ '</option>');
+			cursosSelect.append('<option value=' + value.id + '>'
+					+ value.descricao + '</option>');
 		});
 
 		cursosSelect.chosen();
 
 	});
-	
+
+	$.get(url + "/medicos?especialidade=" + selected, function(data) {
+		medicosSelect.empty();
+
+		$.each(data, function(key, value) {
+			medicosSelect.append('<option value=' + value.id + '>' + value.nome
+					+ " " + value.apelido + '</option>');
+		});
+
+		medicosSelect.chosen();
+
+	});
+
+	$.get(url + "/servicos?especialidade=" + selected, function(data) {
+		servicosSelect.empty();
+ 
+		$.each(data, function(key, value) {
+			$(".servicos").append(
+					'<option value=' + value.id + '>' + value.descricao
+							+ '</option>');
+		});
+
+		servicosSelect.chosen();
+
+	});
+
 }
 
 function dataTablePreviouAndNextSpace() {

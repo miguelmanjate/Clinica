@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
+import mz.ciuem.uclinica.entity.funcionario.Funcionario;
 
 @Entity
 @Table(name ="clinica_param_unidades")
@@ -28,21 +29,21 @@ public class Unidades extends GenericEntity{
     @Column(name="designacao")
 	private String designacao;
 	
-	@ManyToOne(cascade = CascadeType.REFRESH )
-	@JoinColumn(name  = "orgao_unidade")
-	private Orgao orgao;
+//	@ManyToOne(cascade = CascadeType.REFRESH )
+//	@JoinColumn(name  = "orgao_unidade")
+//	private Orgao orgao;
 	
-//	@OneToMany(mappedBy= "unidade", fetch = FetchType.EAGER)
-//	private List<Funcionario> funcionarios;
-//	
-//	
-//	public List<Funcionario> getFuncionarios() {
-//		return funcionarios;
-//	}
-//
-//	public void setFuncionarios(List<Funcionario> funcionarios) {
-//		this.funcionarios = funcionarios;
-//	}
+	@OneToMany(mappedBy= "unidade")
+	private List<Funcionario> funcionarios;
+	
+	
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public void setFuncionarios(List<Funcionario> funcionarios) {
+		this.funcionarios = funcionarios;
+	}
 
 	@Column(name="nacionalidade")
 	private String nacionalidade;
@@ -58,13 +59,13 @@ public class Unidades extends GenericEntity{
 		this.designacao = designacao;
 	}
 
-	public Orgao getOrgao() {
-		return orgao;
-	}
-
-	public void setOrgao(Orgao orgao) {
-		this.orgao = orgao;
-	}
+//	public Orgao getOrgao() {
+//		return orgao;
+//	}
+//
+//	public void setOrgao(Orgao orgao) {
+//		this.orgao = orgao;
+//	}
 
 	public String getNacionalidade() {
 		return nacionalidade;

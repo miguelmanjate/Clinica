@@ -187,14 +187,13 @@
 												</select>
 											</div>
 
-
-
 											<div class="form-group ">
 												<label for="especialidade">Especialidade</label> <select
-													th:field="*{consulta.especialidade}"
-													class="form-control input-sm multiple-select">
+													th:field="*{consulta.especialidade.id}"
+													class="form-control input-sm multiple-select select">
 													<option th:each="especialidade : ${especialidade}"
-														th:value="${especialidade}" th:text="${especialidade}" />
+														th:value="${especialidade.id}"
+														th:text="${especialidade.descricao}" />
 												</select>
 											</div>
 
@@ -214,14 +213,12 @@
 											</div>
 
 											<div class="form-group ">
-												<label for="medico">Medico</label> <select
+												<label for="medico">Médico</label> <select
 													th:field="*{consulta.medico.id}"
-													class="form-control input-sm multiple-select">
-													<option th:each="medico : ${medicos}"
-														th:value="${medico.id}" th:text="${medico.nome}" />
+													class="form-control input-sm multiple-select medicos">
+
 												</select>
 											</div>
-
 
 										</div>
 
@@ -244,7 +241,7 @@
 																<i class="fa fa-calendar"></i>
 															</div>
 															<input th:field="*{consulta.dataDaConsulta}"
-																type="datetime" id="data-consulta"
+																required="required" type="datetime" id="data-consulta"
 																class="form-control input-sm" />
 
 														</div>
@@ -272,19 +269,15 @@
 
 
 													<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
-													<div class="form-group ">
-														<label for="servico">Servicos</label> <select
-															multiple="multiple" th:field="*{servicos}"
-															class="form-control input-sm multiple-select">
-															<option th:each="servico : ${servicos}"
-																th:value="${servico.id}" th:text="${servico.designacao}"></option>
+ 													<div class="form-group ">
+														<label for="servico">Serviços</label> <select
+															required="required" multiple="multiple"
+															th:field="*{servicos}"
+															class="form-control input-sm multiple-select servicos">
+
 
 														</select>
-													</div>
-
-
-
-
+													</div> 
 
 												</div>
 											</div>
@@ -372,8 +365,8 @@
 									<td th:text="${consulta.paciente?.nome}"></td>
 									<td th:text="${consulta.tipoConsulta}"></td>
 									<td th:text="${consulta.causaAdmissao}"></td>
-									<td th:text="${consulta.medico.nome}"></td>
-									<td th:text="${consulta.especialidade}"></td>
+									<td th:text="${consulta.medico?.nome}"></td>
+									<td th:text="${consulta.especialidade?.descricao}"></td>
 									<td th:text="${consulta.preco}"></td>
 									<td th:text="${consulta.estado}"></td>
 

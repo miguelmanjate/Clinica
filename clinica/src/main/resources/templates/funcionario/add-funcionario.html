@@ -44,10 +44,9 @@
 									</div>
 
 									<div class="form-group">
-										<label for="nome">Nome</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('nome')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{nome}"></span>
+										<label for="nome">Nome</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('nome')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{nome}"></span>
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nome}">
 									</div>
@@ -63,7 +62,7 @@
 											class="form-control input-sm" th:field="*{dataDeNascimento}">
 									</div>
 
-                                   <div class="form-group">
+									<div class="form-group">
 										<label for="nomeDoPai">Nome do Pai</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDoPai')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -71,9 +70,9 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDoPai}">
 									</div>
-                                    
-									
-                                    <div class="form-group">
+
+
+									<div class="form-group">
 										<label for="nomeDaMae">Nome da mae</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('nomeDaMae')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -81,7 +80,7 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{nomeDaMae}">
 									</div>
-									
+
 									<div class="form-group">
 										<label for="numeroBi">Nº de BI</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('numeroBi')}">
@@ -90,7 +89,7 @@
 										</label> <input type="text" class="form-control input-sm"
 											th:field="*{numeroBi}">
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="genero">Género</label> <select
 											th:field="*{genero}" class="form-control input-sm">
@@ -103,7 +102,7 @@
 
 								<!-- Segundo bloco do formulario -->
 								<div class="col-md-6">
-									
+
 									<div class="form-group ">
 										<label for="estadoCivil">Estado Civil</label> <select
 											th:field="*{estadoCivil}" class="form-control input-sm">
@@ -111,8 +110,8 @@
 												th:value="${estadoCivil}" th:text="${estadoCivil}" />
 										</select>
 									</div>
-                                    
-                                    <div class="form-group">
+
+									<div class="form-group">
 										<label for="telefone">Telefone</label> <label
 											class="text-danger" th:if="${#fields.hasErrors('telefone')}">
 											<i class="fa fa-times-circle-o"></i> <span
@@ -129,59 +128,61 @@
 										</label> <input type="text" class="form-control"
 											th:field="*{endereco}">
 									</div>
-								
-                                   <div class="form-group ">
-										<label for="unidade">Unidade</label> <select
-											th:field="*{unidade.id}" class="form-control input-sm">
+
+									<div class="form-group ">
+										<label for="unidade">Unidade</label> <label
+											class="text-danger" th:if="${#fields.hasErrors('unidade')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{unidade}"></span>
+										</label><select th:field="*{unidade.id}" class="form-control input-sm multiple-select select">
 											<option th:each="unidade : ${unidades}"
 												th:value="${unidade.id}" th:text="${unidade.designacao}" />
 										</select>
 									</div>
-									
+
 									<div class="form-group">
-										<label for="funcao">Função</label> <label
-											class="text-danger" th:if="${#fields.hasErrors('funcao')}">
-											<i class="fa fa-times-circle-o"></i> <span
-											th:errors="*{funcao}"></span>
+										<label for="funcao">Função</label> <label class="text-danger"
+											th:if="${#fields.hasErrors('funcao')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{funcao}"></span>
 										</label> <input type="text" class="form-control  input-sm"
 											th:field="*{funcao}">
 									</div>
-									
+
 									<div class="form-group ">
 										<label for="nivelAcademico">Nivel Academico</label> <select
-											th:field="*{nivelAcademico}" class="form-control input-sm">
-											<option th:each="nivelAcademico : ${nivelAcademico}" th:value="${nivelAcademico}"
-												th:text="${nivelAcademico}" />
+											th:field="*{nivelAcademico}" class="form-control input-sm multiple-select select">
+											<option th:each="nivelAcademico : ${nivelAcademico}"
+												th:value="${nivelAcademico}" th:text="${nivelAcademico}" />
 										</select>
 									</div>
 
-									</div>
-                                 
-
-									<div class="box-footer">
-										<div>
-											<button type="submit" class="btn btn-primary  ">
-												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
-											</button>
-
-											<a class="btn btn-default" th:href="@{/funcionario/uem/list}"><i
-												class="fa fa-eye" style="margin: 2px"></i>Listar</a> 
-										</div>
-
-									</div>
-									</form>
 								</div>
-		
+
+
+								<div class="box-footer">
+									<div>
+										<button type="submit" class="btn btn-primary  ">
+											<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+										</button>
+
+										<a class="btn btn-default" th:href="@{/funcionario/uem/list}"><i
+											class="fa fa-eye" style="margin: 2px"></i>Listar</a>
+									</div>
+
+								</div>
+							</form>
 						</div>
 
 					</div>
-					<!-- /.box-body -->
-
 
 				</div>
-				<!-- /.box -->
-			</div>
+				<!-- /.box-body -->
 
+
+			</div>
+			<!-- /.box -->
 		</div>
+
+	</div>
 </body>
 </html>

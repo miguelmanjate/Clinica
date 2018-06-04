@@ -89,34 +89,30 @@
 												style="margin-right: 5px"></i></td>
 										</tr>
 
-<!-- 										<tr>
-											<div class="col-lg-12 col-md-12"
+										<tr>
+											<div class=""
 												th:each="taxa :${servico.taxas}">
-												<div class="col-lg-3">
-													<span th:text="${taxa.tipoCliente}"></span>
-												</div>
-												<div class="col-lg-9">
+
+												<div class="">
 													<table style="width: 100%">
 														<tr>
-															<th width="25%"></th>
-															<th width="25%"></th>
-															<th width="25%"></th>
-															<th></th>
+														    <th ></th>
+															<th ></th>
+															<th ></th>
+															<th ></th>
 														</tr>
 
 
 														<tr>
-															<td>Urgente :<span class="label label-danger"
+														    <td> <span class=""
+																style="margin-right: 8px" th:text="${taxa.tipoCliente}"></span></td>
+															<td>Urgente <span class="label label-danger"
 																style="margin-right: 8px" th:text="${taxa.taxaUrgente}"></span></td>
-															<td>Normal : <span class="label label-success"
+															<td>Normal  <span class="label label-success"
 																style="margin-right: 8px" th:text="${taxa.taxaNormal}"></span></td>
-															<td>Retorno: <span class="label label-primary"
-																style="margin-right: 8px" th:text="${taxa.taxaRetorno}"></span></td>
-															<td>Seg. Via : <span class="label label-warning"
-																style="margin-right: 8px"
-																th:text="${taxa.taxaSegundaVia}"></span></td>
-
-
+															<td>Retorno <span class="label label-primary"
+																style="margin-right: 8px" th:text="${taxa.taxaControle}"></span></td>
+															
 														</tr>
 
 													</table>
@@ -131,7 +127,7 @@
 
 											</div>
 
-										</tr> -->
+										</tr> 
 
 									</tbody>
 								</table>

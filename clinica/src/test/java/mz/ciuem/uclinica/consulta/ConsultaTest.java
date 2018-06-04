@@ -1,20 +1,7 @@
 package mz.ciuem.uclinica.consulta;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import mz.ciuem.uclinica.entity.consulta.CausaAdmissao;
-import mz.ciuem.uclinica.entity.consulta.Consulta;
-import mz.ciuem.uclinica.entity.consulta.Especialidade;
-import mz.ciuem.uclinica.entity.consulta.EstadoDaConsulta;
-import mz.ciuem.uclinica.entity.consulta.TipoConsulta;
-import mz.ciuem.uclinica.entity.paciente.Paciente;
-import mz.ciuem.uclinica.entity.parametro.Servico;
 import mz.ciuem.uclinica.paciente.service.PacienteService;
 import mz.ciuem.uclinica.service.consulta.ConsultaService;
 import mz.ciuem.uclinica.service.consulta.MedicoService;

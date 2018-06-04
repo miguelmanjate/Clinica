@@ -1,19 +1,14 @@
 package mz.ciuem.uclinica.entity.parametro;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
-import mz.ciuem.uclinica.entity.consulta.Especialidade;
 @Entity
 @Table(name = "param_servico_unidade")
 public class ServicoDaUnidade extends GenericEntity{

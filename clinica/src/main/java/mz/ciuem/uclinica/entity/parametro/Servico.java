@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
+import mz.ciuem.uclinica.entity.consulta.ItemConsultaServico;
 import mz.ciuem.uclinica.entity.consulta.Taxa;
 
 @Entity
@@ -29,58 +31,75 @@ public class Servico extends GenericEntity {
 	// @NotBlank(message = "Mandatorio informar o codigo do servico")
 	private String codigo;
 
-//	@ManyToOne
-//	@JoinColumn(name = "tiposervico")
-//	private ServicoDaUnidade servicoDaUnidade;
+	// @ManyToOne
+	// @JoinColumn(name = "tiposervico")
+	// private ServicoDaUnidade servicoDaUnidade;
 
-	@OneToMany(mappedBy = "servico", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "servico")
 	private List<Taxa> taxas;
 
+	@ManyToOne
+	@JoinColumn(name = "servico_especialidade_id")
+	private Especialidade especialidade;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "servico_especialidade_id")	
-	private Especialidade especialidade ;
+	@OneToMany(mappedBy = "servico", fetch = FetchType.EAGER)
+	private List<ItemConsultaServico> itemConsultaServicos;
 
+	public List<ItemConsultaServico> getItemConsultaServicos() {
+		return itemConsultaServicos;
+	}
+
+	public void setItemConsultaServicos(List<ItemConsultaServico> itemConsultaServicos) {
+		this.itemConsultaServicos = itemConsultaServicos;
+	}
 
 	public String getDescricao() {
 		return descricao;
 	}
 
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
 
 	public String getCodigo() {
 		return codigo;
 	}
 
-
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-
 
 	public List<Taxa> getTaxas() {
 		return taxas;
 	}
 
-
 	public void setTaxas(List<Taxa> taxas) {
 		this.taxas = taxas;
 	}
-
 
 	public Especialidade getEspecialidade() {
 		return especialidade;
 	}
 
-
 	public void setEspecialidade(Especialidade especialidade) {
 		this.especialidade = especialidade;
 	}
-	
-	
+
+	@Transient
+	public Double getTaxa(String tipoServico, String tipoCliente) {
+		Taxa t = null;
+		for (Taxa taxa : this.taxas) {
+
+			if (taxa.getTipoCliente().toString().equals(tipoCliente)) {
+				t = taxa;
+			}
+		}
+		if(t != null){
+			return t.getTaxaPorTipoConsulta(tipoServico);
+		}else {
+			return 0D;
+		}
+
+	}
 
 }

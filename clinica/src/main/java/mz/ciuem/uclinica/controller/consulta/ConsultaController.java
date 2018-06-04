@@ -1,8 +1,6 @@
 package mz.ciuem.uclinica.controller.consulta;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,23 +13,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import mz.ciuem.uclinica.entity.consulta.CausaAdmissao;
 import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.consulta.ConsultaForm;
-import mz.ciuem.uclinica.entity.consulta.Especialidade;
 import mz.ciuem.uclinica.entity.consulta.EstadoDaConsulta;
-import mz.ciuem.uclinica.entity.consulta.Medico;
+import mz.ciuem.uclinica.entity.consulta.ItemConsultaServico;
+import mz.ciuem.uclinica.entity.consulta.MedicoJson;
+import mz.ciuem.uclinica.entity.consulta.ServicoJason;
 import mz.ciuem.uclinica.entity.consulta.TipoConsulta;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
-import mz.ciuem.uclinica.entity.parametro.Factura;
 import mz.ciuem.uclinica.entity.parametro.Servico;
-import mz.ciuem.uclinica.entity.parametro.ServicoTipo;
 import mz.ciuem.uclinica.paciente.service.PacienteService;
 import mz.ciuem.uclinica.service.consulta.ConsultaService;
+import mz.ciuem.uclinica.service.consulta.ItemConsultaService;
+import mz.ciuem.uclinica.service.consulta.ItemConsultaServicoServiceImpl;
 import mz.ciuem.uclinica.service.consulta.MedicoService;
+import mz.ciuem.uclinica.service.parametro.EspecialidadeService;
 import mz.ciuem.uclinica.service.parametro.FacturaService;
 import mz.ciuem.uclinica.service.parametro.ServicoService;
 
@@ -52,6 +54,12 @@ public class ConsultaController {
 	@Autowired 
 	private FacturaService facturaService;
 	
+	@Autowired
+	private EspecialidadeService especialidadeService;
+	
+	@Autowired
+	private ItemConsultaService itemConsultaServicoService;
+	
 	private Paciente paciente;
 	private Consulta consulta;
 	
@@ -62,11 +70,7 @@ public class ConsultaController {
 		paciente = pacienteService.find(id);
 		ModelAndView model = new ModelAndView("/consultas/agendar-consulta");
 		model.addObject("paciente", paciente);
-		// consulta.setServicos(servicoService.getAll());
-		// servicoList.setServicos((servicoService.getAll()));
-		List<Servico> servicos = servicoService.getAll();
-		
-		model.addObject("servicos", selecionarServicos(servicos));
+	
 		preencherFormulario(model);
 		model.addObject("consultas", consultaService.getConsultasDoPaciente(paciente));
 
@@ -85,38 +89,44 @@ public class ConsultaController {
 
 	private void preencherFormulario(ModelAndView model) {
 		model.addObject("tipoConsulta", TipoConsulta.values());
-		model.addObject("especialidade", Especialidade.values());
+		model.addObject("especialidade", especialidadeService.getAll());
 		model.addObject("causaAdmissao", CausaAdmissao.values());
 		model.addObject("estados", EstadoDaConsulta.values());
-		List<Medico> medicos = medicoService.getAll();
-		model.addObject("medicos", medicos);
+
 	}
 
 	@PostMapping("/agendar")
-	public ModelAndView registarConsulta(@Valid ConsultaForm consultaForm, BindingResult bindingResult) {
+	public ModelAndView registarConsulta(@Valid ConsultaForm consultaForm, BindingResult bindingResult,
+			RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
-
+          
 		}
 		double precoTotal = 0;
 		Consulta consulta = consultaForm.getConsulta();
-
+		
 		consulta.setPaciente(paciente);
-
-		consulta.setServicos(consultaForm.getServicos());
-
+		
 		List<Servico> servicosSelecionados = new ArrayList<>();
 
 		for (Servico servico : consultaForm.getServicos()) {
 			
 			servicosSelecionados.add(servicoService.find(servico.getId()));
-//			precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
-		
 		}
-
-		consulta.setServicos(servicosSelecionados);
+	
 		consulta.setEstado(EstadoDaConsulta.AGENDADA);
-		consulta.setPreco(precoTotal);
 		consultaService.create(consulta);
+		try{
+		itemConsultaServicoService.criarItemConsultaListaServicos(consulta, servicosSelecionados);
+		
+		//consulta.getPreco();
+		//consultaService.saveOrUpdate(consulta);
+		} catch (RuntimeException e) {
+             System.err.println(e);
+			redirectAttributes.addFlashAttribute("msgSemTaxas", "true");
+			ModelAndView model = new ModelAndView("redirect:/consulta/agendar/" + paciente.getId());
+
+			return model;
+		}
 
 		ModelAndView model = new ModelAndView("redirect:/consulta/" + paciente.getId() + "/list");
 
@@ -153,16 +163,14 @@ public class ConsultaController {
 	@GetMapping("{id}/update")
 	public ModelAndView editar(@ModelAttribute ConsultaForm consultaForm, @PathVariable Long id) {
 
-		consultaForm.setConsulta(consultaService.find(id)); 
+		Consulta consulta =  consultaService.find(id);
+		consultaForm.setConsulta(consulta); 
 		paciente = consultaForm.getConsulta().getPaciente();
-		List<Servico> servicos = servicoService.getAll(); 
-		consultaForm.setServicos(selecionarServicos(servicos));
+		consultaForm.setItems(consulta.getItemConsultaServicos());
 		
 		ModelAndView model = new ModelAndView("/consultas/update-consulta", "consultaForm", consultaForm);
 		model.addObject("paciente", consultaForm.getConsulta().getPaciente());
 		preencherFormulario(model);
-		model.addObject("servicos", selecionarServicos(servicos));
-		
 		
 		return model;
 
@@ -179,20 +187,27 @@ public class ConsultaController {
 		double precoTotal = 0;
         Consulta consulta = consultaForm.getConsulta();
         consulta.setPaciente(paciente);
-        
-        consulta.setServicos(consultaForm.getServicos());
-        
+                
         List<Servico> servicosSelecionados = new ArrayList<>();
         
         for(Servico servico : consultaForm.getServicos()){
         	
         	servicosSelecionados.add(servicoService.find(servico.getId()));
-//        	precoTotal = precoTotal + servicoService.find(servico.getId()).getPreco();
+
         }
-		
-        consulta.setPreco(precoTotal);
-        
+		 
 		consultaService.saveOrUpdate(consulta);
+		try{
+			System.err.println("try");
+        			
+        itemConsultaServicoService.actualizarItemConsultaListaServicos(consulta, servicosSelecionados);
+			} catch (RuntimeException e) {
+
+				redirectAtributes.addFlashAttribute("msgSemTaxas", "true");
+				ModelAndView model = new ModelAndView("redirect:/consulta/agendar/" + paciente.getId());
+
+				return model;
+			}
 		ModelAndView model = new ModelAndView("redirect:/consulta/" + paciente.getId() + "/list");
 
 		return model;
@@ -268,6 +283,21 @@ public class ConsultaController {
 		return model;
 		
 	}
-
+	
+	@RequestMapping( value = {"/agendar/{id}/medicos", "/{id}/update/medicos"})
+	public @ResponseBody List<MedicoJson> getMedicosPorEspecialidade(@RequestParam String especialidade){
+		
+		List<MedicoJson> medicos = medicoService.getTodosMedicosDaEspecialidade(especialidade);
+		
+		return medicos;
+	}
+	
+	@RequestMapping( value = {"/agendar/{id}/servicos", "{id}/update/servicos"})
+	public @ResponseBody List<ServicoJason> getServicosPorEspecialidade(@RequestParam String especialidade){
+		
+		List<ServicoJason> servicos = servicoService.getTodosServicosDaEspecialidadeToJson(especialidade);
+		
+		return servicos;
+	}
 
 }

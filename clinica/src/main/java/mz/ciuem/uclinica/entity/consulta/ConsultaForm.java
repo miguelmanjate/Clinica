@@ -9,6 +9,16 @@ public class ConsultaForm {
 	private List<Servico> servicos;
 
 	private Consulta consulta;
+	
+	private List<ItemConsultaServico> items ;
+	
+	public List<ItemConsultaServico> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ItemConsultaServico> items) {
+		this.items = items;
+	}
 
 	public Consulta getConsulta() {
 		return consulta;

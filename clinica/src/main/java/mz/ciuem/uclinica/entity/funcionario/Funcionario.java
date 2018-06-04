@@ -37,7 +37,8 @@ public class Funcionario  extends Paciente{
 	private NivelAcademico nivelAcademico;
 			
 	private String funcao;
-		
+	
+	@NotNull(message = " Campo Obrigatorio")
 	@ManyToOne( cascade = CascadeType.REFRESH ,fetch = FetchType.EAGER)
 	@JoinColumn(name = "unidade_funcionario")
 	private Unidades unidade;

@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import mz.ciuem.uclinica.entity.consulta.Especialidade;
 import mz.ciuem.uclinica.entity.consulta.Taxa;
 import mz.ciuem.uclinica.entity.parametro.Servico;
 import mz.ciuem.uclinica.entity.parametro.ServicoDaUnidade;
-import mz.ciuem.uclinica.entity.parametro.ServicoTipo;
 import mz.ciuem.uclinica.service.parametro.EspecialidadeService;
 import mz.ciuem.uclinica.service.parametro.SectorService;
 import mz.ciuem.uclinica.service.parametro.ServicoService;
@@ -42,6 +40,9 @@ public class ServicoController {
 	
 	@Autowired
 	private EspecialidadeService especialidadeService;
+	
+	@Autowired
+	private TaxasServie taxasServie;
 	
 	private Servico servico;
 
@@ -126,50 +127,69 @@ public class ServicoController {
 		return model;
 	}
 	
-//	@GetMapping(value = {"/{id}/taxas"})
-//	public ModelAndView configurarTaxas(@PathVariable Long id, Taxa taxa) {
-//		
-//		servico = servicoService.find(id);
-//		ModelAndView model = new ModelAndView("/parametros/servico/configuracao-taxas");
-//		model.addObject(servico);
-//		model.addObject("tipoCliente", TipoCliente.values());
-//		listarServicos(model);
-//		
-//		
-//		return model;
-//	}
-//	
-//	@PostMapping(value = {"/taxa/update"})
-//	public ModelAndView configurarTaxas(@Valid Taxa taxa,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//		
-//		
-//		if (bindingResult.hasErrors()) {
-//			
-//		}
-//		ModelAndView model = new ModelAndView("redirect:/parametro/servico/taxas");
-//		taxa.setServico(servico);
-//		taxasService.saveOrUpdate(taxa);
-//		redirectAttributes.addFlashAttribute("messageVisible", "true");
-//
-//		
-//		return model;
-//	}
-//	
-//	
-//	@GetMapping(value = {"/taxas"})
-//	public ModelAndView configurarTaxas() {
-//		
-//	
-//	
-//		ModelAndView model = new ModelAndView("/parametros/servico/taxas");
-//		listarServicos(model);
-//		return model;
-//	}
-//
-//	private void listarServicos(ModelAndView model) {
-//		List<Servico> servicos = servicoService.getServicosComSuasTaxas();
-//		model.addObject("servicos",servicos);
-//	}
+	@GetMapping(value = {"/{id}/taxas"})
+	public ModelAndView configurarTaxas(@PathVariable Long id, Taxa taxa) {
+		
+		servico = servicoService.find(id);
+		ModelAndView model = new ModelAndView("/parametros/servico/configuracao-taxas");
+		model.addObject(servico);
+		model.addObject("tipoCliente", TipoCliente.values());
+		listarServicos(model);
+		
+		
+		return model;
+	}
+	
+	@PostMapping(value = {"/taxa/update"})
+	public ModelAndView configurarTaxas(@Valid Taxa taxa,BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		
+		
+		if (bindingResult.hasErrors()) {
+			return configurarTaxas(servico.getId(), taxa);
+		}
+		List<Taxa> taxas = taxasServie.buscarTaxasPorIdServico(servico.getId());
+		taxa.setServico(servico);
+			
+			if(verificarTxas(taxas, taxa)){
+				
+				taxasService.saveOrUpdate(taxa);
+			}else{
+				ModelAndView model = new ModelAndView("redirect:/parametro/servico/"+servico.getId()+"/taxas");
+				return model;
+			}
+	
+		//ModelAndView model = new ModelAndView("redirect:/parametro/servico/taxas");
+		redirectAttributes.addFlashAttribute("messageVisible", "true");
+
+		
+		return configurarTaxas(servico.getId(), new Taxa());
+	}
+	
+	private boolean verificarTxas(List<Taxa> taxas, Taxa taxa){
+		
+		for(Taxa t : taxas){
+			if(t.getTipoCliente().equals(taxa.getTipoCliente())){
+				return false;
+			}
+				
+		}
+		return true;
+	}
+	
+	@GetMapping(value = {"/taxas"})
+	public ModelAndView configurarTaxas() {
+		
+	
+	
+		ModelAndView model = new ModelAndView("/parametros/servico/taxas");
+		listarServicos(model);
+		return model;
+	}
+
+	private void listarServicos(ModelAndView model) {
+		List<Servico> servicos = servicoService.getServicosComSuasTaxas();
+		model.addObject("servicos",servicos);
+	}
 	
 	
 	

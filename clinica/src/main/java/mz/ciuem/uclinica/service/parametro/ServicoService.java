@@ -8,5 +8,10 @@ import mz.ciuem.uclinica.service.GenericService;
 public interface ServicoService extends GenericService<Servico>{
 
 	List<Servico> getServicosComSuasTaxas();
+	
+	List getTodosServicosDaEspecialidade(String especialidade);
+	
+	
+	List getTodosServicosDaEspecialidadeToJson(String especialidade);
 
 }

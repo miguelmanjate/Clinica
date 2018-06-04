@@ -31,17 +31,17 @@ public class Orgao extends GenericEntity{
 		this.designacao = designacao;
 	}
 	
-	@OneToMany(mappedBy= "orgao", fetch = FetchType.EAGER)
-	List<Unidades> unidades;
+//	@OneToMany(mappedBy= "orgao")
+//	List<Unidades> unidades;
 
-	public List<Unidades> getUnidades() {
-		return unidades;
-	}
-
-	public void setUnidades(List<Unidades> unidades) {
-		this.unidades = unidades;
-	}
-	
+//	public List<Unidades> getUnidades() {
+//		return unidades;
+//	}
+//
+//	public void setUnidades(List<Unidades> unidades) {
+//		this.unidades = unidades;
+//	}
+//	
 	
 
 }

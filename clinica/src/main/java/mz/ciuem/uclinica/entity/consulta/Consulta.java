@@ -3,7 +3,6 @@ package mz.ciuem.uclinica.entity.consulta;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,10 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,21 +25,22 @@ import mz.ciuem.uclinica.entity.parametro.Especialidade;
 import mz.ciuem.uclinica.entity.parametro.Servico;
 
 @Entity
-@Table(name = "consulta")
+@Table(name = "consulta_consulta")
 public class Consulta extends GenericEntity {
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "paciente_id")
 	private Paciente paciente;
 
 	@Column(name = "tipo_consulta")
 	@Enumerated(EnumType.STRING)
 	private TipoConsulta tipoConsulta;
+	
 	@Column(name = "causa_admissao_consulta")
 	@Enumerated(EnumType.STRING)
 	private CausaAdmissao causaAdmissao;
 
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "consulta_especialidade_id")
 	private Especialidade especialidade ;
 
@@ -62,13 +62,10 @@ public class Consulta extends GenericEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "medico_id")
 	private Medico medico;
-     //cascade = CascadeType.ALL
-	@ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)
-	@JoinTable(name = "servico_consulta", joinColumns = { @JoinColumn(name = "consulta_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "servico_id") })
-	private List<Servico> servicos;
+    
+	@OneToMany(mappedBy = "consulta", fetch = FetchType.EAGER)
+	private List<ItemConsultaServico> itemConsultaServicos;
 	
-
 
 	public Paciente getPaciente() {
 		return paciente;
@@ -119,6 +116,13 @@ public class Consulta extends GenericEntity {
 	}
 
 	public double getPreco() {
+		this.preco = 0;
+		for (ItemConsultaServico itemConsultaServico : itemConsultaServicos) {
+			if (itemConsultaServico != null) {
+
+				this.preco = this.preco + itemConsultaServico.getPreco();
+			}
+		}
 		return preco;
 	}
 
@@ -142,14 +146,13 @@ public class Consulta extends GenericEntity {
 		this.medico = medico;
 	}
 
-	public List<Servico> getServicos() {
-		return servicos;
+	public List<ItemConsultaServico> getItemConsultaServicos() {
+		return itemConsultaServicos;
 	}
 
-	public void setServicos(List<Servico> servicos) {
-		this.servicos = servicos;
+	public void setItemConsultaServicos(List<ItemConsultaServico> itemConsultaServicos) {
+		this.itemConsultaServicos = itemConsultaServicos;
 	}
 
-	
 	
 }

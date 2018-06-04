@@ -123,6 +123,10 @@
 										</tr>
 
 									</thead>
+									<tr>
+										<td><b>Faculdade </b></td>
+										<td><i th:text="${estudante.faculdade?.descricao}"></i></td>
+									</tr>
 
 									<tr>
 										<td><b>Curso </b></td>
@@ -200,25 +204,26 @@
 											</button>
 
 											<a class="btn btn-danger" th:href="@{/estudante/uem/list}">
-											<i class="fa fa-times" style="margin: 2px"></i>
-												Cancelar </a>
+												<i class="fa fa-times" style="margin: 2px"></i> Cancelar
+											</a>
 										</div>
 
 
-                                        <input type="hidden" th:field="*{id}" />
-                                        <input type="hidden" th:field="*{nome}" />
-                                        <input type="hidden" th:field="*{apelido}" />
-                                        <input type="hidden" th:field="*{dataDeNascimento}" />
-                                        <input type="hidden" th:field="*{nomeDoPai}" />
-                                        <input type="hidden" th:field="*{nomeDaMae}" />
-                                        <input type="hidden" th:field="*{numeroBi}" />
-                                        <input type="hidden" th:field="*{genero}" />
-                                        <input type="hidden" th:field="*{estadoCivil}" />
-                                        <input type="hidden" th:field="*{telefone}" />
-                                        <input type="hidden" th:field="*{endereco}" />
-                                        <input type="hidden" th:field="*{curso.id}" />
-                                        <input type="hidden" th:field="*{ano}" />
-                                        <input type="hidden" th:field="*{semestre}" />
+										<input type="hidden" th:field="*{id}" /> <input type="hidden"
+											th:field="*{nome}" /> <input type="hidden"
+											th:field="*{apelido}" /> <input type="hidden"
+											th:field="*{dataDeNascimento}" /> <input type="hidden"
+											th:field="*{nomeDoPai}" /> <input type="hidden"
+											th:field="*{nomeDaMae}" /> <input type="hidden"
+											th:field="*{numeroBi}" /> <input type="hidden"
+											th:field="*{genero}" /> <input type="hidden"
+											th:field="*{estadoCivil}" /> <input type="hidden"
+											th:field="*{telefone}" /> <input type="hidden"
+											th:field="*{endereco}" /> <input type="hidden"
+											th:field="*{curso.id}" /> <input type="hidden"
+											th:field="*{faculdade.id}" /> <input type="hidden"
+											th:field="*{ano}" /> <input type="hidden"
+											th:field="*{semestre}" />
 									</div>
 								</div>
 							</form>

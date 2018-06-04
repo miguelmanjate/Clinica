@@ -36,7 +36,7 @@ public class Estudante extends Paciente {
 	@JoinColumn(name = "curso_id")
 	private Curso curso;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "faculdade_id")
 	private Faculdade faculdade;
 	

@@ -140,7 +140,7 @@
 										</tr>
 										<tr>
 											<td><b>Especialidade</b></td>
-											<td><i th:text="${consulta.especialidade}"></i></td>
+											<td><i th:text="${consulta.especialidade.descricao}"></i></td>
 										</tr>
 										<tr>
 											<td><b>Causa de Admissão</b></td>
@@ -190,10 +190,10 @@
 											</tr>
 
 										</thead>
-										<tr th:each="servico :${consulta.servicos}">
+										<tr th:each="item :${consulta.itemConsultaServicos}">
 
-											<td><i th:text="${servico.designacao}"></i></td>
-											<td><i th:text="${servico.preco}"></i></td>
+											<td><i th:text="${item.descricao}"></i></td>
+											<td><i th:text="${item.preco}"></i></td>
 										</tr>
 										<tr>
 											<td><b>Preço da Consulta </b></td>

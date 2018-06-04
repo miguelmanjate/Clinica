@@ -176,39 +176,39 @@
 												</select>
 											</div>
 
+
 											<div class="form-group ">
-												<label for="especia</div>lidade">Especialidade</label> <select
-													th:field="*{consulta.especialidade}"
-													class="form-control input-sm">
+												<label for="especialidade">Especialidade</label> <select
+													th:field="*{consulta.especialidade.id}"
+													class="form-control input-sm multiple-select select">
 													<option th:each="especialidade : ${especialidade}"
-														th:value="${especialidade}" th:text="${especialidade}" />
+														th:value="${especialidade.id}"
+														th:text="${especialidade.descricao}" />
 												</select>
 											</div>
 
 										</div>
 
 
-										<div class="col-md-3 ">
+										<div class="col-md-4 col-sm-6 col-xs-12">
 
 
 											<div class="form-group ">
 												<label for="causaAdmissao">Admissão Por</label> <select
 													th:field="*{consulta.causaAdmissao}"
-													class="form-control input-sm">
+													class="form-control input-sm multiple-select">
 													<option th:each="causaAdmissao : ${causaAdmissao}"
 														th:value="${causaAdmissao}" th:text="${causaAdmissao}" />
 												</select>
 											</div>
 
 											<div class="form-group ">
-												<label for="medico">Medico</label> <select
+												<label for="medico">Médico</label> <select
 													th:field="*{consulta.medico.id}"
-													class="form-control input-sm">
-													<option th:each="medico : ${medicos}"
-														th:value="${medico.id}" th:text="${medico.nome}" />
+													class="form-control input-sm multiple-select medicos">
+
 												</select>
 											</div>
-
 
 										</div>
 
@@ -231,7 +231,8 @@
 																<i class="fa fa-calendar"></i>
 															</div>
 															<input th:field="*{consulta.dataDaConsulta}"
-																id="data-consulta" class="form-control input-sm" />
+																required="required" type="datetime" id="data-consulta"
+																class="form-control input-sm" />
 
 														</div>
 													</div>
@@ -253,51 +254,56 @@
 														<!-- /.input group -->
 													</div>
 												</div>
-											</div>
-											<div class="col-md-6 ">
 
-												 <div class="form-group ">
-														<label for="servico">Servicos</label> <select
-															multiple="multiple" th:field="*{servicos}"
-															class="form-control input-sm multiple-select">
-															<option th:each="servico : ${servicos}"
-																th:value="${servico.id}" th:text="${servico.designacao}"></option>
+												<div class="col-lg-11 col-md-12 col-sm-12 col-xs-12">
+
+
+													<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
+													<div class="form-group ">
+														<label for="servico">Serviços</label> <select
+															required="required" multiple="multiple"
+															th:field="*{servicos}"
+															class="form-control input-sm multiple-select servicos">
+
 
 														</select>
 													</div>
 
-											</div>
-											<div class="col-md-6 ">
 
-												<div class="form-group ">
-													<label for="estado">Estado</label> <select
-														th:field="*{consulta.estado}"
-														class="form-control input-sm multiple-select">
-														<option th:each="estado : ${estados}" th:value="${estado}"
-															th:text="${estado}"></option>
+												</div>
+												<div class="col-md-6 ">
 
-													</select>
+													<div class="form-group ">
+														<label for="estado">Estado</label> <select
+															th:field="*{consulta.estado}"
+															class="form-control input-sm multiple-select">
+															<option th:each="estado : ${estados}"
+																th:value="${estado}" th:text="${estado}"></option>
+
+														</select>
+													</div>
+
 												</div>
 
 											</div>
+											
+											
+										<div class="">
+
+											<button type="submit" class="btn btn-sm btn-primary  "
+												id="btn-agendar">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
+											</button>
+											<a class="btn btn-danger"
+												th:href="@{/consulta/{id}/list/(id=${paciente.id})}"> <i
+												class="fa fa-times" style="margin: 2px"></i> Cancelar
+											</a>
+										</div>
 
 										</div>
 
-									</div>
 
-
-
-									<div class="">
-
-										<button type="submit" class="btn btn-sm btn-primary  "
-											id="btn-agendar">
-											<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
-										</button>
-											<a class="btn btn-danger" th:href="@{/consulta/{id}/list/(id=${paciente.id})}">
-											<i class="fa fa-times" style="margin: 2px"></i>
-											Cancelar </a>
-									</div>
-									<input type="hidden" th:field="*{consulta.id}" />
+										<input type="hidden" th:field="*{consulta.id}" />
 								</form>
 
 
