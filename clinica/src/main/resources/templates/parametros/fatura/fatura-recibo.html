@@ -21,8 +21,8 @@
 
 						<span><b><code>
 									<h3 class="box-title">Recibo da Consulta</h3>
-									<h3 class="box-title" > nº
-										<i th:text="${factura.numeroDaFactura}"></i>
+									<h3 class="box-title">
+										nº <i th:text="${factura.numeroDaFactura}"></i>
 									</h3>
 								</code></b></span> <span class="tools pull-right"> <a
 							class="delete btn btn-xs btn-danger"
@@ -123,7 +123,7 @@
 										</tr>
 										<tr>
 											<td><b>Especialidade</b></td>
-											<td><i th:text="${consulta.especialidade}"></i></td>
+											<td><i th:text="${consulta.especialidade?.descricao}"></i></td>
 										</tr>
 										<tr>
 											<td><b>Causa de Admissão</b></td>
@@ -160,6 +160,16 @@
 											<td><b>Estado</b></td>
 											<td><i th:text="${consulta.estado}"></i></td>
 										</tr>
+										<tr>
+											<td><b>Forma de Pagamento </b></td>
+											<td>
+												<h3>
+													<span class="label label-default"> <i
+														th:text="${factura.formaPagamento}"></i>
+													</span>
+												</h3>
+											</td>
+										</tr>
 
 									</table>
 
@@ -173,10 +183,10 @@
 											</tr>
 
 										</thead>
-										<tr th:each="servico :${consulta.servicos}">
+										<tr th:each="item :${consulta.itemConsultaServicos}">
 
-											<td><i th:text="${servico.designacao}"></i></td>
-											<td><i th:text="${servico.preco}"></i></td>
+											<td><i th:text="${item.descricao}"></i></td>
+											<td><i th:text="${item.preco}"></i></td>
 										</tr>
 										<tr>
 											<td><b>Preço da Consulta </b></td>
@@ -187,6 +197,7 @@
 													</span>
 												</h3>
 											</td>
+
 										</tr>
 
 									</table>

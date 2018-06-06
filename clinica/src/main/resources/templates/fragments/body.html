@@ -23,7 +23,7 @@
 				<!-- Sidebar user panel -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img th:src="@{/img/avatar.png}" class="img-circle"
+						<img th:src="@{/img/person.jpg}" class="img-circle"
 							alt="User Image" />
 					</div>
 					<div class="pull-left info">
@@ -166,7 +166,7 @@
 							<li><a th:href="@{/parametro/medicos}"><i
 									class="fa fa-plus"></i>Novo Médico</a></li>
 
-							<li><a><i class="fa fa-eye"></i>Ver Consultas</a></li>
+							<li><a th:href="@{/parametro/medicos/list/consulta/}" ><i class="fa fa-eye"></i>Ver Consultas</a></li>
 
 						</ul></li>
 

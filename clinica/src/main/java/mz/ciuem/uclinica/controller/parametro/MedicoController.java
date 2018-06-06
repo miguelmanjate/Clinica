@@ -1,6 +1,7 @@
 package mz.ciuem.uclinica.controller.parametro;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import mz.ciuem.uclinica.entity.consulta.Consulta;
+import mz.ciuem.uclinica.entity.consulta.EstadoDaConsulta;
 import mz.ciuem.uclinica.entity.consulta.Medico;
 import mz.ciuem.uclinica.entity.paciente.EstadoCivil;
 import mz.ciuem.uclinica.entity.paciente.Genero;
-import mz.ciuem.uclinica.entity.paciente.Raca;
-import mz.ciuem.uclinica.entity.paciente.TipoDocumento;
+import mz.ciuem.uclinica.entity.paciente.Paciente;
+import mz.ciuem.uclinica.service.consulta.ConsultaService;
 import mz.ciuem.uclinica.service.consulta.MedicoService;
 import mz.ciuem.uclinica.service.parametro.EspecialidadeService;
 import mz.ciuem.uclinica.service.parametro.SectorService;
@@ -37,6 +40,9 @@ public class MedicoController {
 	
 	@Autowired
 	private SectorService sectorService;
+	
+	@Autowired
+	private ConsultaService consultaService;
 
 	private List<Medico> medicos;
 	
@@ -80,6 +86,26 @@ public class MedicoController {
 	    return exibirPacientes();
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = { "/list/consulta", "/list/consulta/" })
+	public ModelAndView listarMedicoConsultas(){
+	
+		medicos = medicoService.getAll();
+		
+		List<Medico> selecionarMedicos = new ArrayList<>();
+		
+		for (Medico medico : medicos){
+			if(medico.getConsultas().size() != 0){
+				selecionarMedicos.add(medico);
+			}
+				
+		}
+		
+		ModelAndView model = new ModelAndView("/parametros/medico/list-medicos-consultas");
+		model.addObject("medicos", selecionarMedicos);
+		
+		return model;
+	}
+	
 	private ModelAndView exibirPacientes() {
 
 		ModelAndView modelAndView = new ModelAndView("/parametros/medico/list-medico");
@@ -124,5 +150,43 @@ public class MedicoController {
 		return model;
 	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = {"medico/{id}/consultas", "medico/{id}/consultas/"})
+	public ModelAndView verConsultasMedico(@PathVariable Long id){
+		
+		Medico medico = medicoService.find(id);
+		
+		ModelAndView model = new ModelAndView("/parametros/medico/medico-consultas-agend", "medico", medico);
+		model.addObject("consultas", medico.getConsultas());
+		
+		return model;
+	}
+	@RequestMapping(method = RequestMethod.GET, value = {"consulta/{id}/servicos"})
+	public ModelAndView verConsultaServicos(@PathVariable Long id){
+		
+		Consulta consulta = consultaService.find(id);
+		Paciente paciente = consulta.getPaciente();
+		Medico medico = consulta.getMedico();
+		
+		ModelAndView model = new ModelAndView("/parametros/medico/medico-consulta-servicos");
+		model.addObject("consulta", consulta);
+		model.addObject("paciente", paciente);
+		model.addObject("medico", medico);
+		
+		return model;
+		
+	}
+	@RequestMapping(method = RequestMethod.GET, value = {"consulta/{id}/concluida"})
+	public ModelAndView concluirAtendimentoConsulta(@PathVariable Long id){
+		
+		Consulta consulta = consultaService.find(id);
+		consulta.setEstado(EstadoDaConsulta.ATENDIDA);
+		
+		consultaService.update(consulta);
+		Medico medico = consulta.getMedico();
+		
+		ModelAndView model = new ModelAndView("redirect:/parametro/medicos/medico/"+medico.getId()+"/consultas/");
+		
+		return model;
+	}
 	
 }

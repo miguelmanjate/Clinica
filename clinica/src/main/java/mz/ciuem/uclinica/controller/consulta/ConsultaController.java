@@ -50,19 +50,18 @@ public class ConsultaController {
 
 	@Autowired
 	private ServicoService servicoService;
-	
-	@Autowired 
+
+	@Autowired
 	private FacturaService facturaService;
-	
+
 	@Autowired
 	private EspecialidadeService especialidadeService;
-	
+
 	@Autowired
 	private ItemConsultaService itemConsultaServicoService;
-	
+
 	private Paciente paciente;
 	private Consulta consulta;
-	
 
 	@GetMapping("/agendar/{id}")
 	public ModelAndView agendarConculta(@ModelAttribute ConsultaForm consultaForm, @PathVariable Long id) {
@@ -70,7 +69,7 @@ public class ConsultaController {
 		paciente = pacienteService.find(id);
 		ModelAndView model = new ModelAndView("/consultas/agendar-consulta");
 		model.addObject("paciente", paciente);
-	
+
 		preencherFormulario(model);
 		model.addObject("consultas", consultaService.getConsultasDoPaciente(paciente));
 
@@ -78,13 +77,13 @@ public class ConsultaController {
 	}
 
 	private List<Servico> selecionarServicos(List<Servico> servicos) {
-		
+
 		List<Servico> servicosSelecionados = new ArrayList<>();
-		for(Servico s : servicos){
-//			     if(s.getServicoTipo().equals(ServicoTipo.CONSULTA_MEDICA))
-			    	 servicosSelecionados.add(s);	 
+		for (Servico s : servicos) {
+			// if(s.getServicoTipo().equals(ServicoTipo.CONSULTA_MEDICA))
+			servicosSelecionados.add(s);
 		}
-         return servicosSelecionados;
+		return servicosSelecionados;
 	}
 
 	private void preencherFormulario(ModelAndView model) {
@@ -99,29 +98,28 @@ public class ConsultaController {
 	public ModelAndView registarConsulta(@Valid ConsultaForm consultaForm, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 		if (bindingResult.hasErrors()) {
-          
+
 		}
 		double precoTotal = 0;
 		Consulta consulta = consultaForm.getConsulta();
-		
+
 		consulta.setPaciente(paciente);
-		
+
 		List<Servico> servicosSelecionados = new ArrayList<>();
 
 		for (Servico servico : consultaForm.getServicos()) {
-			
+
 			servicosSelecionados.add(servicoService.find(servico.getId()));
 		}
-	
+
 		consulta.setEstado(EstadoDaConsulta.AGENDADA);
 		consultaService.create(consulta);
-		try{
-		itemConsultaServicoService.criarItemConsultaListaServicos(consulta, servicosSelecionados);
-		
-		//consulta.getPreco();
-		//consultaService.saveOrUpdate(consulta);
+				
+		try {
+			itemConsultaServicoService.criarItemConsultaListaServicos(consulta, servicosSelecionados);
+
 		} catch (RuntimeException e) {
-             System.err.println(e);
+			System.err.println(e);
 			redirectAttributes.addFlashAttribute("msgSemTaxas", "true");
 			ModelAndView model = new ModelAndView("redirect:/consulta/agendar/" + paciente.getId());
 
@@ -145,13 +143,14 @@ public class ConsultaController {
 		return model;
 
 	}
-	
+
 	@GetMapping("{id}/select")
 	public ModelAndView selectConsultaDoPacinte(@PathVariable Long id) {
 
 		Consulta consulta = consultaService.find(id);
 		Paciente paciente = consulta.getPaciente();
-		//List<Consulta> consultas = consultaService.getConsultasDoPaciente(paciente);
+		// List<Consulta> consultas =
+		// consultaService.getConsultasDoPaciente(paciente);
 
 		ModelAndView model = new ModelAndView("/consultas/paciente-uma-consulta", "consulta", consulta);
 		model.addObject("paciente", paciente);
@@ -163,15 +162,15 @@ public class ConsultaController {
 	@GetMapping("{id}/update")
 	public ModelAndView editar(@ModelAttribute ConsultaForm consultaForm, @PathVariable Long id) {
 
-		Consulta consulta =  consultaService.find(id);
-		consultaForm.setConsulta(consulta); 
+		Consulta consulta = consultaService.find(id);
+		consultaForm.setConsulta(consulta);
 		paciente = consultaForm.getConsulta().getPaciente();
 		consultaForm.setItems(consulta.getItemConsultaServicos());
-		
+
 		ModelAndView model = new ModelAndView("/consultas/update-consulta", "consultaForm", consultaForm);
 		model.addObject("paciente", consultaForm.getConsulta().getPaciente());
 		preencherFormulario(model);
-		
+
 		return model;
 
 	}
@@ -180,35 +179,35 @@ public class ConsultaController {
 
 	public ModelAndView aditar(@Valid ConsultaForm consultaForm, BindingResult bindingResult,
 			RedirectAttributes redirectAtributes) {
-		
+
 		if (bindingResult.hasErrors()) {
-			
+
 		}
 		double precoTotal = 0;
-        Consulta consulta = consultaForm.getConsulta();
-        consulta.setPaciente(paciente);
-                
-        List<Servico> servicosSelecionados = new ArrayList<>();
-        
-        for(Servico servico : consultaForm.getServicos()){
-        	
-        	servicosSelecionados.add(servicoService.find(servico.getId()));
+		Consulta consulta = consultaForm.getConsulta();
+		consulta.setPaciente(paciente);
 
-        }
-		 
+		List<Servico> servicosSelecionados = new ArrayList<>();
+
+		for (Servico servico : consultaForm.getServicos()) {
+
+			servicosSelecionados.add(servicoService.find(servico.getId()));
+
+		}
+
 		consultaService.saveOrUpdate(consulta);
-		try{
+		try {
 			System.err.println("try");
-        			
-        itemConsultaServicoService.actualizarItemConsultaListaServicos(consulta, servicosSelecionados);
-			} catch (RuntimeException e) {
 
-				redirectAtributes.addFlashAttribute("msgSemTaxas", "true");
-				ModelAndView model = new ModelAndView("redirect:/consulta/agendar/" + paciente.getId());
+			itemConsultaServicoService.actualizarItemConsultaListaServicos(consulta, servicosSelecionados);
+		} catch (RuntimeException e) {
 
-				return model;
-			}
-		ModelAndView model = new ModelAndView("redirect:/consulta/" + paciente.getId() + "/list");
+			redirectAtributes.addFlashAttribute("msgSemTaxas", "true");
+			ModelAndView model = new ModelAndView("redirect:/consulta/agendar/" + paciente.getId());
+
+			return model;
+		}
+		ModelAndView model = new ModelAndView("redirect:/consulta/" + consulta.getId() + "/detalhes");
 
 		return model;
 	}
@@ -240,7 +239,7 @@ public class ConsultaController {
 
 		return model;
 	}
-	
+
 	@GetMapping("{id}/cancelar/select")
 	public ModelAndView cancelarConsultaSelecionada(Consulta consulta, @PathVariable Long id) {
 
@@ -254,49 +253,49 @@ public class ConsultaController {
 
 		return model;
 	}
-	
+
 	@GetMapping("{id}/detalhes")
-	public ModelAndView detalhesConsulta(@PathVariable Long id){
-		
+	public ModelAndView detalhesConsulta(@PathVariable Long id) {
+
 		Consulta consulta = consultaService.find(id);
 		Paciente paciente = consulta.getPaciente();
-	
+
 		ModelAndView model = new ModelAndView("/consultas/detalhes-de-consulta", "consulta", consulta);
 		model.addObject("paciente", paciente);
-		
+
 		return model;
 	}
-	
+
 	@GetMapping(value = { "/listAgendadas", "/listAgendadas/" })
-	public ModelAndView listarConsultasAgendadas(){
-		
+	public ModelAndView listarConsultasAgendadas() {
+
 		List<Consulta> consultas = consultaService.getAll();
 		List<Consulta> consultasAgendadas = new ArrayList<>();
-		
-		for(Consulta consulta : consultas){
-			
-			if(consulta.getEstado().equals(EstadoDaConsulta.AGENDADA))
+
+		for (Consulta consulta : consultas) {
+
+			if (consulta.getEstado().equals(EstadoDaConsulta.AGENDADA))
 				consultasAgendadas.add(consulta);
 		}
 		ModelAndView model = new ModelAndView("/consultas/list-consultas-agendadas", "consultas", consultasAgendadas);
-		
+
 		return model;
-		
+
 	}
-	
-	@RequestMapping( value = {"/agendar/{id}/medicos", "/{id}/update/medicos"})
-	public @ResponseBody List<MedicoJson> getMedicosPorEspecialidade(@RequestParam String especialidade){
-		
+
+	@RequestMapping(value = { "/agendar/{id}/medicos", "/{id}/update/medicos" })
+	public @ResponseBody List<MedicoJson> getMedicosPorEspecialidade(@RequestParam String especialidade) {
+
 		List<MedicoJson> medicos = medicoService.getTodosMedicosDaEspecialidade(especialidade);
-		
+
 		return medicos;
 	}
-	
-	@RequestMapping( value = {"/agendar/{id}/servicos", "{id}/update/servicos"})
-	public @ResponseBody List<ServicoJason> getServicosPorEspecialidade(@RequestParam String especialidade){
-		
+
+	@RequestMapping(value = { "/agendar/{id}/servicos", "{id}/update/servicos" })
+	public @ResponseBody List<ServicoJason> getServicosPorEspecialidade(@RequestParam String especialidade) {
+
 		List<ServicoJason> servicos = servicoService.getTodosServicosDaEspecialidadeToJson(especialidade);
-		
+
 		return servicos;
 	}
 

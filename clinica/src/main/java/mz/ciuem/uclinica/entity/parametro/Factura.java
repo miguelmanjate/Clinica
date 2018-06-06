@@ -6,6 +6,9 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.consulta.Consulta;
+import mz.ciuem.uclinica.entity.consulta.ItemConsultaServico;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
 
 @Entity
@@ -41,10 +45,22 @@ public class Factura extends GenericEntity {
 	@Transient
 	private String dataString;
 	
-	@ManyToOne
-	@JoinColumn(name ="consulta")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name ="consulta_id")
 	private Consulta consulta;
 	
+	@Column(name = "forma_de_pagamento")
+	@Enumerated(EnumType.STRING)
+	private FormaPagamento formaPagamento;
+	
+	public FormaPagamento getFormaPagamento() {
+		return formaPagamento;
+	}
+
+	public void setFormaPagamento(FormaPagamento formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
+
 	public String getDataString() {
 		return dataString;
 	}
@@ -86,6 +102,15 @@ public class Factura extends GenericEntity {
 	}
 
 	public double getTotal() {
+		
+		this.total = 0;
+		
+		for(ItemConsultaServico item : this.consulta.getItemConsultaServicos()){
+			
+			if(item != null){
+				this.total = this.total + item.getPreco();
+			}
+		}
 		return total;
 	}
 

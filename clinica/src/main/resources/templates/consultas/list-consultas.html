@@ -51,7 +51,7 @@
 										<td th:text="${consulta.tipoConsulta}"></td>
 										<td th:text="${consulta.causaAdmissao}"></td>
 										<td th:text="${consulta.medico?.nome}"></td>
-										<td th:text="${consulta.especialidade}"></td>
+										<td th:text="${consulta.especialidade?.descricao}"></td>
 										<td th:text="${consulta.preco}"></td>
 
 										<td><a class="delete btn btn-xs btn-primary"

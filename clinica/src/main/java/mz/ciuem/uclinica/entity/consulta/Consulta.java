@@ -9,8 +9,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
 import mz.ciuem.uclinica.entity.parametro.Especialidade;
-import mz.ciuem.uclinica.entity.parametro.Servico;
+import mz.ciuem.uclinica.entity.parametro.Factura;
 
 @Entity
 @Table(name = "consulta_consulta")
@@ -62,10 +60,20 @@ public class Consulta extends GenericEntity {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "medico_id")
 	private Medico medico;
+	
+	@OneToMany(mappedBy = "consulta")
+	private List<Factura> facturas;
     
 	@OneToMany(mappedBy = "consulta", fetch = FetchType.EAGER)
 	private List<ItemConsultaServico> itemConsultaServicos;
 	
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
 
 	public Paciente getPaciente() {
 		return paciente;

@@ -1,6 +1,7 @@
 package mz.ciuem.uclinica.entity.consulta;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -125,7 +126,14 @@ public class Medico extends GenericEntity {
 	}
 
 	public List<Consulta> getConsultas() {
-		return consultas;
+	List<Consulta> selecionarConsultas = new ArrayList<>();
+	
+		for(Consulta c : this.consultas){
+			if(c.getEstado().toString().equals(EstadoDaConsulta.PAGA.toString())){
+				selecionarConsultas.add(c);
+			}
+		}
+		return selecionarConsultas;
 	}
 
 	public void setConsultas(List<Consulta> consultas) {

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Servicos</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+
+						<span><b><code>
+									<h3 class="box-title">Consultas Agendadas</h3>
+									<h3 class="box-title">
+										 <i ></i>
+									</h3>
+								</code></b></span> <span class="tools pull-right"> <a
+							class="delete btn btn-xs btn-danger"
+							th:href="@{/parametro/medicos/list/consulta/}"> <i class=" fa fa-times"
+								style="margin: 5px"></i></a>
+
+						</span>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Codigo </b></td>
+										<td><h3>
+												<span class="label label-success"> <i
+													th:text="${medico.codigo}"></i>
+												</span>
+											</h3></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Nome completo </b></td>
+										<td><i th:text="${medico.nome}" style="margin-right: 5px"></i><i
+											th:text="${medico.apelido}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Especialidade </b></td>
+										<td><i th:text="${medico.especialidade.descricao}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table"
+								style="margin-top: 20px">
+								<thead>
+									<tr>
+										<th>Tipo de Consulta</th>
+										<th>Causa de Admissao</th>
+										<th>Data</th>
+										<th>Hora</th>
+										<th>Paciente</th>
+										<th>nº de serviços</th>
+										<th>Estado</th>
+										<th>Detalhes da consulta</th>
+					
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="consulta :${consultas}">
+										<td th:text="${consulta.tipoConsulta}"></td>
+										<td th:text="${consulta.causaAdmissao}"></td>
+
+										<td th:text="${consulta.dataDaConsulta}"></td>
+										<td th:text="${consulta.horaDaConsulta}"></td>
+										<td th:text="${consulta.paciente?.nome}"></td>
+										<td th:text="${consulta.itemConsultaServicos.size()}"></td>
+										<td th:text="${consulta.estado}"></td>
+
+										<td><a class="delete btn btn-xs btn-primary"
+											th:href="@{/parametro/medicos/consulta/{id}/servicos(id=${consulta.id})}"><i
+												class="fa fa-eye" style="margin: 2px"></i></a></td>
+
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer"></div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+</body>
+</html>
