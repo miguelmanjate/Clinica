@@ -31,6 +31,7 @@
 									<tr>
 										<th>Data da Consulta</th>
 										<th>Hora da Consulta</th>
+										<th>NID do Paciente</th>
 										<th>Nome do Paciente</th>
 										<th>Tipo de Consulta</th>
 										<th>Causa de Admissao</th>
@@ -47,6 +48,7 @@
 										<td><i th:text="${consulta.dataDaConsulta}"></i></td>
 
 										<td><i th:text="${consulta.horaDaConsulta}"></i></td>
+										<td th:text="${consulta.paciente?.nid}"></td>
 										<td th:text="${consulta.paciente?.nome}"></td>
 										<td th:text="${consulta.tipoConsulta}"></td>
 										<td th:text="${consulta.causaAdmissao}"></td>
@@ -65,6 +67,7 @@
 									<tr>
 										<th>Data da Consulta</th>
 										<th>Hora da Consulta</th>
+										<th>NID do Paciente</th>
 										<th>Nome do Paciente</th>
 										<th>Tipo de Consulta</th>
 										<th>Causa de Admissao</th>

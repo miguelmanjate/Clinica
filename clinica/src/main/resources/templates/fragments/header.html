@@ -1,92 +1,104 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head th:fragment = "head(title,links,scripts)">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="head(title,links,scripts)">
 
-<title th:replace = "${title}"></title>
+<title th:replace="${title}"></title>
 
-<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'></meta>
-  <meta charset="UTF-8"></meta>
+<meta
+	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+	name='viewport'></meta>
+<meta charset="UTF-8"></meta>
 
-        
-    
-        <!-- bootstrap 3.0.2 -->
-        <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
-        <!-- font Awesome -->
-        <link th:href="@{/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
-        <!-- Ionicons -->
-        <link th:href="@{/css/ionicons.min.css}" rel="stylesheet" type="text/css" />
-        <!-- Morris chart -->
-        <link th:href="@{/css/morris/morris.css}" rel="stylesheet" type="text/css" />
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link th:href="@{/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}" rel="stylesheet" type="text/css" />
-        <!-- Theme style -->
-        <link th:href="@{/css/AdminLTE.css}" rel="stylesheet" type="text/css" />
+
+
+<!-- bootstrap 3.0.2 -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"
+	type="text/css" />
+<!-- font Awesome -->
+<link th:href="@{/css/font-awesome.min.css}" rel="stylesheet"
+	type="text/css" />
+<!-- Ionicons -->
+<link th:href="@{/css/ionicons.min.css}" rel="stylesheet"
+	type="text/css" />
+<!-- Morris chart -->
+<link th:href="@{/css/morris/morris.css}" rel="stylesheet"
+	type="text/css" />
+<!-- bootstrap wysihtml5 - text editor -->
+<link th:href="@{/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css}"
+	rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link th:href="@{/css/AdminLTE.css}" rel="stylesheet" type="text/css" />
 <!--          <link th:href="@{/css/timepicker/bootstrap-timepicker.min.css}" rel="stylesheet"/> -->
 <!--           <link th:href="@{css/daterangepicker/daterangepicker-bs3.css}" rel="stylesheet" type="text/css" /> -->
-        
-        <link th:href="@{/css/jQueryUI/jquery-ui.min.css}" rel="stylesheet" type="text/css" />
-                 <link th:href="@{/css/wickedpicker.css}" rel="stylesheet"/>
-                         <link th:href="@{/css/datatables/dataTables.bootstrap.css}" rel="stylesheet"/>
-        <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
-        
-     
+
+<link th:href="@{/css/jQueryUI/jquery-ui.min.css}" rel="stylesheet"
+	type="text/css" />
+<link th:href="@{/css/wickedpicker.css}" rel="stylesheet" />
+<link th:href="@{/css/datatables/dataTables.bootstrap.css}"
+	rel="stylesheet" />
+<link
+	href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css"
+	rel="stylesheet" />
+
+
 </head>
-<body class = "skin-blue">
- <header class="header" th:fragment  = "header">
-            <a href="index.html" class="logo">
-                <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                e-UClinica
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top" role="navigation">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <div class="navbar-right">
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-  
-  
-  
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="glyphicon glyphicon-user"></i>
-                                <span sec:authentication="name"> <i class="caret"></i></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    <img th:src="@{/img/person.jpg}" class="img-circle" alt="User Image" />
-                                    <p>
-                                        <small> 2018 </small>
-                                    </p>
-                                </li>
-                              
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a  class="btn btn-default btn-flat">Perfil</a>
-                                    </div>
-                                    <div class="pull-right">
-                                    <form th:action = "@{/logout}" method="post">
-                                        <input type = "submit" class="btn btn-default btn-flat" value="Sair"></input>
-                                        
-                                        </form>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        
-         
+<body class="skin-blue">
+	<header class="header" th:fragment="header">
+		<a href="index.html" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
+			<div class="pull-left image">
+				<img th:src="@{/img/u4.jpg}" alt="User Image" width="37px" />
+			</div> Clinica - UEM
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top" role="navigation">
+			<!-- Sidebar toggle button-->
+			<a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas"
+				role="button"> <span class="sr-only">Toggle navigation</span> <span
+				class="icon-bar"></span> <span class="icon-bar"></span> <span
+				class="icon-bar"></span>
+			</a>
+			<div class="navbar-right">
+				<ul class="nav navbar-nav">
+					<!-- Messages: style can be found in dropdown.less-->
+
+
+
+					<!-- User Account: style can be found in dropdown.less -->
+					<li class="dropdown user user-menu"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"> <i
+							class="glyphicon glyphicon-user"></i> <span
+							sec:authentication="name"> <i class="caret"></i></span>
+					</a>
+						<ul class="dropdown-menu">
+							<!-- User image -->
+							<li class="user-header bg-light-blue"><img
+								th:src="@{/img/person.jpg}" class="img-circle" alt="User Image" />
+								<p>
+									<small> 2018 </small>
+								</p></li>
+
+							<!-- Menu Footer-->
+							<li class="user-footer">
+								<div class="pull-left">
+									<a class="btn btn-default btn-flat">Perfil</a>
+								</div>
+								<div class="pull-right">
+									<form th:action="@{/logout}" method="post">
+										<input type="submit" class="btn btn-default btn-flat"
+											value="Sair"></input>
+
+									</form>
+								</div>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+
 
 </body>
 </html>

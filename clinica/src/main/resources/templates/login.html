@@ -27,14 +27,22 @@
 
 
 	<div class="form-box" id="login-box">
-		
+
 		<div>
-			<h1
+
+<!-- 			<h1
 				style="color: #fff; font-family: 'Trocchi', serif; font-size: 20px; font-weight: bold; line-height: 48px; margin: 0;">Subsistema
-				de Gestão de Saúde</h1>
+				de Gestão de Saúde</h1> -->
 		</div>
 
-		<div class="header">Aceder ao Sistema</div>
+		<div class="header">
+			<div class="pull-center image">
+			
+				<img th:src="@{/img/u4.jpg}"  alt="User Image" width="70px" />
+				
+			</div>
+			Clínica Universitária
+		</div>
 		<form th:action="@{/login}" method="post">
 			<div class="body bg-gray">
 				<div class="form-group">
