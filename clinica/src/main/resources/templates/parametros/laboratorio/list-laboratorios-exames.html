@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Listar Laboratorios</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Lista de Laboratorio && Nº de Exames
+							Agendados</h3>
+
+						<div class="msg1-medico-update" th:if="${messageVisible}"></div>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Laboratorio</th>
+										<th>Especialidade</th>
+										<th>Nº de Exames</th>
+										<th>Ver Exames</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="laboratorio :${laboratorios}">
+										<td><i th:text="${laboratorio.descricao}"></i></td>
+										<td th:text="${laboratorio.especialidade.descricao}"></td>
+
+
+										<td><h4>
+												<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+													class="fa fa-envelope"> <span
+														class="label label-success"
+														th:text="${laboratorio.exames.size()}"></span></i></a>
+											</h4></td>
+
+										<td><a class="delete btn btn-xs btn-primary"
+											th:href="@{/parametro/laboratorio/laboratorio/{id}/exames/(id=${laboratorio.id})}"><i
+												class=" fa fa-eye" style="margin: 4px"></i></a></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Laboratorio</th>
+										<th>Especialidade</th>
+										<th>Nº de Exames</th>
+										<th>Ver Exames</th>
+									</tr>
+								</tfoot>
+
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer"></div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

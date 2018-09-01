@@ -5,7 +5,7 @@
 	layout:decorator="clinica">
 
 <head>
-<title>Consultas Registadas</title>
+<title>Exames Registadas</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 				<!-- general form elements -->
 				<div class="box box-success">
 					<div class="box-header">
-						<h3 class="box-title">Consultas Registadas</h3>
+						<h3 class="box-title">Exames Registadas</h3>
 					</div>
 					<!-- /.box-header -->
 					<!-- form start -->
@@ -146,11 +146,10 @@
 								style="margin-top: 20px">
 								<thead>
 									<tr>
-										<th>Tipo de Consulta</th>
-										<th>Causa de Admissao</th>
+										<th>Tipo de Exame</th>
 										<th>Data</th>
 										<th>Hora</th>
-										<th>Medico</th>
+										<th>Laboratorio</th>
 										<th>Preco</th>
 										<th>Estado</th>
 										<th>Editar</th>
@@ -159,29 +158,25 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="consulta :${consultas}">
-										<td th:text="${consulta.tipoConsulta}"></td>
-										<td th:text="${consulta.causaAdmissao}"></td>
-
-										<td th:text="${consulta.dataDaConsulta}"></td>
-										<td th:text="${consulta.horaDaConsulta}"></td>
-										<td th:text="${consulta.medico?.nome}"></td>
-										<td th:text="${consulta.preco}"></td>
-										<td th:text="${consulta.estado}"></td>
-
-
+									<tr th:each="exame :${exames}">
+										<td th:text="${exame.tipoExame}"></td>
+										<td th:text="${exame.dataDaConsulta}"></td>
+										<td th:text="${exame.horaDaConsulta}"></td>
+										<td th:text="${exame.laboratorio?.descricao}"></td>
+										<td th:text="${exame.preco}"></td>
+										<td th:text="${exame.estado}"></td>
 
 
 										<td><a class="delete btn btn-xs btn-primary"
-											th:href="@{/consulta/{id}/update(id=${consulta.id})}"><i
+											th:href="@{/exame/{id}/update(id=${exame.id})}"><i
 												class="fa fa-edit" style="margin: 2px"></i></a></td>
 
 										<td><a class="delete btn btn-xs btn-default"
-											th:href="@{/consulta/{id}/detalhes(id=${consulta.id})}"><i
+											th:href="@{/exame/{id}/detalhes(id=${exame.id})}"><i
 												class="fa fa-eye" style="margin: 2px"></i></a></td>
 
 										<td><a class="delete btn btn-xs btn-danger"
-											th:href="@{/consulta/{id}/cancelar(id=${consulta.id})}"><i
+											th:href="@{/exame/{id}/cancelar(id=${exame.id})}"><i
 												class=" fa fa-times" style="margin: 2px"></i></a></td>
 
 									</tr>
@@ -198,9 +193,9 @@
 							<table class="table table-hover">
 								<tr>
 									<th><a class=""
-										th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agentar
+										th:href="@{/exame/agendar/{id}(id=${paciente.id})}">Agentar
 											Nova Consulta </a></th>
-									<th><a class="" th:href="@{/paciente/procurar}">Registar
+									<th><a class="" th:href="@{/exame/procurar}">Registar
 											Nova Consulta </a></th>
 									<th><a class="" th:href="@{/paciente/}">Registar Novo
 											Paciente </a></th>

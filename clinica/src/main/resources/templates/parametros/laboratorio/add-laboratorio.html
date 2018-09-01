@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Laboratorio</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Parâmetros: Registo de Laboratorio</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="row">
+							<div class="col-md-5">
+
+								<form action="#" th:object="${laboratorio}" class=""
+									th:action="@{/parametro/laboratorio/add}" method="post">
+
+									<div class="alerta" th:if="${messageVisible}"></div>
+
+
+									<div class="form-group">
+										<label for="codigo">Sigla </label> <label class="text-danger"
+											th:if="${#fields.hasErrors('sigla')}"> <i
+											class="fa fa-times-circle-o"></i> <span th:errors="*{sigla}"></span>
+										</label> <input type="text" class="form-control" required="required"
+											th:field="*{sigla}">
+									</div>
+
+									<div class="form-group">
+										<label for="designacao">Descrição </label> <label
+											class="text-danger" th:if="${#fields.hasErrors('descricao')}">
+											<i class="fa fa-times-circle-o"></i> <span
+											th:errors="*{descricao}"></span>
+										</label> <input type="text" class="form-control" required="required"
+											th:field="*{descricao}">
+									</div>
+
+									<div class="form-group ">
+										<label for="especialidade">Especialidade</label> <select
+											th:field="*{especialidade.id}"
+											class="form-control input-sm multiple-select">
+											<option th:each="especialidade : ${especialidades}"
+												th:value="${especialidade.id}"
+												th:text="${especialidade.descricao}" />
+										</select>
+									</div>
+
+									<div class="box-footer">
+										<div>
+											<button type="submit" class="btn btn-primary  ">
+												<i class="fa fa-save inverse" style="margin: 2px"></i>Registar
+											</button>
+
+										</div>
+
+
+									</div>
+								</form>
+							</div>
+
+
+						</div>
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table">
+
+								<thead>
+									<tr>
+										<th>Sigla</th>
+										<th>Descrição</th>
+										<th>Especialidade</th>
+										<th>Editar</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr th:each="laboratorio :${laboratorios}">
+										<td th:text="${laboratorio.sigla}"></td>
+										<td th:text="${laboratorio.descricao}"></td>
+                                        <td th:text="${laboratorio.especialidade?.descricao}"></td>
+										<td><a
+											th:href="@{/parametro/laboratorio/{id}/update(id=${laboratorio.id})}"
+											class="delete btn btn-xs btn-default"><i
+												class="fa fa-edit" style="margin: 2px"></i>Editar</a></td>
+										<td><a class="delete btn btn-xs btn-default"
+										th:href="@{/parametro/laboratorio/{id}/(id=${laboratorio.id})}"
+											><i
+												class=" fa fa-eye" style="margin: 2px"></i>Detalhes</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+					<!-- /.box-body -->
+
+
+				</div>
+				<!-- /.box -->
+			</div>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

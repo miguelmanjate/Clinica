@@ -21,6 +21,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.consulta.ItemConsultaServico;
+import mz.ciuem.uclinica.entity.exame.Exame;
+import mz.ciuem.uclinica.entity.exame.ItemExameServico;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
 
 @Entity
@@ -42,12 +44,18 @@ public class Factura extends GenericEntity {
 	
 	private double total;
 	
+	private double totalExame;
+	
 	@Transient
 	private String dataString;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name ="consulta_id")
 	private Consulta consulta;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name ="exame_id")
+	private Exame exame;
 	
 	@Column(name = "forma_de_pagamento")
 	@Enumerated(EnumType.STRING)
@@ -67,6 +75,14 @@ public class Factura extends GenericEntity {
 
 	public void setDataString(String dataString) {
 		this.dataString = dataString;
+	}
+	
+	public Exame getExame() {
+		return exame;
+	}
+
+	public void setExame(Exame exame) {
+		this.exame = exame;
 	}
 
 	public Consulta getConsulta() {
@@ -117,6 +133,27 @@ public class Factura extends GenericEntity {
 	public void setTotal(double total) {
 		this.total = total;
 	}
+
+	public double getTotalExame() {
+		
+		this.totalExame = 0;
+		
+		for(ItemExameServico item : this.exame.getItemExameServicos()){
+			
+			if( item != null){
+				this.totalExame = this.totalExame + item.getPreco();
+			}
+			
+		}
+		
+		return totalExame;
+	}
+
+	public void setTotalExame(double totalExame) {
+		this.totalExame = totalExame;
+	}
+	
+	
 
 
 }

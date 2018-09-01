@@ -82,6 +82,7 @@ function sendAjaxRequest() {
 	var url = $(location).attr('href');
 
 	var select = $(".select");
+	
 	var cursosSelect = $(".cursos");
 	cursosSelect.chosen("destroy");
 
@@ -90,6 +91,9 @@ function sendAjaxRequest() {
 
 	var servicosSelect = $(".servicos");
 	servicosSelect.chosen("destroy");
+	
+	var laboratorioSelect = $(".laboratorios");
+	laboratorioSelect.chosen("destroy");
 
 	var selected = select.find(":selected").text();
 
@@ -127,6 +131,18 @@ function sendAjaxRequest() {
 		});
 
 		servicosSelect.chosen();
+
+	});
+	
+	$.get(url + "/laboratorios?especialidade=" + selected, function(data) {
+		laboratorioSelect.empty();
+
+		$.each(data, function(key, value) {
+			laboratorioSelect.append('<option value=' + value.id + '>' + value.descricao
+					 + '</option>');
+		});
+
+		laboratorioSelect.chosen();
 
 	});
 

@@ -43,6 +43,8 @@ public class ServicoServiceImpl extends GenericServiceImpl<Servico> implements S
 		List<ServicoJason> servicosToJson  = new ArrayList<>();
 		
 		for (Servico servico : servicos) {
+			
+			
 			ServicoJason servicoToJson = new ServicoJason();
 			servicoToJson.setId(servico.getId());
 			servicoToJson.setDescricao(servico.getDescricao());

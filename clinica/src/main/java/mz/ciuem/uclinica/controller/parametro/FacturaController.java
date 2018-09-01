@@ -1,6 +1,7 @@
 package mz.ciuem.uclinica.controller.parametro;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.consulta.EstadoDaConsulta;
+import mz.ciuem.uclinica.entity.exame.Exame;
 import mz.ciuem.uclinica.entity.paciente.Paciente;
 import mz.ciuem.uclinica.entity.parametro.Factura;
-import mz.ciuem.uclinica.entity.parametro.FacturaForm;
 import mz.ciuem.uclinica.entity.parametro.FormaPagamento;
 import mz.ciuem.uclinica.service.consulta.ConsultaService;
+import mz.ciuem.uclinica.service.exame.ExameService;
 import mz.ciuem.uclinica.service.parametro.FacturaService;
 
 @Controller
@@ -32,6 +34,9 @@ public class FacturaController {
 	
 	@Autowired
 	private ConsultaService consultaService;
+	
+	@Autowired
+	private ExameService exameService;
 	
 	@GetMapping("{id}/faturar")
 	public ModelAndView consultasFatura(@ModelAttribute Factura factura, @PathVariable Long id ){
@@ -84,8 +89,15 @@ public class FacturaController {
 	public ModelAndView listarRecibos(){
 		
 		List<Factura> facturas = facturaService.getAll();
+		List<Factura> facturasSeleceonadas = new ArrayList<>();
+		
+		for(Factura factura : facturas){
+			if(factura.getConsulta() != null){
+				facturasSeleceonadas.add(factura);
+			}
+		}
 
-		ModelAndView model = new ModelAndView("/parametros/fatura/list-factura", "facturas", facturas );
+		ModelAndView model = new ModelAndView("/parametros/fatura/list-factura", "facturas", facturasSeleceonadas );
 		return model;
 	}
 	
@@ -106,5 +118,86 @@ public class FacturaController {
 		return model;
 	}
 	
+	@GetMapping("/exame/{id}/faturar")
+	public ModelAndView examesFactura(@ModelAttribute Factura factura, @PathVariable Long id){
+		
+		Exame exame = exameService.find(id);
+		
+		factura.setExame(exame);
+		
+		Paciente paciente = exame.getPaciente();
+		ModelAndView model = new ModelAndView("/parametros/fatura/exame-fatura", "exame", exame);
+		model.addObject("paciente", paciente);
+		model.addObject("formaPagamento", FormaPagamento.values());
 
+		return model;
+	}
+	
+	@GetMapping("/exame/{id}/pagar")
+	public ModelAndView efectuarPagamentoExame(@PathVariable Long id, @Valid Factura factura){
+		
+		Exame exame = exameService.find(id);
+		
+		exame.setEstado(EstadoDaConsulta.PAGA);
+		Paciente paciente = exame.getPaciente();
+		
+		Factura f = new Factura();
+		
+		f.setFormaPagamento(factura.getFormaPagamento());
+		
+		exameService.update(exame);
+		f.setExame(exame);
+		
+		f.setTotalExame(exame.getPreco());
+		f.setDataInicio(new Date());
+		
+		facturaService.create(f);
+		
+		f.setNumeroDaFactura(f.getId());
+		facturaService.update(f);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		f.setDataString(df.format(f.getDataInicio()));
+		
+		ModelAndView model = new ModelAndView("/parametros/fatura/faturaExame-recibo", "exame", exame);
+		model.addObject("paciente", paciente);
+		model.addObject("factura", f);
+		
+		return model;
+		
+	}
+	
+	@GetMapping("/list/recibos/exame")
+	public ModelAndView listarRecibosExame(){
+		
+		List<Factura> facturas = facturaService.getAll();
+		List<Factura> facturasSeleceonadas = new ArrayList<>();
+		
+		for(Factura factura : facturas){
+			if(factura.getExame() != null){
+				facturasSeleceonadas.add(factura);
+			}
+		}
+
+		ModelAndView model = new ModelAndView("/parametros/fatura/list-factura-exame", "facturas", facturasSeleceonadas );
+		return model;
+	}
+	
+	@GetMapping("{id}/detalhes/recibo/exame")
+	public ModelAndView detalhesReciboExame(@PathVariable Long id){
+		
+		Factura factura = facturaService.find(id);
+		Exame exame = factura.getExame();
+		Paciente paciente = exame.getPaciente();
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		factura.setDataString(df.format(factura.getDataInicio()));
+		
+		ModelAndView model = new ModelAndView("/parametros/fatura/faturaExame-recibo", "exame", exame);
+		model.addObject("paciente", paciente);
+		model.addObject("factura", factura);
+		
+		return model;
+	}
+	
 }

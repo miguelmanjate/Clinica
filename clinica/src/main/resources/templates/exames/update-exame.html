@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+
+<head>
+<title>Actualizar Consulta</title>
+
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+
+
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 ">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h4 class="box-title">Actualizar Exame</h4>
+
+
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+						<div class="row ">
+							<div class="col-md-8">
+								<div class="alert alert-success alert-dismissable"
+									th:if="${messageVisible}">
+									<i class="fa fa-check"></i>
+									<button type="button" class="close" data-dismiss="alert"
+										aria-hidden="true">&times;</button>
+									<b>Registo de Exame: </b>
+									<p>Exame registada com sucesso!</p>
+								</div>
+							</div>
+						</div>
+						<!-- info row -->
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Nome completo:</b></td>
+										<td><i th:text="${paciente.nome}"
+											style="margin-right: 5px"></i><i
+											th:text="${paciente.apelido}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Naturalidade:</b></td>
+										<td><i th:text="${paciente.naturalidade}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Genero:</b></td>
+										<td><i th:text="${paciente.genero}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Estado Civil:</b></td>
+										<td><i th:text="${paciente.estadoCivil}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Profissao:</b></td>
+										<td><i th:text="${paciente.profissao}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Local de Trabalho:</b></td>
+										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Filho de:</b></td>
+										<td><i th:text="${paciente.nomeDoPai}"
+											style="margin-right: 5px"></i><i>e </i></td>
+									</tr>
+									<tr>
+										<td><b></b></td>
+										<td><i th:text="${paciente.nomeDaMae}"></i></td>
+									</tr>
+									<tr>
+									<tr>
+										<td><b>Local de Trabalho:</b></td>
+										<td><i th:text="${paciente.localDeTrabalho}"></i></td>
+									</tr>
+
+									<tr>
+										<td><b>Raca:</b></td>
+										<td><i th:text="${paciente.raca}"></i></td>
+									</tr>
+
+
+								</table>
+
+							</div>
+
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Endereco:</b></td>
+										<td><i th:text="${paciente.endereco}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+									<tr>
+										<td><b>Email</b></td>
+										<td><i th:text="${paciente.email}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Telefone Princial:</b></td>
+										<td><i th:text="${paciente.telefone}"></i></td>
+									</tr>
+									<tr>
+										<td><b>Telefone Alternativo:</b></td>
+										<td><i th:text="${paciente.telefoneAlternativo}"></i></td>
+									</tr>
+									<tr>
+										<td><b><i th:text="${paciente.tipoDocumento}"></i>:</b></td>
+										<td><i th:text="${paciente.numeroDocumento}"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+						<div class="box-body ">
+
+							<div class="row">
+
+
+								<form action="#" th:object="${exameForm}" class=""
+									th:action="@{/exame/update}" method="post">
+									<div class="row">
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+											<div class="form-group ">
+												<label for="tipoDocumento">Tipo de Exame</label> <select
+													th:field="*{exame.tipoExame}"
+													class="form-control input-sm multiple-select">
+													<option th:each="tipoExame : ${tipoExame}"
+														th:value="${tipoExame}" th:text="${tipoExame}" />
+												</select>
+											</div>
+
+											<div class="form-group ">
+												<label for="especialidade">Especialidade</label> <select
+													th:field="*{exame.especialidade.id}"
+													class="form-control input-sm multiple-select select">
+													<option th:each="especialidade : ${especialidade}"
+														th:value="${especialidade.id}"
+														th:text="${especialidade.descricao}" />
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+											<div class="form-group ">
+												<label for="medico">Laboratório</label> <select
+													th:field="*{exame.laboratorio.id}"
+													class="form-control input-sm multiple-select laboratorios">
+
+												</select>
+											</div>
+
+											<!-- th:selected="*{consulta.servicos.contains(servico)}" -->
+											<div class="form-group ">
+												<label for="servico">Serviços</label> <select
+													required="required" multiple="multiple"
+													th:field="*{servicos}"
+													class="form-control input-sm multiple-select servicos">
+
+												</select>
+											</div>
+
+										</div>
+
+										<div class="col-md-4 col-sm-6 col-xs-12">
+
+											<div class="row">
+
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="dataDaConsulta">Data </label> <label
+															class="text-danger"
+															th:if="${#fields.hasErrors('exame.dataDaConsulta')}">
+															<i class="fa fa-times-circle-o"></i> <span
+															th:errors="*{exame.dataDaConsulta}"></span>
+														</label>
+
+														<div class="input-group">
+
+															<div class="input-group-addon">
+																<i class="fa fa-calendar"></i>
+															</div>
+															<input th:field="*{exame.dataDaConsulta}"
+																required="required" type="datetime" id="data-consulta"
+																class="form-control input-sm" />
+
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6 ">
+
+													<div class="form-group">
+														<label for="horaDaConsulta">Hora </label> <label
+															class="text-danger"
+															th:if="${#fields.hasErrors('exame.horaDaConsulta')}">
+															<i class="fa fa-times-circle-o"></i> <span
+															th:errors="*{exame.horaDaconsulta}"></span>
+														</label>
+														<div class="input-group">
+															<input th:field="*{exame.horaDaConsulta}"
+																class="form-control input-sm timepicker" />
+
+														</div>
+														<!-- /.input group -->
+													</div>
+												</div>
+
+											
+                                             	<div class="col-md-6 ">
+
+													<div class="form-group ">
+														<label for="estado">Estado</label> <select
+															th:field="*{exame.estado}"
+															class="form-control input-sm multiple-select">
+															<option th:each="estado : ${estados}"
+																th:value="${estado}" th:text="${estado}"></option>
+
+														</select>
+													</div>
+
+												</div>
+                                            </div>
+											<div class="">
+
+												<button type="submit" class="btn btn-sm btn-primary  "
+													id="btn-agendar">
+													<i class="fa fa-save inverse" style="margin: 2px"></i>Actualizar
+												</button>
+												<a class="btn btn-danger"
+													th:href="@{/exame/{id}/list/(id=${paciente.id})}"> <i
+													class="fa fa-times" style="margin: 2px"></i> Cancelar
+												</a>
+											</div>
+
+										</div>
+
+										<input type="hidden" th:field="*{exame.id}" />
+								</form>
+
+
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<div class="box-body table-responsive no-padding">
+						<table class="table table-hover">
+							<tr>
+								<th><a class="" th:href="@{/paciente/}">Registar Novo
+										Paciente</a></th>
+								<th><a class=""
+									th:href="@{/paciente/{id}/update(id=${paciente.id})}">Editar
+										Paciente</a></th>
+								<th><a class="" th:href="@{/paciente/list}">Listar
+										Pacientes</a></th>
+								<th><a
+									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
+										Consultas</a></th>
+
+								<th><a class=""
+									th:href="@{/consulta/agendar/{id}(id=${paciente.id})}">Agendar
+										Exame</a></th>
+
+							</tr>
+
+
+						</table>
+					</div>
+				</div>
+				<!-- /.box-body -->
+
+
+
+			</div>
+		</div>
+
+
+	</div>
+
+
+</body>
+</html>

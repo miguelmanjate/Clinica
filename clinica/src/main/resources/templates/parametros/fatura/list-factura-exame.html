@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Lista de Recibos de Exames</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">Recibo: lista de Recibos de Exames</h3>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+						<div class="box-body table-responsive ">
+							<table class="table table-hover table-striped data-table">
+								<thead>
+									<tr>
+										<th>Numero</th>
+										<th>Data do recibo</th>
+										<th>Nome do Paciente</th>
+										<th>Nid do Paciente</th>
+										<th>Data do Exame</th>
+										<th>Preco do Exame</th>
+										<th>Detalhes</th>
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="factura :${facturas}">
+
+										<td><i th:text="${factura.numeroDaFactura}"></i></td>
+										<td><i th:text="${factura.dataInicio}"></i></td>
+										<td><i th:text="${factura.exame?.paciente?.nome}"></i></td>
+										<td th:text="${factura.exame?.paciente?.nid}"></td>
+										<td th:text="${factura.exame?.dataDaConsulta}"></td>
+										<td th:text="${factura.totalExame}"></td>
+
+										<td><a class="delete btn btn-xs btn-primary"
+											th:href="@{/factura/{id}/detalhes/recibo/exame/(id=${factura.id})}"><i
+												class=" fa fa-eye" style="margin: 2px"></i></a></td>
+
+									</tr>
+
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Numero</th>
+										<th>Data do recibo</th>
+										<th>Nome do Paciente</th>
+										<th>Nid do Paciente</th>
+										<th>Data do Exame</th>
+										<th>Preco do Exame</th>
+										<th>Detalhes</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover">
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+</html>

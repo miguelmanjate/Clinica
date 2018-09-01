@@ -12,7 +12,7 @@ import mz.ciuem.uclinica.auth.Permission;
 import mz.ciuem.uclinica.auth.dao.PermissionDao;
 import mz.ciuem.uclinica.test.GenericTest;
 
-@Transactional
+//@Transactional
 public class PermissionDaoTest extends GenericTest {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class PermissionDaoTest extends GenericTest {
 		long totalPermission = permissionDao.count();
 
 		Permission permission = new Permission();
-		permission.setAuthorization(Authorization.ROLE_LISTAR_RECIBOS);
+		permission.setAuthorization(Authorization.ROLE_LISTAR_CONSULTAS);
 		permissionDao.create(permission);
 
 		//Assert.assertEquals(totalPermission + 1, permissionDao.count());

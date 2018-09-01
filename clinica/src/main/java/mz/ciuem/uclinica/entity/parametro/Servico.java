@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.consulta.ItemConsultaServico;
 import mz.ciuem.uclinica.entity.consulta.Taxa;
+//import mz.ciuem.uclinica.entity.exame.ItemExameServico;
 
 @Entity
 @Table(name = "param_servico")
@@ -44,6 +45,17 @@ public class Servico extends GenericEntity {
 
 	@OneToMany(mappedBy = "servico", fetch = FetchType.EAGER)
 	private List<ItemConsultaServico> itemConsultaServicos;
+	
+//	@OneToMany(mappedBy = "servico", fetch = FetchType.EAGER)
+//	private List<ItemExameServico> itemExameServico;
+//	
+//	public List<ItemExameServico> getItemExameServico() {
+//		return itemExameServico;
+//	}
+//
+//	public void setItemExameServico(List<ItemExameServico> itemExameServico) {
+//		this.itemExameServico = itemExameServico;
+//	}
 
 	public List<ItemConsultaServico> getItemConsultaServicos() {
 		return itemConsultaServicos;

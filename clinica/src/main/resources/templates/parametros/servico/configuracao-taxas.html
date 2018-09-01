@@ -126,12 +126,12 @@
 							<div class="col-lg-12" style="margin-top: 10px">
 								<div class=" table-responsive no-padding">
 									<table class="table table-hover table-striped data-table">
-										<thead>
+										<thead style="width: 100%" >
 											<tr>
 												<th>Codigo</th>
 
 												<th>Descrição do Servico</th>
-												<th>Tipo de Cliente & Taxas</th>
+												<th  >Tipo de Cliente & Taxas</th>
 												<th>Detalhes</th>
 												<th>Taxas</th>
 											</tr>
@@ -139,16 +139,16 @@
 										<tbody>
 											<tr th:each="servico :${servicos}">
 
-												<td th:text="${servico.codigo}"></td>
-												<td th:text="${servico.descricao}"></td>
-												<td>
+												<td style="width: 5%" th:text="${servico.codigo}"></td>
+												<td style="width: 8%" th:text="${servico.descricao}"></td>
+												<td style="width: 80%" >
 
-													<div class="col-lg-12 col-md-12"
+													<div  class="col-lg-12 col-md-12"
 														th:each="taxa :${servico.taxas}">
-														<div class="col-lg-3">
+														<div  class="col-lg-4">
 															<span th:text="${taxa.tipoCliente}"></span>
 														</div>
-														<div class="col-lg-9">
+														<div class="col-lg-8">
 															<table style="width: 100%">
 																<tr>
 																	<th width="25%"></th>
@@ -175,6 +175,7 @@
 												</td>
 
 												<td><a class="delete btn btn-xs btn-default"
+												th:href="@{/parametro/servico/{id}/(id=${servico.id})}"
 													><i
 														class=" fa fa-eye" style="margin: 2px"></i>detalhes</a></td>
 												<td><a class="delete btn btn-xs btn-default"

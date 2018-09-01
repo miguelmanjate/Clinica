@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="clinica">
+
+<head>
+<title>Exames Agendados</title>
+</head>
+
+<body>
+
+	<div layout:fragment="conteudo">
+		<div class="row">
+			<!-- left column -->
+
+			<div class="col-md-12 " th:fragment="lista-servicos">
+				<!-- general form elements -->
+				<div class="box box-success">
+					<div class="box-header">
+
+						<span><b><code>
+									<h3 class="box-title">Exames Agendados</h3>
+									<h3 class="box-title">
+										 <i ></i>
+									</h3>
+								</code></b></span> <span class="tools pull-right"> <a
+							class="delete btn btn-xs btn-danger"
+							th:href="@{/parametro/laboratorio/list/exame/}"> <i class=" fa fa-times"
+								style="margin: 5px"></i></a>
+
+						</span>
+					</div>
+					<!-- /.box-header -->
+					<!-- form start -->
+
+					<div class="box-body ">
+
+
+						<div class="row invoice-info" style="margin-bottom: 10px">
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Sigla </b></td>
+										<td><h3>
+												<span class="label label-success"> <i
+													th:text="${laboratorio.sigla}"></i>
+												</span>
+											</h3></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Descrição Completa </b></td>
+										<td><i th:text="${laboratorio.descricao}" style="margin-right: 5px"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+
+
+							<div class="col-sm-4 invoice-col">
+								<table>
+									<thead>
+										<tr>
+											<th width="50%"></th>
+											<th></th>
+										</tr>
+
+									</thead>
+									<tr>
+										<td><b>Especialidade </b></td>
+										<td><i th:text="${laboratorio.especialidade.descricao}"
+											style="margin-right: 5px"></i></td>
+									</tr>
+
+								</table>
+
+							</div>
+						</div>
+
+						<div class="box-body table-responsive no-padding">
+							<table class="table table-hover table-striped data-table"
+								style="margin-top: 20px">
+								<thead>
+									<tr>
+										<th>Tipo de Exame</th>
+										<th>Data</th>
+										<th>Hora</th>
+										<th>Paciente</th>
+										<th>nº de serviços</th>
+										<th>Estado</th>
+										<th>Detalhes do Exame</th>
+					
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="exame :${exames}">
+										<td th:text="${exame.tipoExame}"></td>
+										<td th:text="${exame.dataDaConsulta}"></td>
+										<td th:text="${exame.horaDaConsulta}"></td>
+										<td th:text="${exame.paciente?.nome}"></td>
+										<td th:text="${exame.itemExameServicos.size()}"></td>
+										<td th:text="${exame.estado}"></td>
+
+										<td><a class="delete btn btn-xs btn-primary"
+											th:href="@{/parametro/laboratorio/exame/{id}/servicos(id=${exame.id})}"><i
+												class="fa fa-eye" style="margin: 2px"></i></a></td>
+
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer"></div>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+</body>
+</html>

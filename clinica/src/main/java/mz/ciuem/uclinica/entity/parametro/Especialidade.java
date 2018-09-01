@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -17,6 +16,9 @@ import javax.persistence.Table;
 import mz.ciuem.uclinica.entity.GenericEntity;
 import mz.ciuem.uclinica.entity.consulta.Consulta;
 import mz.ciuem.uclinica.entity.consulta.Medico;
+import mz.ciuem.uclinica.entity.exame.Exame;
+import mz.ciuem.uclinica.entity.exame.Laboratorio;
+//import mz.ciuem.uclinica.entity.exame.Exame;
 @Entity
 @Table(name = "especialidade_especialidade")
 @Access(AccessType.FIELD)
@@ -48,12 +50,32 @@ public class Especialidade extends GenericEntity{
 	private List<Consulta> consultas;
 	
 	@OneToMany(mappedBy = "especialidade")
+	private List<Exame> exames;
+	
+	@OneToMany(mappedBy = "especialidade")
 	private List<Medico> medicos;
+	
+	@OneToMany(mappedBy = "especialidade")
+	private List<Laboratorio> laboratorios;
 	
 	@OneToMany(mappedBy = "especialidade")
 	private List<Servico> servicos;
 	
-	
+	public List<Laboratorio> getLaboratorios() {
+		return laboratorios;
+	}
+
+	public void setLaboratorios(List<Laboratorio> laboratorios) {
+		this.laboratorios = laboratorios;
+	}
+
+	public List<Exame> getExames() {
+		return exames;
+	}
+
+	public void setExames(List<Exame> exames) {
+		this.exames = exames;
+	}
 
 	public Sector getSector() {
 		return sector;
